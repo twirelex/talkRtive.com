@@ -1,0 +1,193 @@
+---
+title: Predicting the result of a Virtual football match of a betting site using R/Rstudio
+author: ''
+date: '2020-07-20'
+slug: predicting-the-result-of-a-virtual-football-game
+categories:
+  - modelling
+tags: []
+subtitle: ''
+summary: 'Predicting the result of a virtual football game with decision tree and random forest algorithms.'
+authors: []
+lastmod: '2020-07-20T17:39:32+01:00'
+featured: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: true
+projects: []
+---
+## After successfully scrapping data from a football betting site we will now build a simple model to see how well it will perform in predicting the result of any match.  
+
+Below are some information about the dataset:  
+   
+* **home      -->** *A premier league club at home to play against an opponent*
+* **away      -->** *A premier league club away from home to play against the home team*
+* **homeOdd   -->** *the odds that the home team will win a particular match*
+* **drawOdd   -->** *the odds that both teams will draw a particular match*
+* **awaysOdd  -->** *the odds that the away team will win particular match*
+* **homeR     -->** *result of the home team after a particular match*
+* **awayR     -->** *result of the away team after a particular match*
+* **matchtime -->** *the time a particular match was played*
+* **leagueW   -->** *the week a particular match was played*
+* **day       -->** *the day a particular match was played*
+
+
+### Leggo.
+
+```{r, message=FALSE}
+
+require(tidyverse)
+```
+
+Read in the dataset and check its dimension
+
+```{r}
+bet9ja <- read_csv("C:/Users/wirelex/Downloads/bet9ja(2).csv")
+
+dim(bet9ja) ## see the dimension of the data
+```  
+
+Overview of the data
+
+```{r, message=FALSE}
+require(knitr)
+
+kable(head(bet9ja))
+```
+
+
+```{r}
+glimpse(bet9ja)
+```
+we do not have a response variable yet so we need to first create a response variable before proceeding.  
+we will create the new variable from our homeR and awayR variables and call the new variable "result", we will encode the "result" variable as follow:
+* 1 when the home team wins
+* 0 when the game ends in a draw
+* 2 when the away team wins
+
+```{r}
+bet9ja <- bet9ja %>% 
+  mutate(result = factor(case_when(homeR > awayR ~ 1, homeR < awayR ~ 2, TRUE ~ 0))) %>%
+  select(-homeR, -awayR) # remove the homeR variable and awayR variable as we will no longer need them
+```
+
+we have now added a 3 category response/dependent variable and this means that we will be building a multiclass classification model. 
+
+some of the variables are represented as character variables but we will need them to be categorical variables for the sake of the algorithm we want to make use of.
+
+```{r}
+bet9ja <- bet9ja %>% 
+  mutate_if(is.character, as.factor)
+```
+
+
+
+## DATA EXPLORATION
+
+If you are familiar with the way football betting works you will know that "odds" play a huge role on whether a team will win a particular game or not. So let us first visually see the relationship between the odds variables and the result variable.
+
+Let us discretize the odds variables and do a plot
+```{r, fig.width=8, fig.height=3}
+bet9ja %>% 
+  transmute(result, homeOdd = factor(case_when(homeOdd <= 1.5 ~ "smallO", homeOdd > 1.5 & homeOdd <= 2 ~ "mediumO", homeOdd > 2 ~ "bigO"))) %>% 
+  ggplot(aes(result, fill = result)) + geom_bar(show.legend = FALSE) + facet_wrap(~homeOdd) + theme_bw() +scale_y_continuous(labels = NULL) + labs(y = NULL, title = "HOME TEAM ODDS PLOT") + theme(plot.title = element_text(hjust = 0.5))
+
+
+```  
+**The plot above is trying to convince us that when a team is home and its winning odds is big i.e above 2 then the match will likely end up in favor of its opponent(away team), but when its winning odds is small or medium i.e between 1 and 2 then the match will most likely end in favor of the team..**
+
+```{r, fig.width=8, fig.height=3}
+bet9ja %>% 
+  transmute(result, awaysOdd = factor(case_when(awaysOdd <= 1.5 ~ "smallO", awaysOdd > 1.5 & awaysOdd <= 2 ~ "mediumO", awaysOdd > 2 ~ "bigO"))) %>% 
+  ggplot(aes(result, fill = result)) + geom_bar(show.legend = FALSE) + facet_wrap(~awaysOdd) + theme_bw() +scale_y_continuous(labels = NULL) + labs(y = NULL, title = "AWAY TEAM ODDS PLOT") + theme(plot.title = element_text(hjust = 0.5))
+
+```  
+**According to the plot above, when a team is away and it is giving a big winning odds in a particular match i.e odds above 2, the game will likely end up in favor of the opposition team(home team), but when the team is giving a small/medium winning odds i.e between 1 and 2 then the match will likely end up in the team's favor**  
+
+## MODELING  
+
+Now that we have an idea of what the relationship between the odds variables and the result variable looks like let us go ahead and build a predictive model.
+
+
+let's build a decision tree model using tidymodels parsnip 
+
+```{r, message=FALSE, warning=FALSE}
+require(doSNOW) # for parallel processing in windows OS
+
+cl <- makeCluster(6, type = "SOCK") 
+registerDoSNOW(cl)
+
+```
+
+**split data into training and testing**
+
+```{r, message=FALSE, warning=FALSE}
+require(tidymodels) # for modeling
+
+splitdata <- initial_split(bet9ja)
+traindata <- training(splitdata)
+testdata <- testing(splitdata)
+```
+
+**fitting**
+```{r}
+set.seed(112)
+dt_model <- decision_tree(mode = "classification") %>% 
+  set_engine("C5.0") %>% 
+  fit(result~., data = traindata)
+```
+
+**make prediction on test data and view confusion matrix**
+
+```{r}
+prediction <- dt_model %>% 
+  predict(testdata) %>% 
+  transmute(actual = testdata$result, rename(.,predicted = .pred_class)) 
+kable(head(prediction, 10))
+```  
+we can see that there are few misclassifications
+
+```{r, warning=FALSE, message=FALSE}
+require(caret) # confusionMatrix function
+
+confusionMatrix(prediction$actual, prediction$predicted)
+```
+
+ The decision tree model produced an accuracy of about 49%
+
+Now let us try to build a random forest model to see if there will be any improvement
+
+```{r}
+set.seed(111)
+rf_model <- rand_forest(mode = "classification") %>% 
+  set_engine("ranger", importance = "permutation") %>% 
+  fit(result~., data = traindata)
+```
+
+
+```{r}
+prediction2 <- rf_model %>% 
+  predict(testdata) %>% 
+  transmute(actual = testdata$result, rename(., predicted = .pred_class)) 
+confusionMatrix(prediction2$actual, prediction2$predicted)
+```
+The decision tree model performed better judging with the Accuracy
+
+lets view how well each of the variables performed in the model
+
+```{r, warning=FALSE, message=FALSE, background="black"}
+require(vip) # variable importance plot function "vip()"
+
+rf_model %>% 
+  vip(geom = "point")
+```  
+From the plot above we can clearly see that the odds variables were the most effective predictor variables.  
+
+### OBSERVATION  
+
+Both models didn't give us the best result but from our analysis we can see that variables that are the most significant determinant of the outcome of any virtual football game are the odds variables, the teams involved or the time/day the game is played doesn't matter that much...  
+
+### CONCLUSION  
+
+With an accuracy less than 50% a decision tree and a random forest model are probably not the best models to depend on when it comes to virtual football game prediction. 
