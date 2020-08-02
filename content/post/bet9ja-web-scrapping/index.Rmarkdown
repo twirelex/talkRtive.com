@@ -55,11 +55,11 @@ rd <- rsDriver(browser = "firefox")
 remdr <- rd[["client"]]
 ```
 you should see something like this
-![](/post/bet9ja-web-scrapping\index_files/remdr.png)
+![](wirelex/static/post/bet9ja-web-scrapping/index_files/remdr.png)
 **NOTE:** if you are using the rsDriver function for the first time what you will see will be different from mine but after the first run your output should be similar to mine (i use Windows 10).
 
 By this time your firefox browser is triggered and is ready to work according to your intructions
-![](/post/bet9ja-web-scrapping\index_files/firefox.png)  
+![](wirelex/static/post/bet9ja-web-scrapping/index_files/firefox.png)  
 We now have access to all the methods that is contained in the remdr variable that we created earlier, we can navigate to web pages and do a lot of interesting things from now.  
 
 ```
@@ -67,7 +67,7 @@ url <- "http://old-mobile.bet9ja.com/Account/Login.aspx"  # url of the site's lo
 
 remdr$navigate(url)  # Navigating to the page
 ```  
-![](/post/bet9ja-web-scrapping\index_files/Bet9jaLoginPage.png)  
+![](wirelex/static/post/bet9ja-web-scrapping/index_files/Bet9jaLoginPage.png)  
 
 Now we will use the selector gadget add-on in chrome browser to locate the elements we are interested in within any page. If you have not used the selector gadget add-on before here is a [link](https://selectorgadget.com/) to a quick guide on how to begin.  
 we first locate the username element and store it in a variable called username
@@ -92,7 +92,7 @@ password$sendKeysToElement(list("password")) # your bet9ja password
 ```  
 you should have something like this
 
-![](/post/bet9ja-web-scrapping\index_files/Bet9jaUsernamePassword.png)  
+![](wirelex/static/post/bet9ja-web-scrapping/index_files/Bet9jaUsernamePassword.png)  
 
 we then click on the login button
 ```
@@ -103,7 +103,7 @@ it is advisable to pause your script sometimes so that the current page gets loa
 ```
 Sys.sleep(5) # giving the current page 5 seconds to finish loading its content
 ```  
-![](/post/bet9ja-web-scrapping\index_files/Bet9jaHomePage.png)
+![](wirelex/static/post/bet9ja-web-scrapping/index_files/Bet9jaHomePage.png)
 
 Now that we are logged in we will need to navigate to the page where the virtual game is displayed.
 
@@ -123,8 +123,8 @@ Sys.sleep(20) # giving the current page 20 seconds to finish loading its content
 ```  
 Now we are at the page we want to scrape from  
 
-![](/post/bet9ja-web-scrapping\index_files/Bet9jaVirtualHome.png)  
-![](/post/bet9ja-web-scrapping\index_files/Bet9jaVirtualResult.png)
+![](wirelex/static/post/bet9ja-web-scrapping/index_files/Bet9jaVirtualHome.png)  
+![](wirelex/static/post/bet9ja-web-scrapping/index_files/Bet9jaVirtualResult.png)
 
 We will extract some information from these pages to make our dataset. The information in these pages changes every 2 minutes so we will need to create a while-loop so that we can capture all the information we need even as it changes.  
 
@@ -229,7 +229,7 @@ The above while loop will run continuously for 2 days and each time a loop is co
 
 you should get a data frame like the one below after each run
 
-![](/post/bet9ja-web-scrapping\index_files/betgames.png)
+![](wirelex/static/post/bet9ja-web-scrapping/index_files/betgames.png)
 
 It takes exactly 2 minutes for a game circle to be completed (match-fix-time + match-play-time), so if you do exactly what was taught in this tutorial, after 2 days of looping you should get a dataset with <span style = "color:blue;"> 10 x 30 x 48 </span> **=** <span style = "color:blue;"> 14400 </span> observations for 2 days..
 
