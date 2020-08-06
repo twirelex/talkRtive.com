@@ -806,15 +806,19 @@ kable(head(prediction, 10))
 <td align="left">1</td>
 </tr>
 <tr>
+<td align="left">0</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">0</td>
+<td align="left">1</td>
+</tr>
+<tr>
 <td align="left">2</td>
 <td align="left">2</td>
 </tr>
 <tr>
-<td align="left">1</td>
-<td align="left">1</td>
-</tr>
-<tr>
-<td align="left">1</td>
+<td align="left">0</td>
 <td align="left">1</td>
 </tr>
 <tr>
@@ -830,12 +834,8 @@ kable(head(prediction, 10))
 <td align="left">1</td>
 </tr>
 <tr>
-<td align="left">0</td>
-<td align="left">2</td>
-</tr>
-<tr>
-<td align="left">0</td>
-<td align="left">2</td>
+<td align="left">1</td>
+<td align="left">1</td>
 </tr>
 <tr>
 <td align="left">we can see that there are few misclassifications</td>
@@ -851,32 +851,32 @@ confusionMatrix(prediction$actual, prediction$predicted)
 ## 
 ##           Reference
 ## Prediction    0    1    2
-##          0    0  610  364
-##          1    0 1179  330
-##          2    0  491  628
+##          0   31  665  323
+##          1   28 1195  278
+##          2   38  516  528
 ## 
 ## Overall Statistics
 ##                                           
-##                Accuracy : 0.5017          
-##                  95% CI : (0.4852, 0.5181)
-##     No Information Rate : 0.633           
+##                Accuracy : 0.487           
+##                  95% CI : (0.4705, 0.5034)
+##     No Information Rate : 0.6596          
 ##     P-Value [Acc &gt; NIR] : 1               
 ##                                           
-##                   Kappa : 0.1973          
+##                   Kappa : 0.177           
 ##                                           
 ##  Mcnemar's Test P-Value : &lt;2e-16          
 ## 
 ## Statistics by Class:
 ## 
 ##                      Class: 0 Class: 1 Class: 2
-## Sensitivity                NA   0.5171   0.4750
-## Specificity            0.7296   0.7504   0.7846
-## Pos Pred Value             NA   0.7813   0.5612
-## Neg Pred Value             NA   0.4740   0.7205
-## Prevalence             0.0000   0.6330   0.3670
-## Detection Rate         0.0000   0.3273   0.1743
-## Detection Prevalence   0.2704   0.4189   0.3107
-## Balanced Accuracy          NA   0.6337   0.6298
+## Sensitivity          0.319588   0.5029   0.4677
+## Specificity          0.718117   0.7504   0.7760
+## Pos Pred Value       0.030422   0.7961   0.4880
+## Neg Pred Value       0.974448   0.4379   0.7615
+## Prevalence           0.026929   0.6596   0.3134
+## Detection Rate       0.008606   0.3318   0.1466
+## Detection Prevalence 0.282898   0.4167   0.3004
+## Balanced Accuracy    0.518852   0.6267   0.6218
 </code></pre>
 <p>The decision tree model produced an accuracy of about 49%</p>
 <p>Now let us try to build a random forest model to see if there will be any improvement</p>
@@ -894,32 +894,32 @@ confusionMatrix(prediction2$actual, prediction2$predicted)
 ## 
 ##           Reference
 ## Prediction    0    1    2
-##          0  129  559  286
-##          1  187 1077  245
-##          2  176  453  490
+##          0  137  595  287
+##          1  143 1086  272
+##          2  129  470  483
 ## 
 ## Overall Statistics
 ##                                           
-##                Accuracy : 0.4708          
-##                  95% CI : (0.4544, 0.4873)
-##     No Information Rate : 0.58            
+##                Accuracy : 0.4736          
+##                  95% CI : (0.4572, 0.4901)
+##     No Information Rate : 0.5972          
 ##     P-Value [Acc &gt; NIR] : 1               
 ##                                           
-##                   Kappa : 0.1628          
+##                   Kappa : 0.1673          
 ##                                           
 ##  Mcnemar's Test P-Value : &lt;2e-16          
 ## 
 ## Statistics by Class:
 ## 
 ##                      Class: 0 Class: 1 Class: 2
-## Sensitivity           0.26220   0.5156   0.4799
-## Specificity           0.72830   0.7145   0.7563
-## Pos Pred Value        0.13244   0.7137   0.4379
-## Neg Pred Value        0.86187   0.5165   0.7861
-## Prevalence            0.13659   0.5800   0.2835
-## Detection Rate        0.03581   0.2990   0.1360
-## Detection Prevalence  0.27041   0.4189   0.3107
-## Balanced Accuracy     0.49525   0.6150   0.6181
+## Sensitivity           0.33496   0.5049   0.4635
+## Specificity           0.72377   0.7140   0.7660
+## Pos Pred Value        0.13445   0.7235   0.4464
+## Neg Pred Value        0.89470   0.4931   0.7782
+## Prevalence            0.11355   0.5972   0.2893
+## Detection Rate        0.03803   0.3015   0.1341
+## Detection Prevalence  0.28290   0.4167   0.3004
+## Balanced Accuracy     0.52937   0.6094   0.6148
 </code></pre>
 <p>The decision tree model performed better judging with the Accuracy</p>
 <p>lets view how well each of the variables performed in the model</p>

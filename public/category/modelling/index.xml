@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>modelling | wirelex</title>
+    <title>modelling | talkRtive</title>
     <link>/category/modelling/</link>
       <atom:link href="/category/modelling/index.xml" rel="self" type="application/rss+xml" />
     <description>modelling</description>
@@ -13,11 +13,11 @@
     </image>
     
     <item>
-      <title>Predicting the result of a Virtual football match of a betting site using R/Rstudio</title>
-      <link>/post/predicting-the-result-of-a-virtual-football-game/</link>
+      <title>Predicting the result of a Virtual football match using tidymodels</title>
+      <link>/post/tidymodels-virtual-football-prediction/</link>
       <pubDate>Mon, 20 Jul 2020 00:00:00 +0000</pubDate>
-      <guid>/post/predicting-the-result-of-a-virtual-football-game/</guid>
-      <description>&lt;h2 id=&#34;after-successfully-scrapping-data-from-a-football-betting-site-we-will-now-build-a-simple-model-to-see-how-well-it-will-perform-in-predicting-the-result-of-any-match&#34;&gt;After successfully scrapping data from a football betting site we will now build a simple model to see how well it will perform in predicting the result of any match.&lt;/h2&gt;
+      <guid>/post/tidymodels-virtual-football-prediction/</guid>
+      <description>&lt;h2 id=&#34;after-successfully-scrapping-data-from-a-football-betting-site-i-will-now-build-a-simple-model-using-tidymodels-r-package-to-see-how-well-it-will-perform-in-predicting-the-result-of-the-games&#34;&gt;After successfully scrapping data from a football betting site i will now build a simple model using tidymodels r package to see how well it will perform in predicting the result of the games.&lt;/h2&gt;
 &lt;p&gt;Below are some information about the dataset:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;home      &amp;ndash;&amp;gt;&lt;/strong&gt; &lt;em&gt;A premier league club at home to play against an opponent&lt;/em&gt;&lt;/li&gt;
@@ -31,10 +31,13 @@
 &lt;li&gt;&lt;strong&gt;leagueW   &amp;ndash;&amp;gt;&lt;/strong&gt; &lt;em&gt;the week a particular match was played&lt;/em&gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;day       &amp;ndash;&amp;gt;&lt;/strong&gt; &lt;em&gt;the day a particular match was played&lt;/em&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;leggo&#34;&gt;Leggo.&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;install the tidymodels r package&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;install.packages(&amp;quot;tidymodels&amp;quot;) # skip this step if you already have the package
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;load the package&lt;/strong&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;require(tidyverse)
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Read in the dataset and check its dimension&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Read in the dataset and check its dimension&lt;/strong&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;bet9ja &amp;lt;- read_csv(&amp;quot;C:/Users/wirelex/Downloads/bet9ja(2).csv&amp;quot;)
 &lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## Parsed with column specification:
@@ -55,7 +58,7 @@
 &lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## [1] 14410    10
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Overview of the data&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Overview of the data&lt;/strong&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;require(knitr)
 
 kable(head(bet9ja))
@@ -197,7 +200,7 @@ we will create the new variable from our homeR and awayR variables and call the 
 &lt;p&gt;&lt;img src=&#34;/post/predicting-the-result-of-a-virtual-football-match-of-a-betting-site/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;768&#34; /&gt;
 &lt;strong&gt;According to the plot above, when a team is away and it is giving a big winning odds in a particular match i.e odds above 2, the game will likely end up in favor of the opposition team(home team), but when the team is giving a small/medium winning odds i.e between 1 and 2 then the match will likely end up in the team&amp;rsquo;s favor&lt;/strong&gt;&lt;/p&gt;
 &lt;h2 id=&#34;modeling&#34;&gt;MODELING&lt;/h2&gt;
-&lt;p&gt;Now that we have an idea of what the relationship between the odds variables and the result variable looks like let us go ahead and build a predictive model.&lt;/p&gt;
+&lt;p&gt;Now that we have an idea of what the relationship between the odds variables and the result variable looks like let us go ahead and build a predictive model using the tidymodels r package.&lt;/p&gt;
 &lt;p&gt;let&amp;rsquo;s build a decision tree model using tidymodels parsnip&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;require(doSNOW) # for parallel processing in windows OS
 
@@ -233,10 +236,6 @@ kable(head(prediction, 10))
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td align=&#34;left&#34;&gt;2&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;2&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;2&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;1&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
@@ -245,22 +244,10 @@ kable(head(prediction, 10))
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td align=&#34;left&#34;&gt;1&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;1&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;1&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;1&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;2&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;2&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td align=&#34;left&#34;&gt;1&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;1&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;0&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;1&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
@@ -270,6 +257,22 @@ kable(head(prediction, 10))
 &lt;tr&gt;
 &lt;td align=&#34;left&#34;&gt;0&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td align=&#34;left&#34;&gt;we can see that there are few misclassifications&lt;/td&gt;
@@ -285,32 +288,32 @@ confusionMatrix(prediction$actual, prediction$predicted)
 ## 
 ##           Reference
 ## Prediction    0    1    2
-##          0    0  610  364
-##          1    0 1179  330
-##          2    0  491  628
+##          0   40  639  305
+##          1   48 1212  271
+##          2   62  525  500
 ## 
 ## Overall Statistics
-##                                           
-##                Accuracy : 0.5017          
-##                  95% CI : (0.4852, 0.5181)
-##     No Information Rate : 0.633           
-##     P-Value [Acc &amp;gt; NIR] : 1               
-##                                           
-##                   Kappa : 0.1973          
-##                                           
-##  Mcnemar&#39;s Test P-Value : &amp;lt;2e-16          
+##                                         
+##                Accuracy : 0.4864        
+##                  95% CI : (0.47, 0.5029)
+##     No Information Rate : 0.6596        
+##     P-Value [Acc &amp;gt; NIR] : 1             
+##                                         
+##                   Kappa : 0.1691        
+##                                         
+##  Mcnemar&#39;s Test P-Value : &amp;lt;2e-16        
 ## 
 ## Statistics by Class:
 ## 
 ##                      Class: 0 Class: 1 Class: 2
-## Sensitivity                NA   0.5171   0.4750
-## Specificity            0.7296   0.7504   0.7846
-## Pos Pred Value             NA   0.7813   0.5612
-## Neg Pred Value             NA   0.4740   0.7205
-## Prevalence             0.0000   0.6330   0.3670
-## Detection Rate         0.0000   0.3273   0.1743
-## Detection Prevalence   0.2704   0.4189   0.3107
-## Balanced Accuracy          NA   0.6337   0.6298
+## Sensitivity           0.26667   0.5101   0.4647
+## Specificity           0.72654   0.7398   0.7676
+## Pos Pred Value        0.04065   0.7916   0.4600
+## Neg Pred Value        0.95798   0.4380   0.7710
+## Prevalence            0.04164   0.6596   0.2987
+## Detection Rate        0.01110   0.3365   0.1388
+## Detection Prevalence  0.27318   0.4250   0.3018
+## Balanced Accuracy     0.49660   0.6250   0.6162
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The decision tree model produced an accuracy of about 49%&lt;/p&gt;
 &lt;p&gt;Now let us try to build a random forest model to see if there will be any improvement&lt;/p&gt;
@@ -328,32 +331,32 @@ confusionMatrix(prediction2$actual, prediction2$predicted)
 ## 
 ##           Reference
 ## Prediction    0    1    2
-##          0  129  559  286
-##          1  187 1077  245
-##          2  176  453  490
+##          0  111  567  306
+##          1  181 1033  317
+##          2  151  445  491
 ## 
 ## Overall Statistics
 ##                                           
-##                Accuracy : 0.4708          
-##                  95% CI : (0.4544, 0.4873)
-##     No Information Rate : 0.58            
+##                Accuracy : 0.4539          
+##                  95% CI : (0.4376, 0.4703)
+##     No Information Rate : 0.5677          
 ##     P-Value [Acc &amp;gt; NIR] : 1               
 ##                                           
-##                   Kappa : 0.1628          
+##                   Kappa : 0.1356          
 ##                                           
 ##  Mcnemar&#39;s Test P-Value : &amp;lt;2e-16          
 ## 
 ## Statistics by Class:
 ## 
 ##                      Class: 0 Class: 1 Class: 2
-## Sensitivity           0.26220   0.5156   0.4799
-## Specificity           0.72830   0.7145   0.7563
-## Pos Pred Value        0.13244   0.7137   0.4379
-## Neg Pred Value        0.86187   0.5165   0.7861
-## Prevalence            0.13659   0.5800   0.2835
-## Detection Rate        0.03581   0.2990   0.1360
-## Detection Prevalence  0.27041   0.4189   0.3107
-## Balanced Accuracy     0.49525   0.6150   0.6181
+## Sensitivity           0.25056   0.5051   0.4408
+## Specificity           0.72365   0.6802   0.7605
+## Pos Pred Value        0.11280   0.6747   0.4517
+## Neg Pred Value        0.87319   0.5113   0.7523
+## Prevalence            0.12299   0.5677   0.3093
+## Detection Rate        0.03082   0.2868   0.1363
+## Detection Prevalence  0.27318   0.4250   0.3018
+## Balanced Accuracy     0.48711   0.5926   0.6006
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The decision tree model performed better judging with the Accuracy&lt;/p&gt;
 &lt;p&gt;lets view how well each of the variables performed in the model&lt;/p&gt;

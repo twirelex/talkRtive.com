@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>web scraping | talkRtive</title>
+    <link>/category/web-scraping/</link>
+      <atom:link href="/category/web-scraping/index.xml" rel="self" type="application/rss+xml" />
+    <description>web scraping</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 07 Jul 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/talRtive.jpg</url>
+      <title>web scraping</title>
+      <link>/category/web-scraping/</link>
+    </image>
+    
+    <item>
+      <title>scraping dynamic content of a site with login requirement and iframe using RSelenium</title>
+      <link>/post/web-scraping-using-rselenium/</link>
+      <pubDate>Tue, 07 Jul 2020 00:00:00 +0000</pubDate>
+      <guid>/post/web-scraping-using-rselenium/</guid>
+      <description>&lt;h2 id=&#34;in-this-tutorial-i-will-explain-how-the-rselenium-r-package-can-be-used-to-scrape-data-from-a-dynamic-web-page-with-login-requirement-easily&#34;&gt;&lt;strong&gt;In this tutorial i will explain how the RSelenium r package can be used to scrape data from a Dynamic web page with login requirement easily.&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;Like so many of you i have also asked myself if it is possible to predict the result of the virtual football matches we play online using a machine learning model. Well, in this post i am going to show you how i was able to satisfy my curiosity with R programming and the package called RSelenium, if you are an R programmer chances are that you have used R&amp;rsquo;s popular rvest package for web scraping but yet to explore the RSelenium package. The RSelenium package is a good web browser automation tool that can serve as a bot in place of human to automate certain tasks. One of the difference between the RSelenium package and the rvest package is that unlike rvest that loads only the html content of a web page the RSelenium package loads everything including the page&amp;rsquo;s Javascript content and therefore may take a bit longer to deliver than rvest depending on internet speed among other things. You can however use RSelenium in an headless mode so that all its graphical content won&amp;rsquo;t display to improve the speed but in this tutorial we will display all content.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Some RSelenium methods and how they can be used&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;$navigate()            &amp;ndash;&amp;gt;&lt;/strong&gt; &lt;em&gt;for navigating to urls pages&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;$findElement()         &amp;ndash;&amp;gt;&lt;/strong&gt; &lt;em&gt;for identifying elements within a web page&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;$getElementText()      &amp;ndash;&amp;gt;&lt;/strong&gt; &lt;em&gt;for getting the text of elements in a web page&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;$sendKeysToElement()   &amp;ndash;&amp;gt;&lt;/strong&gt; &lt;em&gt;for sending values into an input field within a web page&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;$clickElement()        &amp;ndash;&amp;gt;&lt;/strong&gt; &lt;em&gt;for clicking elements within a web page&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;$switchToFrame()       &amp;ndash;&amp;gt;&lt;/strong&gt; &lt;em&gt;for switching between frames within a web page&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;$switchToWindow()      &amp;ndash;&amp;gt;&lt;/strong&gt; &lt;em&gt;for switching from one window to another&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;$open()                &amp;ndash;&amp;gt;&lt;/strong&gt; &lt;em&gt;for opening a webBrowser client&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;$close()               &amp;ndash;&amp;gt;&lt;/strong&gt; &lt;em&gt;for closing a webBrowser client&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;RSelenium server requires java runtime so you need to make sure that you have java runtime installed in your system before proceeding..&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;we start by loading the RSelenium package:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;require(RSelenium)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Loading required package: RSelenium
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;require(readr) # we will make use of the write_csv() function from this package
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Loading required package: readr
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;if you don&amp;rsquo;t have the RSelenium package installed you can first use the code below to install before loading for use&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;install.packages(&amp;quot;RSelenium&amp;quot;)
+install.packages(&amp;quot;readr&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Now we start a selenium server and browser with the rsDriver function and store it in a variable named rd(short for remote driver) and create another variable &amp;ldquo;remdr&amp;rdquo; that will handle how we control the browser.&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;rd &amp;lt;- rsDriver(browser = &amp;quot;firefox&amp;quot;)
+remdr &amp;lt;- rd[[&amp;quot;client&amp;quot;]]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;you should see something like this&lt;/strong&gt;&lt;/p&gt;
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure &gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/img/web-scraping-selenium/remdr.png&#34; &gt;
+
+
+  &lt;img src=&#34;/img/web-scraping-selenium/remdr.png&#34; alt=&#34;connecting to an RSelenium server&#34;  &gt;
+&lt;/a&gt;
+
+
+
+&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; if you are using the rsDriver function for the first time what you will see will be different from mine but after the first run your output should be similar to mine (for this lesson i used Windows 10).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;By this time your firefox browser is triggered and is ready to work according to your instructions&lt;/strong&gt;&lt;/p&gt;
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure &gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/img/web-scraping-selenium/firefox.png&#34; &gt;
+
+
+  &lt;img src=&#34;/img/web-scraping-selenium/firefox.png&#34; alt=&#34;RSelenium firefox browser client started&#34;  &gt;
+&lt;/a&gt;
+
+
+
+&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;We now have access to all the methods that is contained in the remdr variable that we created earlier, we can navigate to web pages and do a lot of interesting things from now.&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;url &amp;lt;- &amp;quot;http://old-mobile.bet9ja.com/Account/Login.aspx&amp;quot;  # url of the site&#39;s login page
+
+remdr$navigate(url)  # Navigating to the page
+&lt;/code&gt;&lt;/pre&gt;
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure &gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/img/web-scraping-selenium/Bet9jaLoginPage.png&#34; &gt;
+
+
+  &lt;img src=&#34;/img/web-scraping-selenium/Bet9jaLoginPage.png&#34; alt=&#34;the website&amp;#39;s login page&#34;  &gt;
+&lt;/a&gt;
+
+
+
+&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;Now we will use the selector gadget add-on in chrome browser to locate the elements we are interested in within any page. If you have not used the selector gadget add-on before here is a 
+&lt;a href=&#34;https://selectorgadget.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;link&lt;/a&gt; to a quick guide on how to begin or use your browser&amp;rsquo;s inspect element option by just right clicking at any particular place of interest and select &amp;ldquo;inspect&amp;rdquo; / &amp;ldquo;inspect element&amp;rdquo; .&lt;/strong&gt;&lt;br&gt;
+&lt;strong&gt;we first locate the username element and store it in a variable called username&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;username &amp;lt;- remdr$findElement(using = &#39;css selector&#39;,&amp;quot;#ctl00_w_ContentMain_ContentMain_LoginUser1_ctrlLogin_Username&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;we do something similar to locate the password element&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;password &amp;lt;- remdr$findElement(using = &#39;css selector&#39;,&amp;quot;#ctl00_w_ContentMain_ContentMain_LoginUser1_ctrlLogin_Password&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;we also locate the login button element&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;login &amp;lt;- remdr$findElement(using = &#39;css selector&#39;,&amp;quot;#ctl00_w_ContentMain_ContentMain_LoginUser1_ctrlLogin_lnkBtnLogin&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Now that we have the location of these elements we can then insert our username and password into their respective fields in the page&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;username$sendKeysToElement(list(&amp;quot;username&amp;quot;)) # your bet9ja username
+
+password$sendKeysToElement(list(&amp;quot;password&amp;quot;)) # your bet9ja password
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;you should have something like this&lt;/strong&gt;&lt;/p&gt;
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure &gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/img/web-scraping-selenium/Bet9jaUsernamePassword.png&#34; &gt;
+
+
+  &lt;img src=&#34;/img/web-scraping-selenium/Bet9jaUsernamePassword.png&#34; alt=&#34;the website&amp;#39;s username and password input field&#34;  &gt;
+&lt;/a&gt;
+
+
+
+&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;we then click on the login button&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;login$clickElement()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;it is advisable to pause your script sometimes so that the current page gets loaded completely before your next line of code runs to avoid errors, especially when your internet connection isn&amp;rsquo;t too good.&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Sys.sleep(5) # giving the current page 5 seconds to finish loading its content
+&lt;/code&gt;&lt;/pre&gt;
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure &gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/img/web-scraping-selenium/Bet9jaHomePage.png&#34; &gt;
+
+
+  &lt;img src=&#34;/img/web-scraping-selenium/Bet9jaHomePage.png&#34; alt=&#34;the website&amp;#39;s homepage&#34;  &gt;
+&lt;/a&gt;
+
+
+
+&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;Now that we are logged in we will need to navigate to the page where the virtual game is displayed.&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;league &amp;lt;- remdr$findElement(using = &#39;css selector&#39;, &amp;quot;.miBet9jaLeague&amp;quot;)
+league$clickElement() # click on the League button in the page
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;Sys.sleep(5) # giving the current page 5 seconds to finish loading its content
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;premier &amp;lt;- remdr$findElement(using = &#39;css selector&#39;, &amp;quot;.col-xs-6:nth-child(1) &amp;gt; div&amp;quot;)
+premier$clickElement() # click on the premier button
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;Sys.sleep(20) # giving the current page 20 seconds to finish loading its content
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Now we are at the page we want to scrape from&lt;/strong&gt;&lt;/p&gt;
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure &gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/img/web-scraping-selenium/Bet9jaVirtualHome.png&#34; &gt;
+
+
+  &lt;img src=&#34;/img/web-scraping-selenium/Bet9jaVirtualHome.png&#34; alt=&#34;the website&amp;#39;s virtual football main page&#34;  &gt;
+&lt;/a&gt;
+
+
+
+&lt;/figure&gt;
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure &gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/img/web-scraping-selenium/Bet9jaVirtualResult.png&#34; &gt;
+
+
+  &lt;img src=&#34;/img/web-scraping-selenium/Bet9jaVirtualResult.png&#34; alt=&#34;the website&amp;#39;s virtual football result page&#34;  &gt;
+&lt;/a&gt;
+
+
+
+&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;We will extract some information from these pages to make our dataset. The information in these pages changes every 2 minutes so we will need to create a while-loop so that we can capture all the information we need even as it changes.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Here is a list of what we will need from these pages:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;the bet week&lt;/li&gt;
+&lt;li&gt;the bet countdown timer&lt;/li&gt;
+&lt;li&gt;the match table&lt;/li&gt;
+&lt;li&gt;the result table&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;There is a little problem that we have to address before proceeding to get this data. Unlike the other pages where we just went ahead to get Elements from, in this page the Elements are inside a frame (use the selector gadget to verify), this restricts us from carrying out the findElement method that we have been using for the other pages directly. The RSelenium web driver provides us methods to handle situations like this, we will first need to switch to the frame so we can have access to the data therein.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;iframe = remdr$findElement(using = &amp;quot;css selector&amp;quot;, &amp;quot;#playAreaFrame&amp;quot;)
+
+remdr$switchToFrame(iframe)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;**We have switched to the frame and can now perform the findElement method to obtain the data that we need. **&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Final step:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;bet9ja &amp;lt;- NULL  ## initialize an empty data frame
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;TimeIn2days &amp;lt;- Sys.time() + 172800 ## we get the day and time we want our loop to exit
+
+## 172800 in seconds is equivalent to 48hours
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## set a while loop so that we can get the data we need continuously every two minutes for as long as we want ##
+while (Sys.time() &amp;lt;= TimeIn2days) { ## checks if the current day is equal or less than 2 days later, stops running if it isn&#39;t..
+  
+  ## we then locate and get the element of the betweek of the game which we will use as variable in our dataset ##
+  betweek &amp;lt;- remdr$findElement(using = &#39;css selector&#39;, &amp;quot;#leagueWeek&amp;quot;)
+  betweek &amp;lt;- unlist(betweek$getElementText())
+  
+  ## we locate the countdown element and then convert it to numeric (the time we have left before the game starts),
+  # this is very important ##
+  
+  countdown &amp;lt;- remdr$findElement(using = &#39;css selector&#39;,&amp;quot;#bets-time-betContdown&amp;quot;)
+  countdown1 &amp;lt;- as.numeric(substr(unlist(countdown$getElementText()), 1, 2))
+  countdown2 &amp;lt;- as.numeric(substr(unlist(countdown$getElementText()), 4, 5))
+    
+  ## we locate the main table where the countries to play against each other and their odds are, and we store it 
+  # in a variable mtable(match table) ##
+  
+  mtable &amp;lt;- remdr$findElement(using = &#39;css selector&#39;, &amp;quot;#tab_id_Match_Result&amp;quot;)
+  mtable &amp;lt;-unlist(strsplit(unlist(mtable$getElementText()), &amp;quot;\n&amp;quot;))
+  mtable &amp;lt;- mtable[-1]
+  
+  ## we will need a precise timing to be able to capture the result of the matches accurately. 
+  # the matches gets played and the final results is displayed in the 28th second, So we pause our code using an 
+  #addition of the time we have left from the current page where we got the betweek and the match table with the 28th 
+  # second of the next page where we will obtain the final result of the games played. ##
+  
+  Sys.sleep((countdown1 * 60) + countdown2 + 28)
+  
+  ## now we get the result of the games played and clean it up a bit ##
+  rstable &amp;lt;- remdr$findElement(using = &#39;css selector&#39;, &amp;quot;#live-list-match&amp;quot;)
+  rstable &amp;lt;- unlist(strsplit(unlist(rstable$getElementText()), &amp;quot;\n&amp;quot;))
+  rstable &amp;lt;- rstable[-c(4, 8, 12, 16, 20, 24, 28, 32, 36, 40)]
+  
+  ## make a data frame with variavbles: home, away, homeOdd, drawOdd, awayOdd, homeR, awayR, matchtime, leagueWK 
+  # and day ##
+  
+  df = data.frame(
+    home = paste0(substr(mtable[seq(2,29,3)], 1,3)),
+    away = paste0(substr(mtable[seq(2,29,3)], 7,9)),
+    homeOdd = paste0(substr(mtable[seq(3,30,3)], 1,4)),
+    drawOdd = paste0(substr(mtable[seq(3,30,3)], 6,9)),
+    awaysOdd = paste0(substr(mtable[seq(3,30,3)], 11,14)),
+    homeR = paste0(substr(rstable[seq(1,28,3)], 5,5)),
+    awayR = paste0(substr(rstable[seq(3,30,3)], 1,1)),
+    matchtime = mtable[1], ## the time a match was played as a variable
+    leagueWK = betweek,  ## the week a match was played as a variable
+    day = weekdays(Sys.Date()) ## the day a match was played as a variable
+  )
+  ## Note: i am able to do the above step because i scraped the data before this tutorial and noted the 
+  #position of the information i needed. ##
+  
+  
+  ## bind rows and save the dataset in the current directory of your rstudio
+  bet9ja &amp;lt;- rbind(bet9ja, df)
+  write_csv(bet9ja, &amp;quot;bet9ja.csv&amp;quot;)
+  
+  
+  ## Navigate back to the page, switch to the frame and do this till the while loop becomes &amp;quot;FALSE&amp;quot; (2 days later) ##
+  remdr$navigate(&amp;quot;https://vsmobile.bet9ja.com/bet9ja-mobile/login/?mode=premier&amp;amp;lang=tryhtml_iframe&amp;quot;)
+
+iframe = remdr$findElement(using = &amp;quot;css selector&amp;quot;, &amp;quot;#playAreaFrame&amp;quot;)
+remdr$switchToFrame(iframe)
+
+Sys.sleep(25)
+  }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;The above while loop will run continuously for 2 days and each time a loop is completed a dataset gets saved to the current working directory rstudio is pointing to and it will subsequently get overwritten until the loop completes.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;you should get a data frame like the one below after each run&lt;/strong&gt;&lt;/p&gt;
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure &gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/img/web-scraping-selenium/betgames.png&#34; &gt;
+
+
+  &lt;img src=&#34;/img/web-scraping-selenium/betgames.png&#34; alt=&#34;scraped data in an excel sheet&#34;  &gt;
+&lt;/a&gt;
+
+
+
+&lt;/figure&gt;
+
+&lt;p&gt;It takes exactly 2 minutes for a game circle to be completed (match-fix-time + match-play-time), so if you do exactly what was taught in this tutorial, after 2 days of looping you should get a dataset with &lt;span style = &#34;color:blue;&#34;&gt; 10 x 30 x 48 &lt;/span&gt; &lt;strong&gt;=&lt;/strong&gt; &lt;span style = &#34;color:blue;&#34;&gt; 14400 &lt;/span&gt; observations for 2 days..&lt;/p&gt;
+&lt;p&gt;Now that we have gotten the dataset that  we want, our next step is to build a model to see how well we can predict the outcome of any match in the virtual football game.&lt;/p&gt;
+&lt;h5 id=&#34;please-refer-to-this-posthahahugoshortcode-s8-hbhb-for-the-modelling-part&#34;&gt;Please refer to this 
+&lt;a href=&#34;/post/tidymodels-virtual-football-prediction/&#34;&gt;post&lt;/a&gt; for the modelling part&amp;hellip;&lt;/h5&gt;
+&lt;h3 id=&#34;wrap-up&#34;&gt;Wrap-up&lt;/h3&gt;
+&lt;p&gt;I use both rvest and RSelenium for web scraping and i must say, both are excellent tools that will always get the job done, the rvest package has a lot of people using it compared to the RSelenium package so you will most likely get solutions online for most rvest related problems than RSelenium.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

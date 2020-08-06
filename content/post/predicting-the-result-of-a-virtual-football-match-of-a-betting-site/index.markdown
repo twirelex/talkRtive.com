@@ -1,13 +1,12 @@
 ---
-title: Predicting the result of a Virtual football match of a betting site using R/Rstudio
+title: Predicting the result of a Virtual football match using tidymodels
 author: ''
 date: '2020-07-20'
-slug: predicting-the-result-of-a-virtual-football-game
-categories:
-  - modelling
+slug: tidymodels-virtual-football-prediction
+categories: [r programming, tidymodels]
 tags: []
 subtitle: ''
-summary: 'Predicting the result of a virtual football game with decision tree and random forest algorithms.'
+summary: 'Predicting the result of a virtual football game with SVM and random forest algorithms using the tidymodels r package'
 authors: []
 lastmod: '2020-07-20T17:39:32+01:00'
 featured: no
@@ -17,7 +16,7 @@ image:
   preview_only: true
 projects: []
 ---
-## After successfully scrapping data from a football betting site we will now build a simple model to see how well it will perform in predicting the result of any match.  
+## After successfully [scraping data from a football betting site]({{< ref "post/RSelenium-web-scraping" >}})  i will now build a simple model using tidymodels r package to see how well it will perform in predicting the result of the games.  
 
 Below are some information about the dataset:  
    
@@ -32,15 +31,19 @@ Below are some information about the dataset:
 * **leagueW   -->** *the week a particular match was played*
 * **day       -->** *the day a particular match was played*
 
+**install the tidymodels r package**
 
-### Leggo.
+```
+install.packages("tidymodels") # skip this step if you already have the tidymodels package
+```
+**load the package**
 
 
 ```r
 require(tidyverse)
 ```
 
-Read in the dataset and check its dimension
+**Read in the dataset and check its dimension**
 
 
 ```r
@@ -71,7 +74,7 @@ dim(bet9ja) ## see the dimension of the data
 ## [1] 14410    10
 ```
 
-Overview of the data
+**Overview of the data**
 
 
 ```r
@@ -98,8 +101,8 @@ glimpse(bet9ja)
 ```
 
 ```
-## Observations: 14,410
-## Variables: 10
+## Rows: 14,410
+## Columns: 10
 ## $ home      <chr> "WAT", "EVE", "TOT", "BOU", "BRI", "CHE", "WHU", "WOL", "...
 ## $ away      <chr> "LIV", "NWC", "BUR", "MNU", "ASV", "NOR", "SOU", "MNC", "...
 ## $ homeOdd   <dbl> 6.08, 2.38, 1.46, 3.54, 2.29, 1.46, 1.94, 4.16, 3.02, 2.0...
@@ -163,10 +166,10 @@ bet9ja %>%
 
 ## MODELING  
 
-Now that we have an idea of what the relationship between the odds variables and the result variable looks like let us go ahead and build a predictive model.
+Now that we have an idea of what the relationship between the odds variables and the result variable looks like let us go ahead and build a predictive model using the tidymodels r package.
 
 
-let's build a decision tree model using tidymodels parsnip 
+let's build a svm model using tidymodels parsnip 
 
 
 ```r
@@ -181,18 +184,20 @@ registerDoSNOW(cl)
 
 ```r
 require(tidymodels) # for modeling
+set.seed(111)
 
 splitdata <- initial_split(bet9ja)
 traindata <- training(splitdata)
 testdata <- testing(splitdata)
 ```
 
+
 **fitting**
 
+
 ```r
-set.seed(112)
-dt_model <- decision_tree(mode = "classification") %>% 
-  set_engine("C5.0") %>% 
+svm_model <- svm_rbf(mode = "classification") %>% 
+  set_engine("kernlab") %>% 
   fit(result~., data = traindata)
 ```
 
@@ -200,7 +205,7 @@ dt_model <- decision_tree(mode = "classification") %>%
 
 
 ```r
-prediction <- dt_model %>% 
+prediction <- svm_model %>% 
   predict(testdata) %>% 
   transmute(actual = testdata$result, rename(.,predicted = .pred_class)) 
 kable(head(prediction, 10))
@@ -210,59 +215,46 @@ kable(head(prediction, 10))
 
 |actual |predicted |
 |:------|:---------|
-|2      |2         |
 |2      |1         |
-|2      |2         |
-|1      |1         |
 |1      |1         |
 |2      |2         |
 |1      |1         |
 |0      |1         |
+|1      |1         |
+|1      |2         |
+|1      |1         |
 |0      |2         |
-|0      |2         |
+|0      |1         |
 we can see that there are few misclassifications
 
 
 ```r
-require(caret) # confusionMatrix function
-
-confusionMatrix(prediction$actual, prediction$predicted)
+prediction %>% 
+  conf_mat(actual, predicted) # view confusion matrix
 ```
 
 ```
-## Confusion Matrix and Statistics
-## 
-##           Reference
+##           Truth
 ## Prediction    0    1    2
-##          0    0  610  364
-##          1    0 1179  330
-##          2    0  491  628
-## 
-## Overall Statistics
-##                                           
-##                Accuracy : 0.5017          
-##                  95% CI : (0.4852, 0.5181)
-##     No Information Rate : 0.633           
-##     P-Value [Acc > NIR] : 1               
-##                                           
-##                   Kappa : 0.1973          
-##                                           
-##  Mcnemar's Test P-Value : <2e-16          
-## 
-## Statistics by Class:
-## 
-##                      Class: 0 Class: 1 Class: 2
-## Sensitivity                NA   0.5171   0.4750
-## Specificity            0.7296   0.7504   0.7846
-## Pos Pred Value             NA   0.7813   0.5612
-## Neg Pred Value             NA   0.4740   0.7205
-## Prevalence             0.0000   0.6330   0.3670
-## Detection Rate         0.0000   0.3273   0.1743
-## Detection Prevalence   0.2704   0.4189   0.3107
-## Balanced Accuracy          NA   0.6337   0.6298
+##          0    5   10   12
+##          1  720 1253  540
+##          2  306  246  510
 ```
 
- The decision tree model produced an accuracy of about 49%
+
+```r
+prediction %>% accuracy(actual, predicted) # check accuracy
+```
+
+```
+## # A tibble: 1 x 3
+##   .metric  .estimator .estimate
+##   <chr>    <chr>          <dbl>
+## 1 accuracy multiclass     0.491
+```
+
+
+ The svm model produced an accuracy of about 49%
 
 Now let us try to build a random forest model to see if there will be any improvement
 
@@ -274,48 +266,61 @@ rf_model <- rand_forest(mode = "classification") %>%
   fit(result~., data = traindata)
 ```
 
+**make prediction on test data and view confusion matrix**
 
 
 ```r
 prediction2 <- rf_model %>% 
   predict(testdata) %>% 
   transmute(actual = testdata$result, rename(., predicted = .pred_class)) 
-confusionMatrix(prediction2$actual, prediction2$predicted)
+kable(head(prediction2, 10))
+```
+
+
+
+|actual |predicted |
+|:------|:---------|
+|2      |1         |
+|1      |1         |
+|2      |2         |
+|1      |1         |
+|0      |2         |
+|1      |1         |
+|1      |2         |
+|1      |1         |
+|0      |2         |
+|0      |0         |
+
+
+
+```r
+prediction2 %>% 
+  conf_mat(actual, predicted) # view confusion matrix
 ```
 
 ```
-## Confusion Matrix and Statistics
-## 
-##           Reference
+##           Truth
 ## Prediction    0    1    2
-##          0  129  559  286
-##          1  187 1077  245
-##          2  176  453  490
-## 
-## Overall Statistics
-##                                           
-##                Accuracy : 0.4708          
-##                  95% CI : (0.4544, 0.4873)
-##     No Information Rate : 0.58            
-##     P-Value [Acc > NIR] : 1               
-##                                           
-##                   Kappa : 0.1628          
-##                                           
-##  Mcnemar's Test P-Value : <2e-16          
-## 
-## Statistics by Class:
-## 
-##                      Class: 0 Class: 1 Class: 2
-## Sensitivity           0.26220   0.5156   0.4799
-## Specificity           0.72830   0.7145   0.7563
-## Pos Pred Value        0.13244   0.7137   0.4379
-## Neg Pred Value        0.86187   0.5165   0.7861
-## Prevalence            0.13659   0.5800   0.2835
-## Detection Rate        0.03581   0.2990   0.1360
-## Detection Prevalence  0.27041   0.4189   0.3107
-## Balanced Accuracy     0.49525   0.6150   0.6181
+##          0  135  147  141
+##          1  586 1086  455
+##          2  310  276  466
 ```
-The decision tree model performed better judging with the Accuracy
+
+
+
+```r
+prediction2 %>% accuracy(actual, predicted) # check accuracy
+```
+
+```
+## # A tibble: 1 x 3
+##   .metric  .estimator .estimate
+##   <chr>    <chr>          <dbl>
+## 1 accuracy multiclass     0.468
+```
+
+
+The svm model performed better judging with the Accuracy
 
 lets view how well each of the variables performed in the model
 
@@ -327,7 +332,7 @@ rf_model %>%
   vip(geom = "point")
 ```
 
-<img src="/post/predicting-the-result-of-a-virtual-football-match-of-a-betting-site/index_files/figure-html/unnamed-chunk-16-1.png" width="672" />
+<img src="/post/predicting-the-result-of-a-virtual-football-match-of-a-betting-site/index_files/figure-html/unnamed-chunk-19-1.png" width="672" />
 From the plot above we can clearly see that the odds variables were the most effective predictor variables.  
 
 ### OBSERVATION  
@@ -336,4 +341,8 @@ Both models didn't give us the best result but from our analysis we can see that
 
 ### CONCLUSION  
 
-With an accuracy less than 50% a decision tree and a random forest model are probably not the best models to depend on when it comes to virtual football game prediction. 
+With an accuracy less than 50% the SVM and a random forest model are probably not the best models to depend on when it comes to virtual football game prediction.  
+
+
+### Wrap-up  
+Shifting from the base r and caret way of modeling can be hard for some of us but seeing how far the tidymodels is preparing to take us (timely upgrade/update) is enough reason for everyone to start trying it out. And also, knowing that the brain behind the caret package is also part  of the tidymodels team makes it even more interesting. I have prepared a short and comprehensive lesson on tidymodels that might be helpful.. [tidymodels for noobs]()

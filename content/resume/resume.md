@@ -50,8 +50,7 @@ subtitle = ""
 
 ## Education
 
-* Blessed International College  -     2010
-* Amadu Bello University -      Bachelor of Science (Statistics), 2019
+* Amadu Bello University -      Bachelor of Science (Statistics), 2018
 
 
 

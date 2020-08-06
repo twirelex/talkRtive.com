@@ -8,7 +8,17 @@
   </url>
   
   <url>
-    <loc>/post/rape-cases-analysis/</loc>
+    <loc>/categories/</loc>
+    <lastmod>2020-07-27T15:05:45+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/data-cleaning-tidyverse-r-package/</loc>
+    <lastmod>2020-07-27T15:05:45+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/category/r-programming/</loc>
     <lastmod>2020-07-27T15:05:45+01:00</lastmod>
   </url>
   
@@ -18,98 +28,33 @@
   </url>
   
   <url>
-    <loc>/categories/</loc>
+    <loc>/category/tidyverse/</loc>
+    <lastmod>2020-07-27T15:05:45+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/tidymodels-virtual-football-prediction/</loc>
     <lastmod>2020-07-20T17:39:32+01:00</lastmod>
   </url>
   
   <url>
-    <loc>/category/modelling/</loc>
+    <loc>/category/tidymodels/</loc>
     <lastmod>2020-07-20T17:39:32+01:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/predicting-the-result-of-a-virtual-football-game/</loc>
-    <lastmod>2020-07-20T17:39:32+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/police-killings-in-nigeria.en/</loc>
-    <lastmod>2020-07-09T11:23:05+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/bet9ja-web-scrapping-rselenium/</loc>
+    <loc>/post/web-scraping-using-rselenium/</loc>
     <lastmod>2020-07-07T00:21:57+01:00</lastmod>
   </url>
   
   <url>
-    <loc>/category/web-scrapping/</loc>
+    <loc>/category/web-scraping/</loc>
     <lastmod>2020-07-07T00:21:57+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/something-new/</loc>
-    <lastmod>2020-07-05T02:07:10+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/another-new-post/</loc>
-    <lastmod>2020-07-04T23:18:49+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/authors/</loc>
-    <lastmod>2020-07-04T23:36:58+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/new-post/</loc>
-    <lastmod>2020-07-04T23:36:58+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/category/r/</loc>
-    <lastmod>2020-07-04T23:36:58+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tag/r-markdown/</loc>
-    <lastmod>2020-07-04T23:36:58+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2020-07-04T23:36:58+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/this-is-a-new-post/</loc>
-    <lastmod>2020-07-04T23:14:47+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/author/anthony-aigboje-akhonokhue/</loc>
-    <lastmod>2020-07-04T23:36:58+01:00</lastmod>
   </url>
   
   <url>
     <loc>/resume/</loc>
     <lastmod>2020-01-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/writing-technical-content/</loc>
-    <lastmod>2019-07-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/author/anthony-aigboje-akhonokhue/</loc>
-    <lastmod>2019-09-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/jupyter/</loc>
-    <lastmod>2019-09-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -123,56 +68,23 @@
   </url>
   
   <url>
-    <loc>/tag/academic/</loc>
-    <lastmod>2019-04-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/getting-started/</loc>
-    <lastmod>2019-04-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/category/demo/</loc>
-    <lastmod>2019-04-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/author/anthony-aigboje-akhonokhue/</loc>
-    <lastmod>2019-04-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tag/%E5%BC%80%E6%BA%90/</loc>
-    <lastmod>2019-04-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/category/%E6%95%99%E7%A8%8B/</loc>
-    <lastmod>2019-04-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2015-07-23-r-rmarkdown/</loc>
-    <lastmod>2015-07-23T21:13:14-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tag/plot/</loc>
-    <lastmod>2015-07-23T21:13:14-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tag/regression/</loc>
-    <lastmod>2015-07-23T21:13:14-05:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/about/</loc>
   </url>
   
   <url>
+    <loc>/author/anthony-aigboje-akhonokhue/</loc>
+  </url>
+  
+  <url>
+    <loc>/authors/</loc>
+  </url>
+  
+  <url>
     <loc>/publication_types/</loc>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
   </url>
   
 </urlset>

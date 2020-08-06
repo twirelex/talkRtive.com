@@ -1,13 +1,12 @@
 ---
-title: Predicting the result of a Virtual football match of a betting site using R/Rstudio
+title: Predicting the result of a Virtual football match using tidymodels
 author: ''
 date: '2020-07-20'
-slug: predicting-the-result-of-a-virtual-football-game
-categories:
-  - modelling
+slug: tidymodels-virtual-football-prediction
+categories: [r programming, tidymodels]
 tags: []
 subtitle: ''
-summary: 'Predicting the result of a virtual football game with decision tree and random forest algorithms.'
+summary: 'Predicting the result of a virtual football game with SVM and random forest algorithms using the tidymodels r package'
 authors: []
 lastmod: '2020-07-20T17:39:32+01:00'
 featured: no
@@ -17,7 +16,7 @@ image:
   preview_only: true
 projects: []
 ---
-## After successfully scrapping data from a football betting site we will now build a simple model to see how well it will perform in predicting the result of any match.  
+## After successfully [scraping data from a football betting site]({{< ref "post/RSelenium-web-scraping" >}})  i will now build a simple model using tidymodels r package to see how well it will perform in predicting the result of the games.  
 
 Below are some information about the dataset:  
    
@@ -32,23 +31,27 @@ Below are some information about the dataset:
 * **leagueW   -->** *the week a particular match was played*
 * **day       -->** *the day a particular match was played*
 
+**install the tidymodels r package**
 
-### Leggo.
+```
+install.packages("tidymodels") # skip this step if you already have the tidymodels package
+```
+**load the package**
 
 ```{r, message=FALSE}
 
 require(tidyverse)
 ```
 
-Read in the dataset and check its dimension
+**Read in the dataset and check its dimension**
 
 ```{r}
-bet9ja <- read_csv("C:/Users/wirelex/Downloads/bet9ja(2).csv")
+bet9ja <- read_csv("https://raw.githubusercontent.com/twirelex/dataset/master/bet9ja(2).csv")
 
 dim(bet9ja) ## see the dimension of the data
 ```  
 
-Overview of the data
+**Overview of the data**
 
 ```{r, message=FALSE}
 require(knitr)
@@ -107,10 +110,10 @@ bet9ja %>%
 
 ## MODELING  
 
-Now that we have an idea of what the relationship between the odds variables and the result variable looks like let us go ahead and build a predictive model.
+Now that we have an idea of what the relationship between the odds variables and the result variable looks like let us go ahead and build a predictive model using the tidymodels r package.
 
 
-let's build a decision tree model using tidymodels parsnip 
+let's build a svm model using tidymodels parsnip 
 
 ```{r, message=FALSE, warning=FALSE}
 require(doSNOW) # for parallel processing in windows OS
@@ -124,24 +127,26 @@ registerDoSNOW(cl)
 
 ```{r, message=FALSE, warning=FALSE}
 require(tidymodels) # for modeling
+set.seed(111)
 
 splitdata <- initial_split(bet9ja)
 traindata <- training(splitdata)
 testdata <- testing(splitdata)
 ```
 
+
 **fitting**
+
 ```{r}
-set.seed(112)
-dt_model <- decision_tree(mode = "classification") %>% 
-  set_engine("C5.0") %>% 
+svm_model <- svm_rbf(mode = "classification") %>% 
+  set_engine("kernlab") %>% 
   fit(result~., data = traindata)
 ```
 
 **make prediction on test data and view confusion matrix**
 
 ```{r}
-prediction <- dt_model %>% 
+prediction <- svm_model %>% 
   predict(testdata) %>% 
   transmute(actual = testdata$result, rename(.,predicted = .pred_class)) 
 kable(head(prediction, 10))
@@ -149,12 +154,18 @@ kable(head(prediction, 10))
 we can see that there are few misclassifications
 
 ```{r, warning=FALSE, message=FALSE}
-require(caret) # confusionMatrix function
 
-confusionMatrix(prediction$actual, prediction$predicted)
+prediction %>% 
+  conf_mat(actual, predicted) # view confusion matrix
+
 ```
 
- The decision tree model produced an accuracy of about 49%
+```{r}
+prediction %>% accuracy(actual, predicted) # check accuracy
+```
+
+
+ The svm model produced an accuracy of about 49%
 
 Now let us try to build a random forest model to see if there will be any improvement
 
@@ -163,16 +174,30 @@ set.seed(111)
 rf_model <- rand_forest(mode = "classification") %>% 
   set_engine("ranger", importance = "permutation") %>% 
   fit(result~., data = traindata)
-```
+```  
 
+**make prediction on test data and view confusion matrix**
 
 ```{r}
 prediction2 <- rf_model %>% 
   predict(testdata) %>% 
   transmute(actual = testdata$result, rename(., predicted = .pred_class)) 
-confusionMatrix(prediction2$actual, prediction2$predicted)
+kable(head(prediction2, 10))
+```  
+
+
+```{r}
+prediction2 %>% 
+  conf_mat(actual, predicted) # view confusion matrix
 ```
-The decision tree model performed better judging with the Accuracy
+
+
+```{r}
+prediction2 %>% accuracy(actual, predicted) # check accuracy
+```
+
+
+The svm model performed better judging with the Accuracy
 
 lets view how well each of the variables performed in the model
 
@@ -190,4 +215,8 @@ Both models didn't give us the best result but from our analysis we can see that
 
 ### CONCLUSION  
 
-With an accuracy less than 50% a decision tree and a random forest model are probably not the best models to depend on when it comes to virtual football game prediction. 
+With an accuracy less than 50% the SVM and a random forest model are probably not the best models to depend on when it comes to virtual football game prediction.  
+
+
+### Wrap-up  
+Shifting from the base r and caret way of modeling can be hard for some of us but seeing how far the tidymodels is preparing to take us (timely upgrade/update) is enough reason for everyone to start trying it out. And also, knowing that the brain behind the caret package is also part  of the tidymodels team makes it even more interesting. I have prepared a short and comprehensive lesson on tidymodels that might be helpful.. [tidymodels for noobs]()
