@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>web scraping | talkRtive</title>
-    <link>https://talkrtive.com/category/web-scraping/</link>
-      <atom:link href="https://talkrtive.com/category/web-scraping/index.xml" rel="self" type="application/rss+xml" />
+    <link>/category/web-scraping/</link>
+      <atom:link href="/category/web-scraping/index.xml" rel="self" type="application/rss+xml" />
     <description>web scraping</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 07 Jul 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://talkrtive.com/img/talRtive.jpg</url>
+      <url>/img/talRtive.jpg</url>
       <title>web scraping</title>
-      <link>https://talkrtive.com/category/web-scraping/</link>
+      <link>/category/web-scraping/</link>
     </image>
     
     <item>
       <title>scraping dynamic content of a site with login requirement and iframe using RSelenium</title>
-      <link>https://talkrtive.com/post/web-scraping-using-rselenium/</link>
+      <link>/post/web-scraping-using-rselenium/</link>
       <pubDate>Tue, 07 Jul 2020 00:00:00 +0000</pubDate>
-      <guid>https://talkrtive.com/post/web-scraping-using-rselenium/</guid>
+      <guid>/post/web-scraping-using-rselenium/</guid>
       <description>&lt;h2 id=&#34;in-this-tutorial-i-will-explain-how-the-rselenium-r-package-can-be-used-to-scrape-data-from-a-dynamic-web-page-with-login-requirement-easily&#34;&gt;&lt;strong&gt;In this tutorial i will explain how the RSelenium r package can be used to scrape data from a Dynamic web page with login requirement easily.&lt;/strong&gt;&lt;/h2&gt;
 &lt;p&gt;Like so many of you i have also asked myself if it is possible to predict the result of the virtual football matches we play online using a machine learning model. Well, in this post i am going to show you how i was able to satisfy my curiosity with R programming and the package called RSelenium, if you are an R programmer chances are that you have used R&amp;rsquo;s popular rvest package for web scraping but yet to explore the RSelenium package. The RSelenium package is a good web browser automation tool that can serve as a bot in place of human to automate certain tasks. One of the difference between the RSelenium package and the rvest package is that unlike rvest that loads only the html content of a web page the RSelenium package loads everything including the page&amp;rsquo;s Javascript content and therefore may take a bit longer to deliver than rvest depending on internet speed among other things. You can however use RSelenium in an headless mode so that all its graphical content won&amp;rsquo;t display to improve the speed but in this tutorial we will display all content.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Some RSelenium methods and how they can be used&lt;/strong&gt;&lt;/p&gt;
@@ -70,10 +70,10 @@ remdr &amp;lt;- rd[[&amp;quot;client&amp;quot;]]
 &lt;figure &gt;
 
 
-  &lt;a data-fancybox=&#34;&#34; href=&#34;https://talkrtive.com/img/web-scraping-selenium/remdr.png&#34; &gt;
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/img/web-scraping-selenium/remdr.png&#34; &gt;
 
 
-  &lt;img src=&#34;https://talkrtive.com/img/web-scraping-selenium/remdr.png&#34; alt=&#34;connecting to an RSelenium server&#34;  &gt;
+  &lt;img src=&#34;/img/web-scraping-selenium/remdr.png&#34; alt=&#34;connecting to an RSelenium server&#34;  &gt;
 &lt;/a&gt;
 
 
@@ -102,10 +102,10 @@ remdr &amp;lt;- rd[[&amp;quot;client&amp;quot;]]
 &lt;figure &gt;
 
 
-  &lt;a data-fancybox=&#34;&#34; href=&#34;https://talkrtive.com/img/web-scraping-selenium/firefox.png&#34; &gt;
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/img/web-scraping-selenium/firefox.png&#34; &gt;
 
 
-  &lt;img src=&#34;https://talkrtive.com/img/web-scraping-selenium/firefox.png&#34; alt=&#34;RSelenium firefox browser client started&#34;  &gt;
+  &lt;img src=&#34;/img/web-scraping-selenium/firefox.png&#34; alt=&#34;RSelenium firefox browser client started&#34;  &gt;
 &lt;/a&gt;
 
 
@@ -137,10 +137,10 @@ remdr$navigate(url)  # Navigating to the page
 &lt;figure &gt;
 
 
-  &lt;a data-fancybox=&#34;&#34; href=&#34;https://talkrtive.com/img/web-scraping-selenium/Bet9jaLoginPage.png&#34; &gt;
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/img/web-scraping-selenium/Bet9jaLoginPage.png&#34; &gt;
 
 
-  &lt;img src=&#34;https://talkrtive.com/img/web-scraping-selenium/Bet9jaLoginPage.png&#34; alt=&#34;the website&amp;#39;s login page&#34;  &gt;
+  &lt;img src=&#34;/img/web-scraping-selenium/Bet9jaLoginPage.png&#34; alt=&#34;the website&amp;#39;s login page&#34;  &gt;
 &lt;/a&gt;
 
 
@@ -184,10 +184,10 @@ password$sendKeysToElement(list(&amp;quot;password&amp;quot;)) # your bet9ja pas
 &lt;figure &gt;
 
 
-  &lt;a data-fancybox=&#34;&#34; href=&#34;https://talkrtive.com/img/web-scraping-selenium/Bet9jaUsernamePassword.png&#34; &gt;
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/img/web-scraping-selenium/Bet9jaUsernamePassword.png&#34; &gt;
 
 
-  &lt;img src=&#34;https://talkrtive.com/img/web-scraping-selenium/Bet9jaUsernamePassword.png&#34; alt=&#34;the website&amp;#39;s username and password input field&#34;  &gt;
+  &lt;img src=&#34;/img/web-scraping-selenium/Bet9jaUsernamePassword.png&#34; alt=&#34;the website&amp;#39;s username and password input field&#34;  &gt;
 &lt;/a&gt;
 
 
@@ -220,10 +220,10 @@ password$sendKeysToElement(list(&amp;quot;password&amp;quot;)) # your bet9ja pas
 &lt;figure &gt;
 
 
-  &lt;a data-fancybox=&#34;&#34; href=&#34;https://talkrtive.com/img/web-scraping-selenium/Bet9jaHomePage.png&#34; &gt;
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/img/web-scraping-selenium/Bet9jaHomePage.png&#34; &gt;
 
 
-  &lt;img src=&#34;https://talkrtive.com/img/web-scraping-selenium/Bet9jaHomePage.png&#34; alt=&#34;the website&amp;#39;s homepage&#34;  &gt;
+  &lt;img src=&#34;/img/web-scraping-selenium/Bet9jaHomePage.png&#34; alt=&#34;the website&amp;#39;s homepage&#34;  &gt;
 &lt;/a&gt;
 
 
@@ -262,10 +262,10 @@ premier$clickElement() # click on the premier button
 &lt;figure &gt;
 
 
-  &lt;a data-fancybox=&#34;&#34; href=&#34;https://talkrtive.com/img/web-scraping-selenium/Bet9jaVirtualHome.png&#34; &gt;
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/img/web-scraping-selenium/Bet9jaVirtualHome.png&#34; &gt;
 
 
-  &lt;img src=&#34;https://talkrtive.com/img/web-scraping-selenium/Bet9jaVirtualHome.png&#34; alt=&#34;the website&amp;#39;s virtual football main page&#34;  &gt;
+  &lt;img src=&#34;/img/web-scraping-selenium/Bet9jaVirtualHome.png&#34; alt=&#34;the website&amp;#39;s virtual football main page&#34;  &gt;
 &lt;/a&gt;
 
 
@@ -292,10 +292,10 @@ premier$clickElement() # click on the premier button
 &lt;figure &gt;
 
 
-  &lt;a data-fancybox=&#34;&#34; href=&#34;https://talkrtive.com/img/web-scraping-selenium/Bet9jaVirtualResult.png&#34; &gt;
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/img/web-scraping-selenium/Bet9jaVirtualResult.png&#34; &gt;
 
 
-  &lt;img src=&#34;https://talkrtive.com/img/web-scraping-selenium/Bet9jaVirtualResult.png&#34; alt=&#34;the website&amp;#39;s virtual football result page&#34;  &gt;
+  &lt;img src=&#34;/img/web-scraping-selenium/Bet9jaVirtualResult.png&#34; alt=&#34;the website&amp;#39;s virtual football result page&#34;  &gt;
 &lt;/a&gt;
 
 
@@ -412,10 +412,10 @@ Sys.sleep(25)
 &lt;figure &gt;
 
 
-  &lt;a data-fancybox=&#34;&#34; href=&#34;https://talkrtive.com/img/web-scraping-selenium/betgames.png&#34; &gt;
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/img/web-scraping-selenium/betgames.png&#34; &gt;
 
 
-  &lt;img src=&#34;https://talkrtive.com/img/web-scraping-selenium/betgames.png&#34; alt=&#34;scraped data in an excel sheet&#34;  &gt;
+  &lt;img src=&#34;/img/web-scraping-selenium/betgames.png&#34; alt=&#34;scraped data in an excel sheet&#34;  &gt;
 &lt;/a&gt;
 
 
@@ -425,7 +425,7 @@ Sys.sleep(25)
 &lt;p&gt;It takes exactly 2 minutes for a game circle to be completed (match-fix-time + match-play-time), so if you do exactly what was taught in this tutorial, after 2 days of looping you should get a dataset with &lt;span style = &#34;color:blue;&#34;&gt; 10 x 30 x 48 &lt;/span&gt; &lt;strong&gt;=&lt;/strong&gt; &lt;span style = &#34;color:blue;&#34;&gt; 14400 &lt;/span&gt; observations for 2 days..&lt;/p&gt;
 &lt;p&gt;Now that we have gotten the dataset that  we want, our next step is to build a model to see how well we can predict the outcome of any match in the virtual football game.&lt;/p&gt;
 &lt;h5 id=&#34;please-refer-to-this-posthahahugoshortcode-s8-hbhb-for-the-modelling-part&#34;&gt;Please refer to this 
-&lt;a href=&#34;https://talkrtive.com/post/tidymodels-virtual-football-prediction/&#34;&gt;post&lt;/a&gt; for the modelling part&amp;hellip;&lt;/h5&gt;
+&lt;a href=&#34;/post/tidymodels-virtual-football-prediction/&#34;&gt;post&lt;/a&gt; for the modelling part&amp;hellip;&lt;/h5&gt;
 &lt;h3 id=&#34;wrap-up&#34;&gt;Wrap-up&lt;/h3&gt;
 &lt;p&gt;I use both rvest and RSelenium for web scraping and i must say, both are excellent tools that will always get the job done, the rvest package has a lot of people using it compared to the RSelenium package so you will most likely get solutions online for most rvest related problems than RSelenium.&lt;/p&gt;
 </description>

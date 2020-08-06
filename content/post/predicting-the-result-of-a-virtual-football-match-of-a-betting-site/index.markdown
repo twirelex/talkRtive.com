@@ -47,7 +47,7 @@ require(tidyverse)
 
 
 ```r
-bet9ja <- read_csv("https://raw.githubusercontent.com/twirelex/dataset/master/bet9ja(2).csv")
+bet9ja <- read_csv("C:/Users/wirelex/Downloads/bet9ja(2).csv")
 ```
 
 ```
