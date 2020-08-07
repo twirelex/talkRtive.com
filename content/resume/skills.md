@@ -29,7 +29,7 @@ subtitle = ""
 [[feature]]
   icon = "heart"
   icon_pack = "fas"
-  name = "I love listening to music alot, expecially 2pac's music. 2pac is unarguably the greatest rapper of all time"
+  name = "I love listening to hiphop music... Tupac is my all time favourite "
   description = ""
 
 +++
