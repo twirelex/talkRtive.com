@@ -277,9 +277,10 @@ rape_final <- rape_final %>%
 
 
 ```{r, fig.width=16, fig.height=8}
-rape_final %>% ggplot(aes(fct_rev(fct_infreq(state)), fill = state)) + geom_bar(show.legend = FALSE) + coord_flip() + labs(x = "STATE", y = "", title = "Confirmed rape cases according to state from Jan-2019 to July-2020 as posted on Lindaikejisblog") + theme_bw() + theme(
+rape_final %>% count(state) %>% ggplot(aes(fct_reorder(state, n), n , fill = state)) + geom_bar(show.legend = FALSE, stat = "identity") + coord_flip() + labs(caption = "talkRtive.com", x = "STATE", y = "", title = "Confirmed rape cases according to state from Jan-2019 to July-2020 as posted on Lindaikejisblog") + theme_bw() + theme(
   axis.text.y = element_text(face = "bold", size = 15),
   axis.text.x = element_blank(),
+  plot.caption = element_text(face = "bold", size = 20),
   plot.title = element_text(
     hjust = 0.3,
     size = 24,
@@ -297,12 +298,13 @@ require(lubridate)
 rape_final %>% mutate(date_published = floor_date(date_published, "month")) %>% count(date_published) %>% ggplot(aes(date_published, n)) + geom_point(color = "black") + geom_line(color = "grey50") + scale_x_date(date_breaks = "1 month", date_labels = "%b %Y") + theme(
   axis.text.x.bottom = element_text(size = 10, face = "bold"),
   panel.grid = element_blank(),
+  plot.caption = element_text(face = "bold", size = 20),
   plot.title = element_text(
     colour = "grey50",
     size = 25,
     hjust = 0.5
   )
-) + labs(x = "Date", y = "", title = "Distribution of confirmed Rape cases from Jan-2019 to July-2020 as posted on Lindaikejisblog")
+) + labs(caption = "talkRtive.com", x = "Date", y = "", title = "Distribution of confirmed Rape cases from Jan-2019 to July-2020 as posted on Lindaikejisblog")
 ```  
 
 There have been quite a number of incident of Rape between 2019 and half-way 2020, despite not being a complete year yet there have been more rape cases in 2020 than in 2019, obviously because of the Lockdown that started in April.  
