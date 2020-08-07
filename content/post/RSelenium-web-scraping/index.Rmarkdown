@@ -142,7 +142,7 @@ There is a little problem that we have to address before proceeding to get this 
 iframe = remdr$findElement(using = "css selector", "#playAreaFrame")
 
 remdr$switchToFrame(iframe)
-```
+```  
 
 **We have switched to the frame and can now perform the findElement method to obtain the data that we need.**
 
