@@ -2,14 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Anthony Aigboje Akhonokhue | talkRtive</title>
-    <link>https://talkrtive.com/author/anthony-aigboje-akhonokhue/</link>
-      <atom:link href="https://talkrtive.com/author/anthony-aigboje-akhonokhue/index.xml" rel="self" type="application/rss+xml" />
+    <link>/author/anthony-aigboje-akhonokhue/</link>
+      <atom:link href="/author/anthony-aigboje-akhonokhue/index.xml" rel="self" type="application/rss+xml" />
     <description>Anthony Aigboje Akhonokhue</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language>
     <image>
-      <url>https://talkrtive.com/img/talRtive.jpg</url>
+      <url>/img/talRtive.jpg</url>
       <title>Anthony Aigboje Akhonokhue</title>
-      <link>https://talkrtive.com/author/anthony-aigboje-akhonokhue/</link>
+      <link>/author/anthony-aigboje-akhonokhue/</link>
     </image>
     
   </channel>

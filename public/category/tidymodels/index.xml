@@ -2,23 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>tidymodels | talkRtive</title>
-    <link>https://talkrtive.com/category/tidymodels/</link>
-      <atom:link href="https://talkrtive.com/category/tidymodels/index.xml" rel="self" type="application/rss+xml" />
+    <link>/category/tidymodels/</link>
+      <atom:link href="/category/tidymodels/index.xml" rel="self" type="application/rss+xml" />
     <description>tidymodels</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 20 Jul 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://talkrtive.com/img/talRtive.jpg</url>
+      <url>/img/talRtive.jpg</url>
       <title>tidymodels</title>
-      <link>https://talkrtive.com/category/tidymodels/</link>
+      <link>/category/tidymodels/</link>
     </image>
     
     <item>
       <title>Predicting the result of a Virtual football match using tidymodels</title>
-      <link>https://talkrtive.com/post/tidymodels-virtual-football-prediction/</link>
+      <link>/post/tidymodels-virtual-football-prediction/</link>
       <pubDate>Mon, 20 Jul 2020 00:00:00 +0000</pubDate>
-      <guid>https://talkrtive.com/post/tidymodels-virtual-football-prediction/</guid>
+      <guid>/post/tidymodels-virtual-football-prediction/</guid>
       <description>&lt;h2 id=&#34;after-successfully-scraping-data-from-a-football-betting-sitehahahugoshortcode-s0-hbhb--i-will-now-build-a-simple-model-using-tidymodels-r-package-to-see-how-well-it-will-perform-in-predicting-the-result-of-the-games&#34;&gt;After successfully 
-&lt;a href=&#34;https://talkrtive.com/post/web-scraping-using-rselenium/&#34;&gt;scraping data from a football betting site&lt;/a&gt;  i will now build a simple model using tidymodels r package to see how well it will perform in predicting the result of the games.&lt;/h2&gt;
+&lt;a href=&#34;/post/web-scraping-using-rselenium/&#34;&gt;scraping data from a football betting site&lt;/a&gt;  i will now build a simple model using tidymodels r package to see how well it will perform in predicting the result of the games.&lt;/h2&gt;
 &lt;p&gt;Below are some information about the dataset:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;home      &amp;ndash;&amp;gt;&lt;/strong&gt; &lt;em&gt;A premier league club at home to play against an opponent&lt;/em&gt;&lt;/li&gt;
@@ -39,7 +39,7 @@
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;require(tidyverse)
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;strong&gt;Read in the dataset and check its dimension&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;bet9ja &amp;lt;- read_csv(&amp;quot;https://raw.githubusercontent.com/twirelex/dataset/master/bet9ja(2).csv&amp;quot;)
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;bet9ja &amp;lt;- read_csv(&amp;quot;C:/Users/wirelex/Downloads/bet9ja(2).csv&amp;quot;)
 &lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## Parsed with column specification:
 ## cols(
@@ -192,13 +192,13 @@ we will create the new variable from our homeR and awayR variables and call the 
   transmute(result, homeOdd = factor(case_when(homeOdd &amp;lt;= 1.5 ~ &amp;quot;smallO&amp;quot;, homeOdd &amp;gt; 1.5 &amp;amp; homeOdd &amp;lt;= 2 ~ &amp;quot;mediumO&amp;quot;, homeOdd &amp;gt; 2 ~ &amp;quot;bigO&amp;quot;))) %&amp;gt;% 
   ggplot(aes(result, fill = result)) + geom_bar(show.legend = FALSE) + facet_wrap(~homeOdd) + theme_bw() +scale_y_continuous(labels = NULL) + labs(y = NULL, title = &amp;quot;HOME TEAM ODDS PLOT&amp;quot;) + theme(plot.title = element_text(hjust = 0.5))
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://talkrtive.com/post/predicting-the-result-of-a-virtual-football-match-of-a-betting-site/index_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;768&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;/post/predicting-the-result-of-a-virtual-football-match-of-a-betting-site/index_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;768&#34; /&gt;
 &lt;strong&gt;The plot above is trying to convince us that when a team is home and its winning odds is big i.e above 2 then the match will likely end up in favor of its opponent(away team), but when its winning odds is small or medium i.e between 1 and 2 then the match will most likely end in favor of the team..&lt;/strong&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;bet9ja %&amp;gt;% 
   transmute(result, awaysOdd = factor(case_when(awaysOdd &amp;lt;= 1.5 ~ &amp;quot;smallO&amp;quot;, awaysOdd &amp;gt; 1.5 &amp;amp; awaysOdd &amp;lt;= 2 ~ &amp;quot;mediumO&amp;quot;, awaysOdd &amp;gt; 2 ~ &amp;quot;bigO&amp;quot;))) %&amp;gt;% 
   ggplot(aes(result, fill = result)) + geom_bar(show.legend = FALSE) + facet_wrap(~awaysOdd) + theme_bw() +scale_y_continuous(labels = NULL) + labs(y = NULL, title = &amp;quot;AWAY TEAM ODDS PLOT&amp;quot;) + theme(plot.title = element_text(hjust = 0.5))
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://talkrtive.com/post/predicting-the-result-of-a-virtual-football-match-of-a-betting-site/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;768&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;/post/predicting-the-result-of-a-virtual-football-match-of-a-betting-site/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;768&#34; /&gt;
 &lt;strong&gt;According to the plot above, when a team is away and it is giving a big winning odds in a particular match i.e odds above 2, the game will likely end up in favor of the opposition team(home team), but when the team is giving a small/medium winning odds i.e between 1 and 2 then the match will likely end up in the team&amp;rsquo;s favor&lt;/strong&gt;&lt;/p&gt;
 &lt;h2 id=&#34;modeling&#34;&gt;MODELING&lt;/h2&gt;
 &lt;p&gt;Now that we have an idea of what the relationship between the odds variables and the result variable looks like let us go ahead and build a predictive model using the tidymodels r package.&lt;/p&gt;
@@ -383,7 +383,7 @@ kable(head(prediction2, 10))
 rf_model %&amp;gt;% 
   vip(geom = &amp;quot;point&amp;quot;)
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://talkrtive.com/post/predicting-the-result-of-a-virtual-football-match-of-a-betting-site/index_files/figure-html/unnamed-chunk-19-1.png&#34; width=&#34;672&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;/post/predicting-the-result-of-a-virtual-football-match-of-a-betting-site/index_files/figure-html/unnamed-chunk-19-1.png&#34; width=&#34;672&#34; /&gt;
 From the plot above we can clearly see that the odds variables were the most effective predictor variables.&lt;/p&gt;
 &lt;h3 id=&#34;observation&#34;&gt;OBSERVATION&lt;/h3&gt;
 &lt;p&gt;Both models didn&amp;rsquo;t give us the best result but from our analysis we can see that variables that are the most significant determinant of the outcome of any virtual football game are the odds variables, the teams involved or the time/day the game is played doesn&amp;rsquo;t matter that much&amp;hellip;&lt;/p&gt;

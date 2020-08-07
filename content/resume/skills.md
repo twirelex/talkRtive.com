@@ -29,7 +29,7 @@ subtitle = ""
 [[feature]]
   icon = "heart"
   icon_pack = "fas"
-  name = "I love listening to hiphop music... Tupac is my all time favourite "
+  name = "I love listening to hiphop music... Tupac is my all time favourite. "
   description = ""
 
 +++

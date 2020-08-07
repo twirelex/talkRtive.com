@@ -3,78 +3,88 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://talkrtive.com/post/</loc>
+    <loc>/post/</loc>
     <lastmod>2020-07-27T15:05:45+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://talkrtive.com/categories/</loc>
+    <loc>/categories/</loc>
     <lastmod>2020-07-27T15:05:45+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://talkrtive.com/post/data-cleaning-tidyverse-r-package/</loc>
+    <loc>/post/data-cleaning-tidyverse-r-package/</loc>
     <lastmod>2020-07-27T15:05:45+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://talkrtive.com/category/r-programming/</loc>
+    <loc>/category/r-programming/</loc>
     <lastmod>2020-07-27T15:05:45+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://talkrtive.com/</loc>
+    <loc>/</loc>
     <lastmod>2020-07-27T15:05:45+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://talkrtive.com/category/tidyverse/</loc>
+    <loc>/category/tidyverse/</loc>
     <lastmod>2020-07-27T15:05:45+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://talkrtive.com/post/tidymodels-virtual-football-prediction/</loc>
+    <loc>/post/tidymodels-virtual-football-prediction/</loc>
     <lastmod>2020-07-20T17:39:32+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://talkrtive.com/category/tidymodels/</loc>
+    <loc>/category/tidymodels/</loc>
     <lastmod>2020-07-20T17:39:32+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://talkrtive.com/post/web-scraping-using-rselenium/</loc>
+    <loc>/post/web-scraping-using-rselenium/</loc>
     <lastmod>2020-07-07T00:21:57+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://talkrtive.com/category/web-scraping/</loc>
+    <loc>/category/web-scraping/</loc>
     <lastmod>2020-07-07T00:21:57+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://talkrtive.com/resume/</loc>
+    <loc>/resume/</loc>
     <lastmod>2020-01-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://talkrtive.com/about/</loc>
+    <loc>/privacy/</loc>
+    <lastmod>2018-06-28T00:00:00+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://talkrtive.com/author/anthony-aigboje-akhonokhue/</loc>
+    <loc>/terms/</loc>
+    <lastmod>2018-06-28T00:00:00+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://talkrtive.com/authors/</loc>
+    <loc>/about/</loc>
   </url>
   
   <url>
-    <loc>https://talkrtive.com/publication_types/</loc>
+    <loc>/author/anthony-aigboje-akhonokhue/</loc>
   </url>
   
   <url>
-    <loc>https://talkrtive.com/tags/</loc>
+    <loc>/authors/</loc>
+  </url>
+  
+  <url>
+    <loc>/publication_types/</loc>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
   </url>
   
 </urlset>
