@@ -345,4 +345,4 @@ With an accuracy less than 50% the SVM and a random forest model are probably no
 
 
 ### Wrap-up  
-Shifting from the base r and caret way of modeling can be hard for some of us but seeing how far the tidymodels is preparing to take us (timely upgrade/update) is enough reason for everyone to start trying it out. And also, knowing that the brain behind the caret package is also part  of the tidymodels team makes it even more interesting. I have prepared a short and comprehensive lesson on tidymodels that might be helpful.. [tidymodels for noobs]()
+Shifting from the base r and caret way of modeling can be hard for some of us but seeing how far the tidymodels is preparing to take us (timely upgrade/update) is enough reason for everyone to start trying it out. And also, knowing that the brain behind the caret package is also part  of the tidymodels team makes it even more interesting. I have prepared a short and comprehensive lesson on tidymodels that might be helpful.. [Tidymodels for complete noob]({{< ref "post/predicting-the-result-of-a-virtual-football-match-of-a-betting-site" >}})
