@@ -82,7 +82,7 @@ remdr$navigate(url)  # Navigating to the page
 ```  
 {{< figure library="true" src="web-scraping-selenium/Bet9jaLoginPage.png" alt="the website's login page">}}
 
-**Now we will use the selector gadget add-on in chrome browser to locate the elements we are interested in within any page. If you have not used the selector gadget add-on before here is a [link](https://selectorgadget.com/) to a quick guide on how to begin or use your browser's inspect element option by just right clicking at any particular place of interest and select "inspect" / "inspect element" .**  
+**Now we will use the selector gadget add-on in chrome browser to locate the elements we are interested in within any page. If you have not used the selector gadget add-on before here is a <a href="https://selectorgadget.com/" target="_blank" rel="nofollow noopener">link<a/> to a quick guide on how to begin or use your browser's inspect element option by just right clicking at any particular place of interest and select "inspect" / "inspect element" .**  
 **we first locate the username element and store it in a variable called username**
 ```
 username <- remdr$findElement(using = 'css selector',"#ctl00_w_ContentMain_ContentMain_LoginUser1_ctrlLogin_Username")
