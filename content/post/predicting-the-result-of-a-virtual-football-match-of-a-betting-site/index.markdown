@@ -184,7 +184,8 @@ registerDoSNOW(cl)
 
 ```r
 require(tidymodels) # for modeling
-set.seed(111)
+
+set.seed(111) # setting seed for reproducibility
 
 splitdata <- initial_split(bet9ja)
 traindata <- training(splitdata)
@@ -260,7 +261,6 @@ Now let us try to build a random forest model to see if there will be any improv
 
 
 ```r
-set.seed(111)
 rf_model <- rand_forest(mode = "classification") %>% 
   set_engine("ranger", importance = "permutation") %>% 
   fit(result~., data = traindata)
@@ -301,9 +301,9 @@ prediction2 %>%
 ```
 ##           Truth
 ## Prediction    0    1    2
-##          0  135  147  141
-##          1  586 1086  455
-##          2  310  276  466
+##          0  139  146  151
+##          1  583 1090  441
+##          2  309  273  470
 ```
 
 
@@ -316,7 +316,7 @@ prediction2 %>% accuracy(actual, predicted) # check accuracy
 ## # A tibble: 1 x 3
 ##   .metric  .estimator .estimate
 ##   <chr>    <chr>          <dbl>
-## 1 accuracy multiclass     0.468
+## 1 accuracy multiclass     0.472
 ```
 
 
