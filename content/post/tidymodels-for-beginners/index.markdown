@@ -45,7 +45,7 @@ The diagram below is an overview chart i created to give you a general understan
 
 <center> <h3> <b>WHAT IS TIDYMODELS</b> </h3> </center>  
 
-Tidymodels is collection of r packages for modeling and machine learning using tidyverse principles.  
+Tidymodels is a collection of r packages for modeling and machine learning using tidyverse principles.  
 
 <center> <h3> <b>HOW MANY PACKAGES ARE IN THE TIDYMODELS FRAMEWORK</b> </h3> </center>  
 
