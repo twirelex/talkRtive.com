@@ -1,7 +1,7 @@
 ---
 authors:
 - admin
-bio: A data science enthusiast.
+bio: A data analyst/scientist for hire. See my [Resume](https://talkrtive.com/resume) for more info.
 education:
   courses:
   - course: BSc in Statistics
