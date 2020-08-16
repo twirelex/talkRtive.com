@@ -17,7 +17,7 @@ subtitle = ""
 [[feature]]
   icon = "chart-bar"
   icon_pack = "fas"
-  name = "Machine learning, Statistical modeling, Data analysis, Cloud computing, Web applications, Web scrapping"
+  name = "Machine learning, Statistical modeling, Data analysis, Cloud computing, Web applications, Web scraping"
   description = ""
   
 [[feature]]
