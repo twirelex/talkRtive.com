@@ -45,7 +45,7 @@ The diagram below is an overview chart i created to give you a general understan
 
 <center> <h3> <b>WHAT IS TIDYMODELS</b> </h3> </center>  
 
-The tidymodels framework is collection of r packages for modeling and machine learning using tidyverse principles.  
+Tidymodels is collection of r packages for modeling and machine learning using tidyverse principles.  
 
 <center> <h3> <b>HOW MANY PACKAGES ARE IN THE TIDYMODELS FRAMEWORK</b> </h3> </center>  
 
@@ -86,7 +86,7 @@ library(tidymodels)
 ```
 
 ```
-## -- Attaching packages ---------------------------------------------------------------- tidymodels 0.1.1 --
+## -- Attaching packages ----------------------------------------------------------------- tidymodels 0.1.1 --
 ```
 
 ```
@@ -101,7 +101,7 @@ library(tidymodels)
 ```
 
 ```
-## -- Conflicts ------------------------------------------------------------------- tidymodels_conflicts() --
+## -- Conflicts -------------------------------------------------------------------- tidymodels_conflicts() --
 ## x purrr::discard() masks scales::discard()
 ## x dplyr::filter()  masks stats::filter()
 ## x dplyr::lag()     masks stats::lag()
@@ -222,6 +222,6 @@ predicted %>% metrics(truth = actual, estimate = .pred)
 
 ## Wrap-up  
 
-The example above is only to give you a glimpse of how powerful the tidymodels framework is, there is much more that can be done with the packages that it compounds, the idea was just to get you started and show its beautiful interface.. 
+The example above is only to give you a glimpse of how powerful and easy the tidymodels framework is, there is much more that can be done with the packages that it compounds, the idea was just to get you started and show its beautiful interface.. 
 
 Don't forget to share this lesson to others if you find it helpful... Thanks.
