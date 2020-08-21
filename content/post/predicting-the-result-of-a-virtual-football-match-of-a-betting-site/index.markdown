@@ -16,6 +16,9 @@ image:
   preview_only: true
 projects: []
 ---
+
+
+
 ## After successfully [scraping data from a football betting site]({{< ref "post/RSelenium-web-scraping" >}})  i will now build a simple model using tidymodels r package to see how well it will perform in predicting the result of the games.  
 
 Below are some information about the dataset:  
@@ -151,7 +154,7 @@ bet9ja %>%
   ggplot(aes(result, fill = result)) + geom_bar(show.legend = FALSE) + facet_wrap(~homeOdd) + theme_bw() +scale_y_continuous(labels = NULL) + labs(y = NULL, title = "HOME TEAM ODDS PLOT") + theme(plot.title = element_text(hjust = 0.5))
 ```
 
-<img src="/post/predicting-the-result-of-a-virtual-football-match-of-a-betting-site/index_files/figure-html/unnamed-chunk-7-1.png" width="768" />
+{{<figure src="/post/predicting-the-result-of-a-virtual-football-match-of-a-betting-site/index_files/figure-html/unnamed-chunk-8-1.png" alt="barplot showing the home team odds">}}
 **The plot above is trying to convince us that when a team is home and its winning odds is big i.e above 2 then the match will likely end up in favor of its opponent(away team), but when its winning odds is small or medium i.e between 1 and 2 then the match will most likely end in favor of the team..**
 
 
@@ -161,7 +164,7 @@ bet9ja %>%
   ggplot(aes(result, fill = result)) + geom_bar(show.legend = FALSE) + facet_wrap(~awaysOdd) + theme_bw() +scale_y_continuous(labels = NULL) + labs(y = NULL, title = "AWAY TEAM ODDS PLOT") + theme(plot.title = element_text(hjust = 0.5))
 ```
 
-<img src="/post/predicting-the-result-of-a-virtual-football-match-of-a-betting-site/index_files/figure-html/unnamed-chunk-8-1.png" width="768" />
+{{<figure src="/post/predicting-the-result-of-a-virtual-football-match-of-a-betting-site/index_files/figure-html/unnamed-chunk-9-1.png" alt="barplot showing the away team odds">}}
 **According to the plot above, when a team is away and it is giving a big winning odds in a particular match i.e odds above 2, the game will likely end up in favor of the opposition team(home team), but when the team is giving a small/medium winning odds i.e between 1 and 2 then the match will likely end up in the team's favor**  
 
 ## MODELING  
@@ -332,7 +335,7 @@ rf_model %>%
   vip(geom = "point")
 ```
 
-<img src="/post/predicting-the-result-of-a-virtual-football-match-of-a-betting-site/index_files/figure-html/unnamed-chunk-19-1.png" width="672" />
+{{<figure src="/post/predicting-the-result-of-a-virtual-football-match-of-a-betting-site/index_files/figure-html/unnamed-chunk-20-1.png" alt="scatterplot showing variable importance of the variables">}}
 From the plot above we can clearly see that the odds variables were the most effective predictor variables.  
 
 ### OBSERVATION  

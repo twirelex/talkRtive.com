@@ -86,7 +86,7 @@ library(tidymodels)
 ```
 
 ```
-## -- Attaching packages ---------------------------------------------------------------- tidymodels 0.1.1 --
+## -- Attaching packages ----------------------------------------------------------------- tidymodels 0.1.1 --
 ```
 
 ```
@@ -101,7 +101,7 @@ library(tidymodels)
 ```
 
 ```
-## -- Conflicts ------------------------------------------------------------------- tidymodels_conflicts() --
+## -- Conflicts -------------------------------------------------------------------- tidymodels_conflicts() --
 ## x purrr::discard() masks scales::discard()
 ## x dplyr::filter()  masks stats::filter()
 ## x dplyr::lag()     masks stats::lag()

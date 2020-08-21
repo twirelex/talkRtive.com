@@ -17,6 +17,27 @@ image:
 projects: []
 ---
 
+```{r, include=FALSE}
+knitr::knit_hooks$set(
+  plot = function(x, options) {
+    hugoopts <- options$hugoopts
+    paste0(
+      "{", "{<figure src=", # the original code is simpler
+      # but here I need to escape the shortcode!
+      '"', x, '" ',
+      if (!is.null(hugoopts)) {
+        glue::glue_collapse(
+          glue::glue('{names(hugoopts)}="{hugoopts}"'),
+          sep = " "
+        )
+      },
+      ">}}\n"
+    )
+  }
+)
+
+```
+
 ## I am going to show you how you can do a simple and fast data analysis using tidyverse r package without stress.
 
 The dataset i will be using for this lesson is one i scraped from a popular blog in Nigeria. The dataset contains all the news that has ever been featured on the blog from when it started operating to the day i scraped the data (31-07-2020). My interest however, is only on the "Rape" related news.
@@ -26,7 +47,6 @@ So without wasting much time let me get on with the analysis..
 **Load the tidyverse r package**
 ```{r, message=FALSE}
 require(tidyverse)
-require(widgetframe)
 ```
 
 **Read in the data**
@@ -38,19 +58,10 @@ dim(blog_data) # check dimension
 
 **See what the data looks like**
 
-```{r, message=FALSE, warning=FALSE}
 
-bd_10 <-  head(blog_data, 10) %>% DT::datatable(options = list(dom = "t")) # first 10 rows
-
-bd_10
+```{r}
+head(blog_data, 10)
 ```
-
-
-```{r, message=FALSE, warning=FALSE, echo=FALSE}
-
-htmlwidgets::saveWidget(bd_10, "bd_10.html", selfcontained = TRUE)
-```
-<iframe seamless src="bd_10.html" width = "930" height = "400"></iframe>
 
 
 **Change the name of the column to something meaningful**
@@ -120,17 +131,10 @@ rape_related <- rape_related %>%
 
 ```{r, message=FALSE, warning=FALSE}
 
-rl_5 <-  head(rape_related, 5) %>% DT::datatable(options = list(dom = "t")) # first 5 observations
+head(rape_related, 5) # first 5 observations
 
-rl_5
 ```
 
-
-```{r, message=FALSE, warning=FALSE, echo=FALSE}
-
-htmlwidgets::saveWidget(frameableWidget(rl_5), "rl_5.html", selfcontained = TRUE)
-```
-<iframe seamless src="rl_5.html" width = "930" height = "400"></iframe>
 
 **Eventho the filtered data is rape related some of them are just mere accusations and unconfirmed stories, so i will narrow my filtered data down to only the cases that were confirmed i.e Perpetrator was arrested or sentenced or imprisoned.. etc....**  
 
@@ -161,33 +165,20 @@ rape_related <- rape_related %>%
 
 ```{r, message=FALSE, warning=FALSE}
 
-rl_filtered <-  rape_related %>% DT::datatable() # view all observation
+rape_related %>% head(20) 
 
-rl_filtered
 ```
 
-
-```{r, message=FALSE, warning=FALSE, echo=FALSE}
-
-htmlwidgets::saveWidget(frameableWidget(rl_filtered), "rl_filtered.html", selfcontained = TRUE)
-```
-<iframe seamless src="rl_filtered.html" width = "930" height = "400"></iframe>  
 
 **Looking at the data above it appears that there is still filtering that needs to be done as some of the observations are either alleged, accusations that are being investigated or rape cases that occurred outside Nigeria. One thing that i noticed however is that most of these cases are cases without state in their title i.e observations without state in the state column. To verify this i will filter the observations down to cases where the state variable is Empty/NotAvailable and investigate the observations**
 
 
 
 ```{r}
-rape_ws <- rape_related %>% filter(is.na(state) == TRUE) %>% DT::datatable()
+rape_related %>% filter(is.na(state) == TRUE) %>% head(10)
 
-rape_ws
 ```
 
-```{r, message=FALSE, warning=FALSE, echo=FALSE}
-
-htmlwidgets::saveWidget(frameableWidget(rape_ws), "rape_ws.html", selfcontained = TRUE)
-```
-<iframe seamless src="rape_ws.html" width = "930" height = "400"></iframe>  
 
 **Took my time to investigate the posts and discovered that truly most of the cases without states are rape events outside Nigeria, and few cases are accusations that are being discussed (No proof). However, i noticed that very few of the post didn't have state in them either because the blogger did not include state or because the state was written in the main news/post and not in the title/summary that i scraped. I selected the few posts(216,352,42,119,210,247,318,320) and manually researched the states they occurred, (Delta,Lagos,Imo,Niger,Adamawa,Abuja,Lagos,Niger) respectively. Now i will include those states to the observations (i will make use of the rows_update function from dplyr in tidyverse**  
 
@@ -209,16 +200,10 @@ rape_related <- rows_update(rape_related ,
 
 
 ```{r}
-rape_withstate <- rape_related %>% filter(is.na(state) == FALSE) %>% DT::datatable()
+rape_related %>% filter(is.na(state) == FALSE) %>% head(10)
 
-rape_withstate
 ```
 
-```{r, message=FALSE, warning=FALSE, echo=FALSE}
-
-htmlwidgets::saveWidget(frameableWidget(rape_withstate), "rape_withstate.html", selfcontained = TRUE)
-```
-<iframe seamless src="rape_withstate.html" width = "930" height = "400"></iframe>  
 
 **It appears that some of the cases are cases where the accused denies and sues the accuser but no arrest or sentencing was made. An example of such cases is the COZA pastor rape allegation case, that particular story appeared a few times, also there are cases where arrest were made for attempted rape (not really what we want), and a case where the victim was an Animal and lots more. I have investigated these cases and will have to remove them from the observations**  
 
@@ -229,15 +214,10 @@ rape_related <- rape_related[-c(27,34,51,60,65,71,75,114,116,122,126,149,173,190
 **I am now only going to keep observations with state and perform one final check "whether the state variable captured the actual state where each event occurred"**  
 
 ```{r}
-rape_final <- rape_related %>% filter(is.na(state) == FALSE) %>% DT::datatable()
+rape_related %>% filter(is.na(state) == FALSE) %>% head(10)
 
-rape_final
 ```
 
-```{r, echo=FALSE}
-htmlwidgets::saveWidget(frameableWidget(rape_final), "rape_final.html", selfcontained = TRUE)
-```
-<iframe seamless src="rape_final.html" width = "930" height = "400"></iframe>  
 
 **After carrying out the final check i discovered that about 2 states were misrepresented, and the misrepresentation was because i had initially set my map(loop) to extract the first state in the title/summary that matches any state in the states i provided. There are 2 cases where the first state in the title/summary was the state of the culprit and not the state of occurrence. An example of such case is; *"A bricklayer from Cross River has been arrested for raping his 9-year-old sister-in-law in Osun state"*.... the event occurred in Osun but since Cross River was mentioned first Cross River was picked..**  
 
@@ -276,7 +256,7 @@ rape_final <- rape_final %>%
 **Finally i will like to represent the data graphically**
 
 
-```{r, fig.width=16, fig.height=8}
+```{r, fig.width=16, fig.height=8, hugoopts=list(alt= "barplot showing states of confirmed rape cases created with ggplot in tidyverse")}
 rape_final %>% count(state) %>% ggplot(aes(fct_reorder(state, n), n , fill = state)) + geom_bar(show.legend = FALSE, stat = "identity") + coord_flip() + labs(x = "STATE", y = "", title = "Confirmed rape cases according to state from Jan-2019 to July-2020 as posted on Lindaikejisblog") + theme_bw() + theme(
   axis.text.y = element_text(face = "bold", size = 15),
   axis.text.x = element_blank(),
@@ -292,7 +272,7 @@ rape_final %>% count(state) %>% ggplot(aes(fct_reorder(state, n), n , fill = sta
 Lagos state, Ogun state and Niger state happen to have recorded more confirmed rape cases than the other states, with Anambara and Abuja following..
 
 
-```{r, fig.width=15, message=FALSE, fig.height=7}
+```{r, fig.width=15, message=FALSE, fig.height=7, hugoopts=list(alt= "scatterplot of rape cases created with ggplot in tidyverse")}
 require(lubridate)
 
 rape_final %>% mutate(date_published = floor_date(date_published, "month")) %>% count(date_published) %>% ggplot(aes(date_published, n)) + geom_point(color = "black") + geom_line(color = "grey50") + geom_text(aes(label = n), vjust = -0.35, hjust = 0.5, size = 5) + scale_x_date(date_breaks = "1 month", date_labels = "%b %Y") + theme(

@@ -1,7 +1,7 @@
 ---
 title: Linear regression in r
 author: ''
-date: '2020-08-21'
+date: '2020-08-20'
 slug: linear-regression-in-r
 categories:
   - r programming
@@ -9,26 +9,50 @@ tags: []
 subtitle: ''
 summary: 'Building a linear regression model in r using both the base r and the tidymodels approach'
 authors: []
-lastmod: '2020-08-21T11:46:19+01:00'
+lastmod: '2020-08-20T20:47:51+01:00'
 featured: no
 image:
   caption: ''
   focal_point: ''
   preview_only: true
 projects: []
----
+---  
+
+```{r, include=FALSE}
+knitr::knit_hooks$set(
+  plot = function(x, options) {
+    hugoopts <- options$hugoopts
+    paste0(
+      "{", "{<figure src=", # the original code is simpler
+      # but here I need to escape the shortcode!
+      '"', x, '" ',
+      if (!is.null(hugoopts)) {
+        glue::glue_collapse(
+          glue::glue('{names(hugoopts)}="{hugoopts}"'),
+          sep = " "
+        )
+      },
+      ">}}\n"
+    )
+  }
+)
+
+```
+
+
 In this lesson we will try and get a high level intuitive understanding of how linear regression works.
 Regression analysis is often used to model causes and effects, the cause being the independent variable and can also be referred to as the explanatory/predictor variable (`X`), the effect is the dependent variable i.e the variable that is dependent on the cause.  
+Regression analysis can be defined as a statistical method that can be used to examine relationships between a dependent variable and one or more independent variables.
 
 ## Let's consider simple linear regression;
 Simple linear regression is a regression where we have exactly 1 `X` variable. Simple linear regression is easy to understand because the data points used for the regression analysis can be plotted on a two dimensional plane like in the diagram below  
 
-![](linear-regression-in-r/simple_linear_regression.png)
+{{< figure library="true" src="linear-regression-in-r/simple_linear_regression.png" alt="simple linear regression fig">}}
 
 ## So what exactly is linear regression? 
 Linear regression involves finding the best fit line through the data points  
 
-![](linear-regression-in-r/simple_linear_regression_bestfit.png) 
+{{< figure library="true" src="linear-regression-in-r/simple_linear_regression_bestfit.png" alt="simple linear regression with best fit line fig">}}  
 
 The line is what is used for prediction.  
 
@@ -38,16 +62,16 @@ The regression line also known as best fit line is that line which minimizes the
 
 When there are more than one explanatory variable the regression becomes *Multiple Regression*. The same objective of the simple linear regression applies to the multiple regression, i.e To minimize the variance of the residuals.  
 
-Now after performing regression analysis (whether simple linear regression or multiple regression) we need a way to be able to evaluate our result, one of the ways we can evaluate the result is by using the $R^{2}$ metric  
-$R^{2}$ = ESS / TSS  
+Now after performing regression analysis (whether simple linear regression or multiple regression) we need a way to be able to evaluate our result, one of the ways we can evaluate the result is by using the **R²** metric  
+**R²** = ESS / TSS  
 where   
 `ESS` stands for EXPLAINED SUM OF SQUARES (variance of the fitted values)  
 `TSS` stands for TOTAL SUM OF SQUARES (variance of the actual values)  
-The $R^{2}$ metric measures the percentage of total variance explained by the regression. The higher the $R^{2}$ the better the quality of the regression analysis.  
+The **R²** metric measures the percentage of total variance explained by the regression. The higher the **R²** the better the quality of the regression analysis.  
 
-In multiple regression the $R^{2}$ metric is not used directly, we make use of the adjusted $R^{2}$, and this is because in multiple regression there may be variables which are not relevant. The adjusted $R^{2}$ adds an additional penalty to handle variables that are not really relevant in the analysis.  
+In multiple regression the **R²** metric is not used directly, we make use of the adjusted **R²**, and this is because in multiple regression there may be variables which are not relevant. The adjusted **R²** adds an additional penalty to handle variables that are not really relevant in the analysis.  
 
-In summary, the best fit regression line is the line that produces the best $R^{2}$  
+In summary, the best fit regression line is the line that produces the best **R²**  
 
 Another way to evaluate the result of a regression analysis is by using the `RMSE` metric. The root mean square error is a preferred evaluation choice for some people, it can be obtained by taking the root of the Mean Square Error.
 
@@ -107,7 +131,7 @@ summary(real_estate)
 Looking at the summary statistics above we can see that variables like `distance_to_the_nearest_mrt_station` has a mean value that is very high when compared to other variables like the `number_of_convinience_stores` and `house_age`, these large values will have effect on our model if used as is, so we will have to standardize the variables in the pre-processing stage before building our model so that all the variables can have values that will not cause bias in our model.  
 
 
-```{r, fig.width=18, fig.height=10}
+```{r, fig.width=18, fig.height=10, hugoopts=list(alt="pairs plot created with ggplairs function from ggally package in r")}
 ggpairs(real_estate, upper = NULL)
 ```  
 
@@ -252,3 +276,9 @@ Though there is no improvement in the model after using tidymodels and tuning fo
 
 ### CONCLUSION  
 R provides us with a convenient way of performing regression analysis and with the help of tidymodels we can do more advanced and robust analysis like applying bootstrap resampling, cross-validation etc..
+
+
+
+
+
+
