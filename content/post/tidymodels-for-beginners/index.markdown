@@ -16,11 +16,11 @@ image:
   preview_only: true
 projects: []
 ---
-For this lesson i prepared a decision chart that will help people who are looking to start using the **tidymodels** framework but don't know where to begin from understand it from a starter point of view and i will also answer some popular **tidymodels** related questions i have come across online.  
-I have seen people complaining about how they want to start using the **tidymodels** r framework but haven't really found tutorials that breaks things down enough to their level. If you are in that category of people then this lesson is for you. R is a great programming language that continues to evolve, one of the things that attracts people to R is its simplicity and how there is always a package for anything/anytask. 
-It might interest you to know that the brain behind R's popular machine learning package "caret" is also part of the team behind the **tidymodels** framework.  
+For this lesson i prepared a decision chart that will help people who are looking to start using the tidymodels framework but don't know where to begin from understand it from a starter point of view and i will also answer some popular tidymodels related questions i have come across online.  
+I have seen people complaining about how they want to start using the tidymodels r framework but haven't really found tutorials that breaks things down enough to their level. If you are in that category of people then this lesson is for you. R is a great programming language that continues to evolve, one of the things that attracts people to R is its simplicity and how there is always a package for anything/anytask. 
+It might interest you to know that the brain behind R's popular machine learning package "caret" is also part of the team behind the tidymodels framework.  
 
-The diagram below is an overview chart i created to give you a general understanding of the **tidymodels** workflow  
+The diagram below is an overview chart i created to give you a general understanding of the tidymodels workflow  
 
 {{< figure library="true" src="tidymodels_framework_overview.png" alt="tidymodels framework overview">}} 
 
@@ -86,7 +86,7 @@ library(tidymodels)
 ```
 
 ```
-## -- Attaching packages ----------------------------------------------------------------- tidymodels 0.1.1 --
+## -- Attaching packages ---------------------------------------------------------------- tidymodels 0.1.1 --
 ```
 
 ```
@@ -101,7 +101,7 @@ library(tidymodels)
 ```
 
 ```
-## -- Conflicts -------------------------------------------------------------------- tidymodels_conflicts() --
+## -- Conflicts ------------------------------------------------------------------- tidymodels_conflicts() --
 ## x purrr::discard() masks scales::discard()
 ## x dplyr::filter()  masks stats::filter()
 ## x dplyr::lag()     masks stats::lag()
