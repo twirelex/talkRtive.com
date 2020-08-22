@@ -45,7 +45,7 @@ Regression analysis is often used to model causes and effects, the cause being t
 Regression analysis can be defined as a statistical method that can be used to examine relationships between a dependent variable and one or more independent variables.
 
 ## Let's consider simple linear regression;
-Simple linear regression is a regression where we have exactly 1 `X` variable. Simple linear regression is easy to understand because the data points used for the regression analysis can be plotted on a two dimensional plane like in the diagram below  
+Simple linear regression is a regression where we have exactly 1 `X` variable and a continuous dependent (`Y`) variable. Simple linear regression is easy to understand because the data points used for the regression analysis can be plotted on a two dimensional plane like in the diagram below  
 
 {{< figure library="true" src="linear-regression-in-r/simple_linear_regression.png" alt="simple linear regression fig">}}
 
@@ -65,8 +65,8 @@ When there are more than one explanatory variable the regression becomes *Multip
 Now after performing regression analysis (whether simple linear regression or multiple regression) we need a way to be able to evaluate our result, one of the ways we can evaluate the result is by using the **R²** metric  
 **R²** = ESS / TSS  
 where   
-`ESS` stands for EXPLAINED SUM OF SQUARES (variance of the fitted values)  
-`TSS` stands for TOTAL SUM OF SQUARES (variance of the actual values)  
+`ESS` stands for **EXPLAINED SUM OF SQUARES** (variance of the fitted values)  
+`TSS` stands for **TOTAL SUM OF SQUARES** (variance of the actual values)  
 The **R²** metric measures the percentage of total variance explained by the regression. The higher the **R²** the better the quality of the regression analysis.  
 
 In multiple regression the **R²** metric is not used directly, we make use of the adjusted **R²**, and this is because in multiple regression there may be variables which are not relevant. The adjusted **R²** adds an additional penalty to handle variables that are not really relevant in the analysis.  
@@ -82,7 +82,7 @@ Now that we know what regression analysis is and how to evaluate the result let 
 For this example we are going to build the linear regression model first using base R and then using tidymodels..
 
 
-We will be making use of the `Real Estate Dataset` from kaggle for this example. Our aim is to predict house price given some features like *date of purchase*, *house age*, *number of convinience stores* ,*location*, and *distance to nearest mrt station*.  
+We will be making use of the <a href="https://www.kaggle.com/quantbruce/real-estate-price-prediction" target="_blank" rel="nofollow noopener"> Real Estate Dataset <a/> from kaggle for this example. Our aim is to predict house price given some features like *date of purchase*, *house age*, *number of convinience stores* ,*location*, and *distance to nearest mrt station*.  
 
 Before proceeding let us make some few assumptions about the dataset since we didn't get much information about the dataset from kaggle. 
 Bellow are the assumptions;  
