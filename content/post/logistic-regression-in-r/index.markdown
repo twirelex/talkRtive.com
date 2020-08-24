@@ -57,8 +57,8 @@ require(InformationValue)
 
 
 ```r
-titanic_train <- read_csv("C:/Users/wirelex/Downloads/train(1).csv")
-titanic_test <- read_csv("C:/Users/wirelex/Downloads/test(1).csv")
+titanic_train <- read_csv("https://raw.githubusercontent.com/twirelex/dataset/master/train(1).csv")
+titanic_test <- read_csv("https://raw.githubusercontent.com/twirelex/dataset/master/test(1).csv")
 ```
 
 **Let's take a look at the datasets and see what we have**  
@@ -293,7 +293,7 @@ titanic_test <- titanic_combined %>% filter(identifier == FALSE)
 **It is time to build our machine learning model with the Logistic Regression algorithm.**  
 
 
-## MODELING THE BASE R WAY  
+## BUILD MODEL  
 
 In base r the `glm` function can be used to build a logistic regression model. glm stands for Generalized Linear Model  
 
