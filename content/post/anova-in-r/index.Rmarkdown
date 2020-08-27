@@ -6,7 +6,7 @@ slug: anova-in-r
 categories: []
 tags: []
 subtitle: ''
-summary: ''
+summary: 'Conducting one-way and two-way analysis of variance (ANOVA) test in R'
 authors: []
 lastmod: '2020-08-26T13:59:55+01:00'
 featured: no
@@ -203,7 +203,7 @@ There appears to be more non-smokers than smokers
 
 **Create a barplot to visualize the frequencies of the race variable**  
 
-```{rhugoopts=list(alt="barplot of race variable"),fig.height=3}
+```{r,hugoopts=list(alt="barplot of race variable"),fig.height=3}
 birthweight_data %>% ggplot(aes(race)) + geom_bar(fill = "lightblue")
 ``` 
 Most of the mothers are from the **1** ethnicity  

@@ -6,7 +6,7 @@ slug: anova-in-r
 categories: []
 tags: []
 subtitle: ''
-summary: ''
+summary: 'Conducting one-way and two-way analysis of variance (ANOVA) test in R'
 authors: []
 lastmod: '2020-08-26T13:59:55+01:00'
 featured: no
@@ -278,9 +278,12 @@ There appears to be more non-smokers than smokers
 
 **Create a barplot to visualize the frequencies of the race variable**  
 
-```{rhugoopts=list(alt="barplot of race variable"),fig.height=3}
+
+```r
 birthweight_data %>% ggplot(aes(race)) + geom_bar(fill = "lightblue")
-``` 
+```
+
+{{<figure src="/post/anova-in-r/index_files/figure-html/unnamed-chunk-19-1.png" alt="barplot of race variable">}}
 Most of the mothers are from the **1** ethnicity  
 
 **Create a boxplot to visualize the influence the smoke variable has on the child's birth_weight variable** 
@@ -289,7 +292,7 @@ Most of the mothers are from the **1** ethnicity
 birthweight_data %>% ggplot(aes(birth_weight, smoke)) + geom_boxplot(fill = "lightblue") + coord_flip()
 ```
 
-{{<figure src="/post/anova-in-r/index_files/figure-html/unnamed-chunk-19-1.png" alt="boxplot of birth_weight variable and smoke">}}
+{{<figure src="/post/anova-in-r/index_files/figure-html/unnamed-chunk-20-1.png" alt="boxplot of birth_weight variable and smoke">}}
 From the plot above it appears that the median birth_weight of children whose mother does not smoke is higher than that of children whose mother smokes. We will very with ANOVA if the difference is significant.  
 
 **Create a boxplot to visualize the influence the race variable has on the child's birth_weight variable**  
@@ -299,7 +302,7 @@ From the plot above it appears that the median birth_weight of children whose mo
 birthweight_data %>% ggplot(aes(birth_weight, race)) + geom_boxplot(fill = "lightblue") + coord_flip()
 ```
 
-{{<figure src="/post/anova-in-r/index_files/figure-html/unnamed-chunk-20-1.png" alt="boxplot of birth_weight variable and race">}}
+{{<figure src="/post/anova-in-r/index_files/figure-html/unnamed-chunk-21-1.png" alt="boxplot of birth_weight variable and race">}}
 The plot above suggests that there is difference in the median of the birth_weight for the 3 ethnic groups. We will verify if the difference are significant with the ANOVA test.  
 
 **Two-way anova test**  
@@ -367,7 +370,7 @@ p-value greater than 0.05 tells us that there is no significance difference in t
 plot(TwoWay_anova, 2, col = "lightblue")
 ```
 
-{{<figure src="/post/anova-in-r/index_files/figure-html/unnamed-chunk-24-1.png" alt="two way anova in r normallity plot">}}
+{{<figure src="/post/anova-in-r/index_files/figure-html/unnamed-chunk-25-1.png" alt="two way anova in r normallity plot">}}
 We can see that the residuals are normally distributed i.e follows the straight line.  
 
 **Verify normality using the shapiro wilk test**
