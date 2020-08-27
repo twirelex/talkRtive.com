@@ -260,7 +260,7 @@ shapiro.test(TwoWay_anova$residuals)
 ```
 p-value greater than our 0.05 threshold.  
 
-We can now reject the null hypothesis and conclude that both the `smoke` variable and the `race` variables are significant in determining a child's weight.  
+We can now reject the null hypothesis and conclude that both the `smoke` and the `race` variables are significant in determining a child's birth_weight.  
 
 
 
