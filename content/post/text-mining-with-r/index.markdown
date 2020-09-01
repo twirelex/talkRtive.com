@@ -28,7 +28,7 @@ In the world we are today a lot of big companies and organizations have started 
 
 **EXAMPLE**  
 
-For this example we will make use of a dataset made available to us by `Cochtane`. He did a great job scraping the data from a popular Nigerian Forum <a href="https://nairaland.com" target="_blank" rel="nofollow noopener"> nairaland </a>. Nairaland is an online community and public space that serves as a meeting place for Nigerians at Home and in the Diaspora. The dataset contains information about posts that were featured in the frontpage of the forum over a period of 1 year. The dataset has about 28,800 observations and 7 variables/features, Our focus however will only be on 2 variables:  
+For this example we will make use of a dataset made available to us by `Cochtrane`. He did a great job scraping the data from a popular Nigerian Forum <a href="https://nairaland.com" target="_blank" rel="nofollow noopener"> nairaland </a>. Nairaland is an online community and public space that serves as a meeting place for Nigerians at Home and in the Diaspora. The dataset contains information about posts that were featured in the frontpage of the forum over a period of 1 year. The dataset has about 28,800 observations and 7 variables/features, Our focus however will only be on 2 variables:  
 `title`   **===>** Title of each post  
 `section` **===>** section/category the post falls under  
 
@@ -279,7 +279,7 @@ predicted %>% conf_mat(truth = truth, estimate = .pred_class) %>% autoplot(type 
 ```
 
 {{<figure src="/post/text-mining-with-r/index_files/figure-html/unnamed-chunk-18-1.png" alt="text mining in r heatmap showing confusion matrix">}}
-From the heatmap above it is obvious that the randomforest model got more correct predictions for  *Politics*, *Celebrities* and *Crime* category than it did for the other categories. This is definitely because of the inbalanced nature of the **title** variable.
+From the heatmap above it is obvious that the randomforest model got more correct predictions for  *Politics*, *Celebrities* and *Crime* category than it did for the other categories. This is definitely because of the inbalanced nature of the **Section** variable.
 
 **view accuracy metric**
 
@@ -321,62 +321,62 @@ Now let's see how our model will classify these 5 titles
 
 ```r
 cbind(get_section(title = "8 Cars Recovered As EFCC Arrests 14 Suspected Fraudsters In Anambra (Photos)"),
-                  truth = "Crime") %>% knitr::kable()
+                  true_class = "Crime") %>% knitr::kable()
 ```
 
 
 
-|.pred_class |truth |
-|:-----------|:-----|
-|Crime       |Crime |
+|.pred_class |true_class |
+|:-----------|:----------|
+|Crime       |Crime      |
 
 
 ```r
 cbind(get_section(title = "143 New COVID-19 Cases, 125 Discharged And No Deaths On August 31"), 
-                  truth = "Health") %>% knitr::kable()
+                  true_class = "Health") %>% knitr::kable()
 ```
 
 
 
-|.pred_class |truth  |
-|:-----------|:------|
-|Health      |Health |
+|.pred_class |true_class |
+|:-----------|:----------|
+|Health      |Health     |
 
 
 ```r
 cbind(get_section(title = "Our Public Universities Are Still Unsafe For Reopening - ASUU"), 
-                  truth = "Education") %>% knitr::kable()
+                  true_class = "Education") %>% knitr::kable()
 ```
 
 
 
-|.pred_class |truth     |
-|:-----------|:---------|
-|Politics    |Education |
+|.pred_class |true_class |
+|:-----------|:----------|
+|Politics    |Education  |
 
 
 ```r
 cbind(get_section(title = "Buhari Forms Exco-Legislative Party Forum, Names Osinbajo As Chair"), 
-                  truth = "Politics") %>% knitr::kable()
+                  true_class = "Politics") %>% knitr::kable()
 ```
 
 
 
-|.pred_class |truth    |
-|:-----------|:--------|
-|Politics    |Politics |
+|.pred_class |true_class |
+|:-----------|:----------|
+|Politics    |Politics   |
 
 
 ```r
 cbind(get_section(title = "Can Someone Explain The Feeling Of Disgust, Remorse And Disdain After Sex.?"),
-                  truth = "Romance") %>% knitr::kable()
+                  true_class = "Romance") %>% knitr::kable()
 ```
 
 
 
-|.pred_class |truth   |
-|:-----------|:-------|
-|Education   |Romance |
+|.pred_class |true_class |
+|:-----------|:----------|
+|Education   |Romance    |
 
 As expected, the model got prediction right for Crime, Politics, Health because these categories had more posts than the rest.
 
