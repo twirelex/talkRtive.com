@@ -86,7 +86,7 @@ library(tidymodels)
 ```
 
 ```
-## -- Attaching packages ----------------------------------------------------------------- tidymodels 0.1.1 --
+## -- Attaching packages ------------------------------------------------------------------------ tidymodels 0.1.1 --
 ```
 
 ```
@@ -101,7 +101,7 @@ library(tidymodels)
 ```
 
 ```
-## -- Conflicts -------------------------------------------------------------------- tidymodels_conflicts() --
+## -- Conflicts --------------------------------------------------------------------------- tidymodels_conflicts() --
 ## x purrr::discard() masks scales::discard()
 ## x dplyr::filter()  masks stats::filter()
 ## x dplyr::lag()     masks stats::lag()
@@ -119,7 +119,7 @@ data("mtcars") # the dataset is available in R
 ### Pre-process 
 The only pre-processing we will do is to remove all other variables from the dataset and keep only variables of interest "mpg", "disp"
 
-**Create a recipe**
+**Create a recipe and remove some variables with the** `step_rm` **function**
 
 ```r
 prep_rec <- recipe(mpg~., data = mtcars) %>% 
