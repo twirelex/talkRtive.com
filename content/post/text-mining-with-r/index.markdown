@@ -28,7 +28,7 @@ In the world we are today a lot of big companies and organizations have started 
 
 **EXAMPLE**  
 
-For this example we will make use of a dataset made available to us by `Cochtrane`. He did a great job scraping the data from a popular Nigerian Forum <a href="https://nairaland.com" target="_blank" rel="nofollow noopener"> nairaland </a>. Nairaland is an online community and public space that serves as a meeting place for Nigerians at Home and in the Diaspora. The dataset contains information about posts that were featured in the frontpage of the forum over a period of 1 year. The dataset has about 28,800 observations and 7 variables/features, Our focus however will only be on 2 variables:  
+For this example we will make use of a dataset made available to us by <a href="https://github.com/manchuran/datasets/tree/master/nairaland/basic" target="_blank" rel="nofollow noopener"> `Cochtrane` </a>. He did a great job scraping the data from a popular Nigerian Forum <a href="https://nairaland.com" target="_blank" rel="nofollow noopener"> nairaland </a>. Nairaland is an online community and public space that serves as a meeting place for Nigerians at Home and in the Diaspora. The dataset contains information about posts that were featured in the frontpage of the forum over a period of 1 year. The dataset has about 28,800 observations and 7 variables/features, Our focus however will only be on 2 variables:  
 `title`   **===>** Title of each post  
 `section` **===>** section/category the post falls under  
 
@@ -279,7 +279,7 @@ predicted %>% conf_mat(truth = truth, estimate = .pred_class) %>% autoplot(type 
 ```
 
 {{<figure src="/post/text-mining-with-r/index_files/figure-html/unnamed-chunk-18-1.png" alt="text mining in r heatmap showing confusion matrix">}}
-From the heatmap above it is obvious that the randomforest model got more correct predictions for  *Politics*, *Celebrities* and *Crime* category than it did for the other categories. This is definitely because of the inbalanced nature of the **Section** variable.
+From the heatmap above it is obvious that the randomforest model got more correct predictions for  *Politics*, *Celebrities* *Health* and *Crime* category than it did for the other categories. This is definitely because of the inbalanced nature of the **Section** variable.
 
 **view accuracy metric**
 
