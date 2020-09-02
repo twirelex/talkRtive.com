@@ -429,7 +429,8 @@ model <- model %>% finalize_model(best_tune)
 **Now we fit the model and make predictions**
 
 ```r
-model <- model %>% fit(y_house_price_of_unit_area~., data = real_estate_standard2) %>% predict(real_estate_standard2) %>% mutate(truth = real_estate_standard2$y_house_price_of_unit_area)
+model <- model %>% fit(y_house_price_of_unit_area~., data = real_estate_standard2) %>% 
+  predict(real_estate_standard2) %>% mutate(truth = real_estate_standard2$y_house_price_of_unit_area)
 ```
 
 **Model Evaluation**

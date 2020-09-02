@@ -279,7 +279,7 @@ predicted %>% conf_mat(truth = truth, estimate = .pred_class) %>% autoplot(type 
 ```
 
 {{<figure src="/post/text-mining-with-r/index_files/figure-html/unnamed-chunk-18-1.png" alt="text mining in r heatmap showing confusion matrix">}}
-From the heatmap above it is obvious that the randomforest model got more correct predictions for  *Politics*, *Celebrities* *Health* and *Crime* category than it did for the other categories. This is definitely because of the inbalanced nature of the **Section** variable.
+From the heatmap above it is obvious that the randomforest model got more correct predictions for  *Politics*, *Celebrities*, *Health* and *Crime* category than it did for the other categories. This is definitely because of the inbalanced nature of the **Section** variable.
 
 **view accuracy metric**
 
