@@ -1,0 +1,232 @@
+---
+title: Visualizing and interpreting correlation in R
+author: ''
+date: '2020-09-03'
+slug: visualizing-and-interpreting-correlation-in-r
+categories: [r programming, statistics]
+tags: []
+subtitle: ''
+summary: 'R is a good statistical tool for performing so many statistical tests. In this lesson i will walk you through how to test/interpret correlation between varibles in r.'
+authors: []
+lastmod: '2020-09-03T13:54:22+01:00'
+featured: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: true
+projects: []
+---  
+```{r, include=FALSE}
+knitr::knit_hooks$set(
+  plot = function(x, options) {
+    hugoopts <- options$hugoopts
+    paste0(
+      "{", "{<figure src=", # the original code is simpler
+      # but here I need to escape the shortcode!
+      '"', x, '" ',
+      if (!is.null(hugoopts)) {
+        glue::glue_collapse(
+          glue::glue('{names(hugoopts)}="{hugoopts}"'),
+          sep = " "
+        )
+      },
+      ">}}\n"
+    )
+  }
+)
+
+```
+
+Correlation analysis is a statistical analysis for understanding the relationship/association between continuous variables. Essentially what we are interested-in in a correlation analysis is a value called the correlation coefficient. This value ranges from **-1** to **+1**, it tells us how strong or weak the relationship is between a pair of variables.  
+Generally:  
+  
+* A value of **-1** translates to a perfect negative correlation between the two variables  
+  + a value between **-0.1** and **-0.49** implies that there is a weak negative correlation between the two variables(Low negative correlation)  
+  + a value between **-0.5** and **-0.99** implies that there is a strong negative correlation between the two variables(High negative correlation)  
+    
+* A value of **+1** translates to a perfect positive correlation between the two variables  
+  + a value between **+0.1** and **+0.49** implies that there is a weak positive correlation between the two variables(Low negative correlation)  
+  + a value between **+0.5** and **+0.99** implies that there is a strong positive correlation between the two variables(High negative correlation)  
+    
+    
+* A value of **0** translates to no correlation between the two variables(No relationship)  
+
+{{% alert note %}}Notice that we didn't use the adverb "very" to describe how strong or weak the correlation is. This is because people tend to set different threshold value depending on the requirement of their analysis. {{% /alert %}}
+
+
+### THREE MAJOR METHODS OF CORRELATION COEFFICIENT CAN BE COMPUTED IN BASE R
+1. <center> <h3> Pearson's product-moment correlation </h3> </center>  
+
+Pearson's product-moment correlation is a parametric measure of the linear association between two continuous random variables  
+
+#### ASSUMPTIONS:  
+* The two variables are continuous  
+* The variable values are pairs(there are two values, two measurements for each sample case)  
+* The relationship between the variables are approximately linear  
+* The variables are normally distributed  
+* There exist no outliers
+
+2. <center> <h3> Spearman's rank correlation </h3> </center>  
+Spearman's rank correlation is a non-parametric measure of the monotonic association between two continuous random variables  
+
+#### ASSUMPTIONS:  
+* Both variables are ordinal and/or continuous  
+* The relationship between the variables is monotonic  
+* The variable values are pairs(there are two values, two measurements for each sample case)
+
+3. <center> <h3> Kendall's rank correlation  </h3> </center>  
+kendall's rank correlation is a non-parametric measure of the association, based on concordance or discordance of two continuous random variables.  
+
+
+### HYPOTHESIS TESTING  
+
+When performing correlation analysis in R we can also test for hypothesis as follows:  
+* **Ho** (Null hypothesis): correlation between the two variables is equal to Zero  
+* **H1** (Alternative hypothesis): correlation between the two variables is not equal to Zero  
+
+### REJECTION REGION  
+Reject the Null hypothesis when the p-value is smaller than 0.05  
+Reject the Alternative hypothesis when the p-value is greater than 0.05  
+
+
+### EXAMPLE  
+
+For this example we will make use of the popular mtcars dataset that comes with R. The dataset contains information about 32 cars, including their weight, fuel efficiency (in miles_per_gallon), speed, Rear axle ratio, etc... you can use the `help(mtcars)` function in r to know more about the dataset.  
+Our aim is to analyze the correlation between the Miles_per_gallon(mpg) variable and few other continuous variables in the dataset.  
+
+**Load required packages and dataset**  
+```{r, message=FALSE}
+require(tidyverse)
+require(corrplot)
+data("mtcars")
+```
+
+**See what the data looks like**
+```{r}
+mtcars %>% head() %>% knitr::kable()
+```  
+
+
+To compute the Pearson, Speaman or kendall correlation coefficient test in R we use the `cor.test` function. We can indicate the method we want to use with the **method** parameter, by default the pearson's method is used.  
+
+
+**Compute Pearson correlation test for MPG vs DISP variables**  
+```{r}
+cor.test(mtcars$dis, mtcars$mpg, method = "pearson") 
+```
+We can see that we get a lot of important information like the p-value, hypothesis, confidence interval, degree-of-freedom, and correlation coefficient when we use the `cor.test` function.  
+A correlation coefficient value of -0.8475514 means that there is strong negative correlation between the MPG and DISP variable. We can simply use the `cor` function if we are only interested in the value of the  correlation coefficient between the variables. i.e `cor(mtcars$mpg, mtcars$disp, method = "pearson")`  
+
+**Visualize the variables**  
+We can also visualize the variables to understand the association  
+
+```{r, message=FALSE, hugoopts=list(alt="correlation in r scatter plot of variables"),fig.height=3}
+mtcars %>% ggplot(aes(disp, mpg)) + geom_point() + geom_smooth(se = FALSE)
+```  
+Obviously as the **disp** increases the **mpg** decreases and the relationship is fairly linear.  
+
+**Compute Spearman's rank correlation test for MPG vs DISP variables**  
+```{r, warning=FALSE}
+cor.test(mtcars$dis, mtcars$mpg, method = "spearman") 
+```  
+We get a higher correlation coefficient in the Spearman's test  
+
+**NOTE:** It is always advisable to first verify which of the assumptions are satisfied before going ahead to compute any of these tests.  
+
+
+**Compute Pearson correlation test for MPG vs DRAT variables**  
+
+```{r, warning=FALSE}
+cor.test(mtcars$drat, mtcars$mpg, method = "pearson") 
+``` 
+We get a correlation coefficient value of 0.6811719 indicating that there is a strong correlation between the **mpg** and **drat** variables  
+
+
+**Visualize the variables**  
+We can also visualize the variables to understand the association  
+
+```{r, message=FALSE, hugoopts=list(alt="A scatter plot display of correlation in r"),fig.height=3}
+mtcars %>% ggplot(aes(drat, mpg)) + geom_point() + geom_smooth(se = FALSE)
+```  
+We can see that the **mpg** increases as **drat** increases and the relationhip is fairly linear  
+
+#### COMPUTING AND VISUALIZING THE CORRELATION OF MULTIPLE VARIABLES  
+
+it is also possible to compute correlation coefficient for multiple variables, each pairs combined to form a matrix. This can also be achieved with the `cor` function, this time instead of supplying the function with two continuous variables we supply an entire data frame with several continuous variables.  
+
+**Correlation matrix for the mtcars dataframe**  
+
+```{r}
+cor(mtcars) %>% 
+  knitr::kable()
+```   
+
+
+Notice how the leading diagonal is 1 all through, this means that there is always a perfect positive correlation when a variable is paired with itself.
+
+we can tell how much each variable is correlated with another by observing the correlation matrix, but some people may not be too comfortable seeing just numbers, it may be hard for them to interpret results is this form.  
+Another good way to compute a correlation matrix is by making an heatmap. With heatmap it is easy to tell which variables have high and low correlation without having to be looking at numbers  
+
+
+**Visualize the correlation of the mtcars dataframe using the** `corrplot` **function from the** <span style = "color:blue;"> corrplot </span> **package**
+```{r, hugoopts=list(alt="corrplot correlation in r"),fig.height=3}
+corrplot(cor(mtcars), method = "pie")
+```  
+Each pie from the plot above shows how strong or weak correlation between pairs is, more filled pies indicates strong relationship between the pairs and less filled pie indicates weak relationship between the pairs. The color of each pairs tells us the sign/direction of the relationship i.e `Negative` or `Positive`
+
+With plots like the one above one would not need to be struggling to understand numbers. Mere looking at the plot one can tell how much each pairs correlates with one another compared to the rest.  
+
+
+The **method** parameter in the `corrplot` function allows us to choose the visualization method of correlation matrix to be used. It currently supports the seven methods below:  
+* circle  
+* square  
+* ellipse  
+* number  
+* pie  
+* shade  
+* color  
+
+for example we can use the "square" method as follows:
+
+```{r,hugoopts=list(alt="heatmap plot showing correlation in r"),fig.height=3}
+corrplot(cor(mtcars), method = "square")
+```
+and so on.......
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
