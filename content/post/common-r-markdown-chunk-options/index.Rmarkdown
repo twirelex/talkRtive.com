@@ -6,7 +6,7 @@ slug: commonly-used-r-markdown-chunk-options
 categories: []
 tags: []
 subtitle: ''
-summary: 'There are more than 50 chunk options that can be used to fine tune the behavior of `knitr` when processing code chunks, in this lesson we are going to list all the chunk options and discuss the most common of them all.'
+summary: 'There are more than 50 chunk options that can be used to fine tune the behavior of `knitr` when processing code chunks, in this lesson we are going to list all the chunk options and discuss some of the most commonly used.'
 authors: []
 lastmod: '2020-09-15T18:55:16+01:00'
 featured: no
@@ -21,7 +21,7 @@ Let us first understand what a code chunk is and when it can be used;
 
 A code chunk is an environment where codes can be written to produce an output or just to display codes in a rmarkdown document. Code chunks are used when there is a need to render code output into documents.  
 
-There are more than 50 chunk options that can be used to fine tune the behavior of `knitr` when processing code chunks, in this lesson we are going to list all the chunk options and discuss the most common of them all.
+There are more than 50 chunk options that can be used to fine tune the behavior of `knitr` when processing code chunks, in this lesson we are going to list all the chunk options and discuss some of the most commonly used.
 
 Chunk options are written in chunk headers. 
 
