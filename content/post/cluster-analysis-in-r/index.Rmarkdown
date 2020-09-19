@@ -1,0 +1,197 @@
+---
+title: Cluster analysis in r (Clustering)
+author: ''
+date: '2020-09-19'
+slug: cluster-analysis-in-r
+categories: [clustering]
+tags: []
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2020-09-19T16:56:28+01:00'
+featured: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: true
+projects: []
+---  
+
+```{r, include=FALSE}
+knitr::knit_hooks$set(
+  plot = function(x, options) {
+    hugoopts <- options$hugoopts
+    paste0(
+      "{", "{<figure src=", # the original code is simpler
+      # but here I need to escape the shortcode!
+      '"', x, '" ',
+      if (!is.null(hugoopts)) {
+        glue::glue_collapse(
+          glue::glue('{names(hugoopts)}="{hugoopts}"'),
+          sep = " "
+        )
+      },
+      ">}}\n"
+    )
+  }
+)
+
+```
+
+
+Clustering is a way of dividing data points with shared attribute into groups(clusters). The clustering system falls under unsupervised learning, where a data set is provided without label and the algorithm tries to figure out groups to assign each data point based on how similar or dissimilar they are to each other.  
+
+Example use cases  
+
+* Natural Language Processing (NLP)
+* Computer vision  
+* Customer/Market segmentation  
+* Stock markets  
+
+
+Let us try to understand clustering with a graphical illustration  
+
+{{< figure library="true" src="cluster-analysis/clusters.png" alt="r cluster analysis fig ">}}
+
+The above 2D graph shows how data points are grouped into Four distinct clusters.  
+
+We are going to discuss two major types of clustering in R  
+
+1. The hierarchical clustering
+2. The k-means clustering  
+
+## **Hierarchical clustering in R**  
+
+Hierarchical clustering is separating data points into different groups based on some measures of similarities  
+
+### **EXAMPLE**  
+
+For this example we will make use of the popular iris data set in r. The iris data set contains the measurements in centimeters of the variables sepal length and width and petal length and width, respectively, for 50 flowers from each of 3 species of iris. The species are Iris *setosa*, *versicolor*, and *virginica*.  
+
+Ideally, because of the presence of a label this data set falls in the **Supervised** category but for the sake of this lesson i will remove the labeled variable thereby making the data set good for **Unsupervised** learning.  
+
+**STEPS**  
+
+1. Load the data set  
+2. Create a scatter plot  
+3. Normalize the data  
+4. Calculate Euclidean distance  
+5. Create a dendogram  
+
+
+**STEP 1**  
+
+**Load the data set**
+
+```{r}
+iris_data <- iris
+
+head(iris_data) # View first 6 observations
+```
+
+Now let's remove the `Species` label variable  
+
+```{r}
+iris_data$Species <- NULL
+```
+
+
+**STEP 2**
+
+**Create a scatter plot**  
+
+
+`Sepal.Width` VS `Sepal.Length`
+```{r, message=FALSE, hugoopts=list(alt="scatter plot showing sepal.width vs sepal.length"),fig.height=3}
+require(ggplot2)
+
+ggplot(iris_data, aes(Sepal.Width, Sepal.Length)) + geom_point()
+```  
+
+`Petal.Width` VS `Petal.Length`  
+
+```{r,hugoopts=list(alt="scatter plot showing petal.width vs petal.length"),fig.height=3}
+ggplot(iris_data, aes(Petal.Width, Petal.Length)) + geom_point()
+```  
+
+**STEP 3**  
+
+**Normalize the data**  
+
+```{r}
+iris_data <- scale(iris_data)
+
+head(iris_data) # View first 6 observations of the normalized data
+```  
+
+**STEP 4**  
+
+**Calculate Euclidean distance**  
+
+```{r}
+Eu_dist <- dist(iris_data, method = "euclidean")
+
+```
+
+**Compute hierarchical clustering using the** `hclust` **function in R**  
+
+```{r}
+h_clust <- hclust(Eu_dist) 
+```  
+
+**STEP 5**  
+
+**Create a dendogram**  
+
+We can use the `color_branches` function from the <span style = "color:blue;"> dendextend </span> package to color out the number of groups/clusters we would like to see
+
+```{r, message=FALSE,hugoopts=list(alt="dendogram showing clustered data"),fig.height=4}
+require(dendextend)
+
+
+h_clust$labels <-  " "
+
+plot(color_branches(as.dendrogram(h_clust), k = 3))
+
+```  
+
+**View how many observations were assigned to each cluster**  
+
+```{r}
+  
+table(cutree(h_clust, k = 3))
+
+```
+Knowing that our original data set had 3 categories of data points i.e three classes of Species (50 each). We would expect a good model to be able to group the data set evenly into three distinct clusters. The hierarchical clustering model above assigned few data points to the wrong groups.  
+
+## **k-means clustering in R** 
+
+The k-means clustering is a similar cluster analysis technique like the hierarchical clustering discussed above, the main difference however, is that the number of groups/clusters to be computed is known prior to building the model in k-means clustering while there is no prior knowledge of the number of clusters to be computed in the hierarchical clustering.
+
+#### Build model  
+
+```{r}
+kmeans_model <- kmeans(x = iris_data, centers=3, nstart = 20)
+```  
+
+Let's Walk through the code above  
+
+* The `kmeans` function is a base R function for computing kmeans unsupervised learning in r, the function takes some parameter arguments, three of which were used above  
+  + the *x* parameter represents the dataframe to be used  
+  + the *centers* parameter represents the number of clusters/groups that we want  
+  + the *nstart* parameter represents the number of random sets that should be chosen  
+  
+**View summary of the model**  
+
+```{r ModelSummary}
+summary(kmeans_model)
+```  
+
+**See how well the data points were clustered using the** `Sepal.length` **and** `Sepal.width` **variables**  
+
+```{r,hugoopts=list(alt="scatter plot showing three clusters of sepal.width vs sepal.lenth "),fig.height=4}
+
+plot(iris$Sepal.Length, iris$Sepal.Width, col = kmeans_model$cluster)
+```  
+
+The above plot shows that the data points were decently clustered.
