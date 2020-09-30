@@ -149,9 +149,16 @@ If you are familiar with the way football betting works you will know that "odds
 Let us discretize the odds variables and do a plot
 
 ```r
-bet9ja %>% 
-  transmute(result, homeOdd = factor(case_when(homeOdd <= 1.5 ~ "smallO", homeOdd > 1.5 & homeOdd <= 2 ~ "mediumO", homeOdd > 2 ~ "bigO"))) %>% 
-  ggplot(aes(result, fill = result)) + geom_bar(show.legend = FALSE) + facet_wrap(~homeOdd) + theme_bw() +scale_y_continuous(labels = NULL) + labs(y = NULL, title = "HOME TEAM ODDS PLOT") + theme(plot.title = element_text(hjust = 0.5))
+bet9ja %>%
+  transmute(result, homeOdd = factor(
+    case_when(
+      homeOdd <= 1.5 ~ "smallO",
+      homeOdd > 1.5 &
+        homeOdd <= 2 ~ "mediumO",
+      homeOdd > 2 ~ "bigO"
+    )
+  )) %>%
+  ggplot(aes(result, fill = result)) + geom_bar(show.legend = FALSE) + facet_wrap( ~ homeOdd) + theme_bw() + scale_y_continuous(labels = NULL) + labs(y = NULL, title = "HOME TEAM ODDS PLOT") + theme(plot.title = element_text(hjust = 0.5))
 ```
 
 {{<figure src="/post/predicting-the-result-of-a-virtual-football-match-of-a-betting-site/index_files/figure-html/unnamed-chunk-8-1.png" alt="barplot showing the home team odds">}}
@@ -159,9 +166,16 @@ bet9ja %>%
 
 
 ```r
-bet9ja %>% 
-  transmute(result, awaysOdd = factor(case_when(awaysOdd <= 1.5 ~ "smallO", awaysOdd > 1.5 & awaysOdd <= 2 ~ "mediumO", awaysOdd > 2 ~ "bigO"))) %>% 
-  ggplot(aes(result, fill = result)) + geom_bar(show.legend = FALSE) + facet_wrap(~awaysOdd) + theme_bw() +scale_y_continuous(labels = NULL) + labs(y = NULL, title = "AWAY TEAM ODDS PLOT") + theme(plot.title = element_text(hjust = 0.5))
+bet9ja %>%
+  transmute(result, awaysOdd = factor(
+    case_when(
+      awaysOdd <= 1.5 ~ "smallO",
+      awaysOdd > 1.5 &
+        awaysOdd <= 2 ~ "mediumO",
+      awaysOdd > 2 ~ "bigO"
+    )
+  )) %>%
+  ggplot(aes(result, fill = result)) + geom_bar(show.legend = FALSE) + facet_wrap( ~ awaysOdd) + theme_bw() + scale_y_continuous(labels = NULL) + labs(y = NULL, title = "AWAY TEAM ODDS PLOT") + theme(plot.title = element_text(hjust = 0.5))
 ```
 
 {{<figure src="/post/predicting-the-result-of-a-virtual-football-match-of-a-betting-site/index_files/figure-html/unnamed-chunk-9-1.png" alt="barplot showing the away team odds">}}

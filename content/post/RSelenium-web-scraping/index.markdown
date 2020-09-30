@@ -1,5 +1,5 @@
 ---
-title: scraping dynamic content of a site with login requirement and iframe using RSelenium
+title: web scraping using RSelenium in R/Rstudio
 author: ''
 date: '2020-07-07'
 slug: web-scraping-using-RSelenium

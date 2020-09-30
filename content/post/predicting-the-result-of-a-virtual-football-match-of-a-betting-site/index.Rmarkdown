@@ -114,18 +114,32 @@ If you are familiar with the way football betting works you will know that "odds
 
 Let us discretize the odds variables and do a plot
 ```{r, fig.width=8, fig.height=3, hugoopts = list(alt="barplot showing the home team odds")}
-bet9ja %>% 
-  transmute(result, homeOdd = factor(case_when(homeOdd <= 1.5 ~ "smallO", homeOdd > 1.5 & homeOdd <= 2 ~ "mediumO", homeOdd > 2 ~ "bigO"))) %>% 
-  ggplot(aes(result, fill = result)) + geom_bar(show.legend = FALSE) + facet_wrap(~homeOdd) + theme_bw() +scale_y_continuous(labels = NULL) + labs(y = NULL, title = "HOME TEAM ODDS PLOT") + theme(plot.title = element_text(hjust = 0.5))
+bet9ja %>%
+  transmute(result, homeOdd = factor(
+    case_when(
+      homeOdd <= 1.5 ~ "smallO",
+      homeOdd > 1.5 &
+        homeOdd <= 2 ~ "mediumO",
+      homeOdd > 2 ~ "bigO"
+    )
+  )) %>%
+  ggplot(aes(result, fill = result)) + geom_bar(show.legend = FALSE) + facet_wrap( ~ homeOdd) + theme_bw() + scale_y_continuous(labels = NULL) + labs(y = NULL, title = "HOME TEAM ODDS PLOT") + theme(plot.title = element_text(hjust = 0.5))
 
 
 ```  
 **The plot above is trying to convince us that when a team is home and its winning odds is big i.e above 2 then the match will likely end up in favor of its opponent(away team), but when its winning odds is small or medium i.e between 1 and 2 then the match will most likely end in favor of the team..**
 
 ```{r, fig.width=8, fig.height=3, hugoopts = list(alt="barplot showing the away team odds")}
-bet9ja %>% 
-  transmute(result, awaysOdd = factor(case_when(awaysOdd <= 1.5 ~ "smallO", awaysOdd > 1.5 & awaysOdd <= 2 ~ "mediumO", awaysOdd > 2 ~ "bigO"))) %>% 
-  ggplot(aes(result, fill = result)) + geom_bar(show.legend = FALSE) + facet_wrap(~awaysOdd) + theme_bw() +scale_y_continuous(labels = NULL) + labs(y = NULL, title = "AWAY TEAM ODDS PLOT") + theme(plot.title = element_text(hjust = 0.5))
+bet9ja %>%
+  transmute(result, awaysOdd = factor(
+    case_when(
+      awaysOdd <= 1.5 ~ "smallO",
+      awaysOdd > 1.5 &
+        awaysOdd <= 2 ~ "mediumO",
+      awaysOdd > 2 ~ "bigO"
+    )
+  )) %>%
+  ggplot(aes(result, fill = result)) + geom_bar(show.legend = FALSE) + facet_wrap( ~ awaysOdd) + theme_bw() + scale_y_continuous(labels = NULL) + labs(y = NULL, title = "AWAY TEAM ODDS PLOT") + theme(plot.title = element_text(hjust = 0.5))
 
 ```  
 **According to the plot above, when a team is away and it is giving a big winning odds in a particular match i.e odds above 2, the game will likely end up in favor of the opposition team(home team), but when the team is giving a small/medium winning odds i.e between 1 and 2 then the match will likely end up in the team's favor**  

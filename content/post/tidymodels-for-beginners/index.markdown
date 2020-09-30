@@ -86,22 +86,22 @@ library(tidymodels)
 ```
 
 ```
-## -- Attaching packages ------------------------------------------------------------------------ tidymodels 0.1.1 --
+## -- Attaching packages ---------------------------------------------------------------------- tidymodels 0.1.1 --
 ```
 
 ```
 ## v broom     0.7.0      v recipes   0.1.13
-## v dials     0.0.8      v rsample   0.0.7 
-## v dplyr     1.0.0      v tibble    3.0.3 
-## v ggplot2   3.3.2      v tidyr     1.1.1 
+## v dials     0.0.9      v rsample   0.0.8 
+## v dplyr     1.0.2      v tibble    3.0.3 
+## v ggplot2   3.3.2      v tidyr     1.1.2 
 ## v infer     0.5.3      v tune      0.1.1 
-## v modeldata 0.0.2      v workflows 0.1.2 
+## v modeldata 0.0.2      v workflows 0.2.0 
 ## v parsnip   0.1.3      v yardstick 0.0.7 
 ## v purrr     0.3.4
 ```
 
 ```
-## -- Conflicts --------------------------------------------------------------------------- tidymodels_conflicts() --
+## -- Conflicts ------------------------------------------------------------------------- tidymodels_conflicts() --
 ## x purrr::discard() masks scales::discard()
 ## x dplyr::filter()  masks stats::filter()
 ## x dplyr::lag()     masks stats::lag()
