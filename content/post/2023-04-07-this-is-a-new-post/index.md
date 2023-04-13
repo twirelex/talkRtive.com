@@ -16,3 +16,7 @@ image:
   preview_only: no
 projects: []
 ---
+
+```{r cars}
+something new was just added
+```
