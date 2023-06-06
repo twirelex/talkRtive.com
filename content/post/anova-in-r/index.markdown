@@ -19,7 +19,7 @@ projects: []
 
 
 
-Let us start by understanding what analysis of variance is.   
+Let us start by understanding what analysis of variance iz...   
 
 # WHAT IS ANALYSIS OF VARIANCE?  
 
@@ -86,11 +86,14 @@ dietdata <- read_csv("https://raw.githubusercontent.com/twirelex/dataset/master/
 ```
 
 ```
-## Parsed with column specification:
-## cols(
-##   diet = col_character(),
-##   weightloss = col_double()
-## )
+## Rows: 78 Columns: 2
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: ","
+## chr (1): diet
+## dbl (1): weightloss
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 ```
 **View first 6 observations of the data**
 
@@ -99,7 +102,7 @@ head(dietdata)
 ```
 
 ```
-## # A tibble: 6 x 2
+## # A tibble: 6 × 2
 ##   diet  weightloss
 ##   <chr>      <dbl>
 ## 1 B           60  
@@ -119,8 +122,8 @@ glimpse(dietdata)
 ```
 ## Rows: 78
 ## Columns: 2
-## $ diet       <chr> "B", "B", "A", "A", "A", "A", "A", "A", "A", "A", "A", "...
-## $ weightloss <dbl> 60.0, 103.0, 54.2, 54.0, 63.3, 61.1, 62.2, 64.0, 65.0, 6...
+## $ diet       <chr> "B", "B", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A",…
+## $ weightloss <dbl> 60.0, 103.0, 54.2, 54.0, 63.3, 61.1, 62.2, 64.0, 65.0, 60.5…
 ```
 The `diet` variable appears to be a character variable, we need to make it a categorical variable to be able to use it in the analysis.  
 
@@ -139,8 +142,8 @@ glimpse(dietdata)
 ```
 ## Rows: 78
 ## Columns: 2
-## $ diet       <fct> B, B, A, A, A, A, A, A, A, A, A, A, A, A, A, A, B, B, B,...
-## $ weightloss <dbl> 60.0, 103.0, 54.2, 54.0, 63.3, 61.1, 62.2, 64.0, 65.0, 6...
+## $ diet       <fct> B, B, A, A, A, A, A, A, A, A, A, A, A, A, A, A, B, B, B, B,…
+## $ weightloss <dbl> 60.0, 103.0, 54.2, 54.0, 63.3, 61.1, 62.2, 64.0, 65.0, 60.5…
 ```
 
 **See the count for each diet category**  
@@ -151,7 +154,7 @@ dietdata %>% count(diet)
 ```
 
 ```
-## # A tibble: 3 x 2
+## # A tibble: 3 × 2
 ##   diet      n
 ##   <fct> <int>
 ## 1 A        24
@@ -166,7 +169,7 @@ dietdata %>% count(diet)
 dietdata %>% ggplot(aes(diet, fill = diet)) + geom_bar(show.legend = FALSE)
 ```
 
-{{<figure src="/post/anova-in-r/index_files/figure-html/unnamed-chunk-9-1.png" alt="barplot for diet variable">}}
+{{<figure src="index_files/figure-html/unnamed-chunk-9-1.png" alt="barplot for diet variable">}}
 
 **Visualize the weightloss variable**  
 
@@ -175,7 +178,7 @@ dietdata %>% ggplot(aes(diet, fill = diet)) + geom_bar(show.legend = FALSE)
 dietdata %>% ggplot(aes(weightloss)) + geom_density() 
 ```
 
-{{<figure src="/post/anova-in-r/index_files/figure-html/unnamed-chunk-10-1.png" alt="density plot for weightloss variable">}}
+{{<figure src="index_files/figure-html/unnamed-chunk-10-1.png" alt="density plot for weightloss variable">}}
 
 
 **Visualize the weightloss variable for each diet category**  
@@ -185,7 +188,7 @@ dietdata %>% ggplot(aes(weightloss)) + geom_density()
 dietdata %>% ggplot(aes(weightloss, diet, fill = diet)) + geom_boxplot(show.legend = FALSE) + coord_flip()
 ```
 
-{{<figure src="/post/anova-in-r/index_files/figure-html/unnamed-chunk-11-1.png" alt="boxplot of weightloss and diet variable">}}
+{{<figure src="index_files/figure-html/unnamed-chunk-11-1.png" alt="boxplot of weightloss and diet variable">}}
 Notice that the median weightloss for group **B** is slightly different from that of group **A** and group **C**.  
 
 We will now use the one-way analysis of variance (ANOVA) to check if the difference is significant  
@@ -240,7 +243,7 @@ head(birthweight_data)
 birthweight_data %>% ggplot(aes(birth_weight)) + geom_boxplot(fill = "lightblue") + coord_flip()
 ```
 
-{{<figure src="/post/anova-in-r/index_files/figure-html/unnamed-chunk-15-1.png" alt="boxplot of birth_weight variable">}}
+{{<figure src="index_files/figure-html/unnamed-chunk-15-1.png" alt="boxplot of birth_weight variable">}}
 The variable appears to be okay  
 
 **View the structure of the data**  
@@ -253,9 +256,9 @@ glimpse(birthweight_data)
 ```
 ## Rows: 189
 ## Columns: 3
-## $ smoke        <int> 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1, ...
-## $ race         <int> 2, 3, 1, 1, 1, 3, 1, 3, 1, 1, 3, 3, 3, 3, 1, 1, 2, 1, ...
-## $ birth_weight <int> 2523, 2551, 2557, 2594, 2600, 2622, 2637, 2637, 2663, ...
+## $ smoke        <int> 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, …
+## $ race         <int> 2, 3, 1, 1, 1, 3, 1, 3, 1, 1, 3, 3, 3, 3, 1, 1, 2, 1, 3, …
+## $ birth_weight <int> 2523, 2551, 2557, 2594, 2600, 2622, 2637, 2637, 2663, 266…
 ```
 
 Variables `smoke` and `race` are currently **int** variables but these variables have discrete values, so for the sake of our analysis we will have to convert both variables to categorical variables.  
@@ -273,7 +276,7 @@ birthweight_data <- birthweight_data %>% mutate(smoke = factor(smoke), race = fa
 birthweight_data %>% ggplot(aes(smoke)) + geom_bar(fill = "lightblue")
 ```
 
-{{<figure src="/post/anova-in-r/index_files/figure-html/unnamed-chunk-18-1.png" alt="barplot of smoke variable">}}
+{{<figure src="index_files/figure-html/unnamed-chunk-18-1.png" alt="barplot of smoke variable">}}
 There appears to be more non-smokers than smokers  
 
 **Create a barplot to visualize the frequencies of the race variable**  
@@ -283,7 +286,7 @@ There appears to be more non-smokers than smokers
 birthweight_data %>% ggplot(aes(race)) + geom_bar(fill = "lightblue")
 ```
 
-{{<figure src="/post/anova-in-r/index_files/figure-html/unnamed-chunk-19-1.png" alt="barplot of race variable">}}
+{{<figure src="index_files/figure-html/unnamed-chunk-19-1.png" alt="barplot of race variable">}}
 Most of the mothers are from the **1** ethnicity  
 
 **Create a boxplot to visualize the influence the smoke variable has on the child's birth_weight variable** 
@@ -292,7 +295,7 @@ Most of the mothers are from the **1** ethnicity
 birthweight_data %>% ggplot(aes(birth_weight, smoke)) + geom_boxplot(fill = "lightblue") + coord_flip()
 ```
 
-{{<figure src="/post/anova-in-r/index_files/figure-html/unnamed-chunk-20-1.png" alt="boxplot of birth_weight variable and smoke">}}
+{{<figure src="index_files/figure-html/unnamed-chunk-20-1.png" alt="boxplot of birth_weight variable and smoke">}}
 From the plot above it appears that the median birth_weight of children whose mother does not smoke is higher than that of children whose mother smokes. We will very with ANOVA if the difference is significant.  
 
 **Create a boxplot to visualize the influence the race variable has on the child's birth_weight variable**  
@@ -302,7 +305,7 @@ From the plot above it appears that the median birth_weight of children whose mo
 birthweight_data %>% ggplot(aes(birth_weight, race)) + geom_boxplot(fill = "lightblue") + coord_flip()
 ```
 
-{{<figure src="/post/anova-in-r/index_files/figure-html/unnamed-chunk-21-1.png" alt="boxplot of birth_weight variable and race">}}
+{{<figure src="index_files/figure-html/unnamed-chunk-21-1.png" alt="boxplot of birth_weight variable and race">}}
 The plot above suggests that there is difference in the median of the birth_weight for the 3 ethnic groups. We will verify if the difference are significant with the ANOVA test.  
 
 **Two-way anova test**  
@@ -370,7 +373,7 @@ p-value greater than 0.05 tells us that there is no significance difference in t
 plot(TwoWay_anova, 2, col = "lightblue")
 ```
 
-{{<figure src="/post/anova-in-r/index_files/figure-html/unnamed-chunk-25-1.png" alt="two way anova in r normallity plot">}}
+{{<figure src="index_files/figure-html/unnamed-chunk-25-1.png" alt="two way anova in r normallity plot">}}
 We can see that the residuals are normally distributed i.e follows the straight line.  
 
 **Verify normality using the shapiro wilk test**
