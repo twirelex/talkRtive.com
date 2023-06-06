@@ -19,7 +19,7 @@ projects: []
 
 
 
-Let us start by understanding what analysis of variance iz...   
+Let us start by understanding what analysis of variance is 
 
 # WHAT IS ANALYSIS OF VARIANCE?  
 
