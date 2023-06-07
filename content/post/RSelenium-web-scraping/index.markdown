@@ -1,14 +1,14 @@
 ---
 title: web scraping using RSelenium in R/Rstudio
 author: ''
-date: '2020-07-07'
+date: '2023-06-05'
 slug: web-scraping-using-RSelenium
 categories: [r programming, web scraping]
 tags: []
 subtitle: ''
 summary: 'Scraping the content of a site with login requirement and iframe using the RSelenium r package can be very easy. In this lesson you will learn how.....'
 authors: []
-lastmod: '2020-07-07T00:21:57+01:00'
+lastmod: '2023-06-05T00:22:57+01:00'
 featured: no
 image:
   caption: ''
