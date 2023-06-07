@@ -1,14 +1,14 @@
 ---
 title: Kruskal-wallis test in r (Simple guide)
 author: ''
-date: '2020-09-17'
+date: '2023-06-03'
 slug: kruskal-wallis-test-in-r-simple-guide
 categories: [r programming, statistics]
 tags: []
 subtitle: ''
 summary: 'A simple guide to performing kruskal wallis test in R'
 authors: []
-lastmod: '2020-09-17T21:31:34+01:00'
+lastmod: '2023-06-03T21:31:34+01:00'
 featured: no
 image:
   caption: ''

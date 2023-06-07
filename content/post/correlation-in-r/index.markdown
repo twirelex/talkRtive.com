@@ -1,14 +1,14 @@
 ---
 title: Visualizing and interpreting correlation in R
 author: ''
-date: '2020-09-03'
+date: '2023-06-04'
 slug: visualizing-and-interpreting-correlation-in-r
 categories: [r programming, statistics]
 tags: []
 subtitle: ''
 summary: 'R is a good statistical tool for performing so many statistical tests. In this lesson i will walk you through how to test/interpret correlation between varibles in r.'
 authors: []
-lastmod: '2020-09-03T13:54:22+01:00'
+lastmod: '2023-06-04T13:53:22+01:00'
 featured: no
 image:
   caption: ''
@@ -134,7 +134,7 @@ We can also visualize the variables to understand the association
 mtcars %>% ggplot(aes(disp, mpg)) + geom_point() + geom_smooth(se = FALSE)
 ```
 
-{{<figure src="/post/correlation-in-r/index_files/figure-html/unnamed-chunk-5-1.png" alt="correlation in r scatter plot of variables">}}
+{{<figure src="index_files/figure-html/unnamed-chunk-5-1.png" alt="correlation in r scatter plot of variables">}}
 Obviously as the **disp** increases the **mpg** decreases and the relationship is fairly linear.  
 
 **Compute Spearman's rank correlation test for MPG vs DISP variables**  
@@ -190,7 +190,7 @@ We can also visualize the variables to understand the association
 mtcars %>% ggplot(aes(drat, mpg)) + geom_point() + geom_smooth(se = FALSE)
 ```
 
-{{<figure src="/post/correlation-in-r/index_files/figure-html/unnamed-chunk-8-1.png" alt="A scatter plot display of correlation in r">}}
+{{<figure src="index_files/figure-html/unnamed-chunk-8-1.png" alt="A scatter plot display of correlation in r">}}
 We can see that the **mpg** increases as **drat** increases and the relationhip is fairly linear  
 
 #### COMPUTING AND VISUALIZING THE CORRELATION OF MULTIPLE VARIABLES  
@@ -234,7 +234,7 @@ Another good way to compute a correlation matrix is by making an heatmap. With h
 corrplot(cor(mtcars), method = "pie")
 ```
 
-{{<figure src="/post/correlation-in-r/index_files/figure-html/unnamed-chunk-10-1.png" alt="corrplot correlation in r">}}
+{{<figure src="index_files/figure-html/unnamed-chunk-10-1.png" alt="corrplot correlation in r">}}
 Each pie from the plot above shows how strong or weak correlation between pairs is, more filled pies indicates strong relationship between the pairs and less filled pie indicates weak relationship between the pairs. The color of each pairs tells us the sign/direction of the relationship i.e `Negative` or `Positive`
 
 With plots like the one above one would not need to be struggling to understand numbers. Mere looking at the plot one can tell how much each pairs correlates with one another compared to the rest.  
@@ -256,7 +256,7 @@ for example we can use the "square" method as follows:
 corrplot(cor(mtcars), method = "square")
 ```
 
-{{<figure src="/post/correlation-in-r/index_files/figure-html/unnamed-chunk-11-1.png" alt="heatmap plot showing correlation in r">}}
+{{<figure src="index_files/figure-html/unnamed-chunk-11-1.png" alt="heatmap plot showing correlation in r">}}
 and so on.......
 
 

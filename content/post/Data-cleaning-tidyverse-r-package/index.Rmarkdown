@@ -1,14 +1,14 @@
 ---
 title: Data Cleaning and Analysis with the tidyverse r package
 author: ''
-date: '2020-07-27'
+date: '2023-06-03'
 slug: data-analysis-tidyverse-r-package
 categories: [r programming, tidyverse]
 tags: []
 subtitle: ''
 summary: 'A detailed explanation on how the tidyverse r package can be used to perform data cleaning and analysis'
 authors: []
-lastmod: '2020-07-27T15:05:45+01:00'
+lastmod: '2023-06-03T15:05:45+01:00'
 featured: no
 image:
   caption: ''

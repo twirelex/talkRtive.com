@@ -1,7 +1,7 @@
 ---
 title: Linear regression in r
 author: ''
-date: '2020-08-20'
+date: '2023-06-02'
 slug: linear-regression-in-r
 categories:
   - r programming
@@ -9,7 +9,7 @@ tags: []
 subtitle: ''
 summary: 'Building a linear regression model in r using both the base r and the tidymodels approach'
 authors: []
-lastmod: '2020-08-20T20:47:51+01:00'
+lastmod: '2023-06-03T20:48:51+01:00'
 featured: no
 image:
   caption: ''

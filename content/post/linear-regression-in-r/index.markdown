@@ -1,7 +1,7 @@
 ---
 title: Linear regression in r
 author: ''
-date: '2020-08-20'
+date: '2023-06-02'
 slug: linear-regression-in-r
 categories:
   - r programming
@@ -9,7 +9,7 @@ tags: []
 subtitle: ''
 summary: 'Building a linear regression model in r using both the base r and the tidymodels approach'
 authors: []
-lastmod: '2020-08-20T20:47:51+01:00'
+lastmod: '2023-06-03T20:48:51+01:00'
 featured: no
 image:
   caption: ''
@@ -86,17 +86,13 @@ real_estate <- read_csv("https://raw.githubusercontent.com/twirelex/dataset/mast
 ```
 
 ```
-## Parsed with column specification:
-## cols(
-##   No = col_double(),
-##   `X1 transaction date` = col_double(),
-##   `X2 house age` = col_double(),
-##   `X3 distance to the nearest MRT station` = col_double(),
-##   `X4 number of convenience stores` = col_double(),
-##   `X5 latitude` = col_double(),
-##   `X6 longitude` = col_double(),
-##   `Y house price of unit area` = col_double()
-## )
+## Rows: 414 Columns: 8
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: ","
+## dbl (8): No, X1 transaction date, X2 house age, X3 distance to the nearest M...
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 ```
 ### View data types and see summary statistics  
 
@@ -118,14 +114,14 @@ glimpse(real_estate)
 ```
 ## Rows: 414
 ## Columns: 8
-## $ no                                     <dbl> 1, 2, 3, 4, 5, 6, 7, 8, 9, 1...
-## $ x1_transaction_date                    <dbl> 2012.917, 2012.917, 2013.583...
-## $ x2_house_age                           <dbl> 32.0, 19.5, 13.3, 13.3, 5.0,...
-## $ x3_distance_to_the_nearest_mrt_station <dbl> 84.87882, 306.59470, 561.984...
-## $ x4_number_of_convenience_stores        <dbl> 10, 9, 5, 5, 5, 3, 7, 6, 1, ...
-## $ x5_latitude                            <dbl> 24.98298, 24.98034, 24.98746...
-## $ x6_longitude                           <dbl> 121.5402, 121.5395, 121.5439...
-## $ y_house_price_of_unit_area             <dbl> 37.9, 42.2, 47.3, 54.8, 43.1...
+## $ no                                     <dbl> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, …
+## $ x1_transaction_date                    <dbl> 2012.917, 2012.917, 2013.583, 2…
+## $ x2_house_age                           <dbl> 32.0, 19.5, 13.3, 13.3, 5.0, 7.…
+## $ x3_distance_to_the_nearest_mrt_station <dbl> 84.87882, 306.59470, 561.98450,…
+## $ x4_number_of_convenience_stores        <dbl> 10, 9, 5, 5, 5, 3, 7, 6, 1, 3, …
+## $ x5_latitude                            <dbl> 24.98298, 24.98034, 24.98746, 2…
+## $ x6_longitude                           <dbl> 121.5402, 121.5395, 121.5439, 1…
+## $ y_house_price_of_unit_area             <dbl> 37.9, 42.2, 47.3, 54.8, 43.1, 3…
 ```
 **remove the `no` column as it is only an identifier and doesn't really need to be part of the variables**
 
@@ -190,7 +186,7 @@ Looking at the summary statistics above we can see that variables like `distance
 ggpairs(real_estate, upper = NULL)
 ```
 
-{{<figure src="/post/linear-regression-in-r/index_files/figure-html/unnamed-chunk-9-1.png" alt="pairs plot created with ggplairs function from ggally package in r">}}
+{{<figure src="index_files/figure-html/unnamed-chunk-9-1.png" alt="pairs plot created with ggplairs function from ggally package in r">}}
 
 
 These are some of the things that can be observed from the plot above  
@@ -440,7 +436,7 @@ model %>% metrics(truth = truth, estimate = .pred)
 ```
 
 ```
-## # A tibble: 3 x 3
+## # A tibble: 3 × 3
 ##   .metric .estimator .estimate
 ##   <chr>   <chr>          <dbl>
 ## 1 rmse    standard       8.79 

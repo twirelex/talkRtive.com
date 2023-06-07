@@ -1,14 +1,14 @@
 ---
 title: Predicting the result of a Virtual football match using tidymodels
 author: ''
-date: '2020-07-20'
+date: '2023-06-02'
 slug: tidymodels-virtual-football-prediction
 categories: [r programming, tidymodels]
 tags: []
 subtitle: ''
 summary: 'Predicting the result of a virtual football game with SVM and random forest algorithms using the tidymodels r package'
 authors: []
-lastmod: '2020-07-20T17:39:32+01:00'
+lastmod: '2023-06-02T17:31:32+01:00'
 featured: no
 image:
   caption: ''

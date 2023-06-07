@@ -1,14 +1,14 @@
 ---
 title: Data Cleaning and Analysis with the tidyverse r package
 author: ''
-date: '2020-07-27'
+date: '2023-06-03'
 slug: data-analysis-tidyverse-r-package
 categories: [r programming, tidyverse]
 tags: []
 subtitle: ''
 summary: 'A detailed explanation on how the tidyverse r package can be used to perform data cleaning and analysis'
 authors: []
-lastmod: '2020-07-27T15:05:45+01:00'
+lastmod: '2023-06-03T15:05:45+01:00'
 featured: no
 image:
   caption: ''
@@ -38,10 +38,13 @@ blog_data <- read_csv("https://raw.githubusercontent.com/twirelex/dataset/master
 ```
 
 ```
-## Parsed with column specification:
-## cols(
-##   unlist.strsplit.unlist.wirewire.......... = col_character()
-## )
+## Rows: 246585 Columns: 1
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: ","
+## chr (1): unlist.strsplit.unlist.wirewire..........
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 ```
 
 ```r
@@ -61,19 +64,19 @@ head(blog_data, 10)
 ```
 
 ```
-## # A tibble: 10 x 1
+## # A tibble: 10 × 1
 ##    unlist.strsplit.unlist.wirewire..........                                    
 ##    <chr>                                                                        
-##  1 "Court dismisses case against Senator Abbo after he was filmed slapping a nu~
-##  2 "1 comments Read More...         Woman crashes wedding claiming to be pregna~
-##  3 "1 comments Read More...            Insecurity: Nigerians know we have done ~
-##  4 "104 comments Read More...         Victor Osimhen becomes Nigeria's most exp~
-##  5 "15 comments Read More...           \n\n\r\n    (adsbygoogle = window.adsbyg~
-##  6 "[]).push({});\r\n     Jude Okoye's wife, Ifeoma, shares hot new photos as s~
-##  7 "60 comments Read More...         \"I’m concerned for the world that feels I~
-##  8 "42 comments Read More...            You Do Not Want To Miss This!      \nDu~
-##  9 "9 comments Read More...         After waiting for 18 years, woman dies thre~
-## 10 "36 comments Read More...           \n\n\r\n    (adsbygoogle = window.adsbyg~
+##  1 "Court dismisses case against Senator Abbo after he was filmed slapping a nu…
+##  2 "1 comments Read More...         Woman crashes wedding claiming to be pregna…
+##  3 "1 comments Read More...            Insecurity: Nigerians know we have done …
+##  4 "104 comments Read More...         Victor Osimhen becomes Nigeria's most exp…
+##  5 "15 comments Read More...           \n\n\r\n    (adsbygoogle = window.adsbyg…
+##  6 "[]).push({});\r\n     Jude Okoye's wife, Ifeoma, shares hot new photos as s…
+##  7 "60 comments Read More...         \"I’m concerned for the world that feels I…
+##  8 "42 comments Read More...            You Do Not Want To Miss This!      \nDu…
+##  9 "9 comments Read More...         After waiting for 18 years, woman dies thre…
+## 10 "36 comments Read More...           \n\n\r\n    (adsbygoogle = window.adsbyg…
 ```
 
 
@@ -158,14 +161,14 @@ head(rape_related, 5) # first 5 observations
 ```
 
 ```
-## # A tibble: 5 x 3
+## # A tibble: 5 × 3
 ##   title                                                     state date_published
 ##   <chr>                                                     <chr> <date>        
-## 1 "Former Nollywood actress, Victoria Inyama, has advised ~ <NA>  2020-07-31    
-## 2 "The Commissioner of Police (CP) Rivers state, Joseph Mu~ Jos   2020-07-31    
-## 3 "British-Ghanaian rapper, Solo 45 is jailed for 24 years~ <NA>  2020-07-31    
-## 4 "A human rights activist, Prince Wiro, has charged the R~ Rive~ 2020-07-30    
-## 5 "A 24-year-old man identified as Godwin Akpan has been a~ Ogun  2020-07-30
+## 1 "Former Nollywood actress, Victoria Inyama, has advised … <NA>  2020-07-31    
+## 2 "The Commissioner of Police (CP) Rivers state, Joseph Mu… Jos   2020-07-31    
+## 3 "British-Ghanaian rapper, Solo 45 is jailed for 24 years… <NA>  2020-07-31    
+## 4 "A human rights activist, Prince Wiro, has charged the R… Rive… 2020-07-30    
+## 5 "A 24-year-old man identified as Godwin Akpan has been a… Ogun  2020-07-30
 ```
 
 
@@ -208,29 +211,29 @@ rape_related %>% head(20)
 ```
 
 ```
-## # A tibble: 20 x 3
-##    title                                                  state   date_published
-##    <chr>                                                  <chr>   <date>        
-##  1 "British-Ghanaian rapper, Solo 45 is jailed for 24 ye~  <NA>   2020-07-31    
-##  2 "A human rights activist, Prince Wiro, has charged th~ "River~ 2020-07-30    
-##  3 "A 24-year-old man identified as Godwin Akpan has bee~ "Ogun"  2020-07-30    
-##  4 "An 18-year-old boy has been arrested by men of the A~ "Adama~ 2020-07-29    
-##  5 "The police in Ogun State have arrested three suspect~ "Ogun"  2020-07-29    
-##  6 "A former X-Factor contestant has been jailed for lif~  <NA>   2020-07-27    
-##  7 "A Court of Appeal sitting in Lagos on Monday, July 2~ "Lagos" 2020-07-27    
-##  8 "26-year-old Pwadimadi Zeham, pictured above, has bee~ "Adama~ 2020-07-27    
-##  9 "Men of the Katsina state police command have arreste~ "Katsi~ 2020-07-24    
-## 10 "Men of the Niger state police command have arrested ~ "Niger~ 2020-07-24    
-## 11 "A 70-year-old man, Mohammed Sani Umar, has been sent~ "Niger~ 2020-07-23    
-## 12 "Adamawa police arrest 44-year-old man for allegedly ~ "Adama~ 2020-07-23    
-## 13 "Men of the Rivers state police command have arrested~ "River~ 2020-07-23    
-## 14 "The Yobe state police command has arrested an Assist~ "Yobe"  2020-07-22    
-## 15 "Justice Abiodun Akinyemi of an Ogun State High Court~ "Ogun"  2020-07-22    
-## 16 "A man has been sentenced to 9 years in prison for de~ "Edo"   2020-07-21    
-## 17 "39-year-old man arrested for defiling 9-year-old dau~ "Adama~ 2020-07-21    
-## 18 "A popular singer based in Imo state, Uba Obinna Agba~ "Imo"   2020-07-20    
-## 19 "Rivers police arrest man for impregnating his 16-yea~ "River~ 2020-07-17    
-## 20 "The police in Anambra state have arrested a 31-year-~ "Anamb~ 2020-07-15
+## # A tibble: 20 × 3
+##    title                                                    state date_published
+##    <chr>                                                    <chr> <date>        
+##  1 "British-Ghanaian rapper, Solo 45 is jailed for 24 year…  <NA> 2020-07-31    
+##  2 "A human rights activist, Prince Wiro, has charged the … "Riv… 2020-07-30    
+##  3 "A 24-year-old man identified as Godwin Akpan has been … "Ogu… 2020-07-30    
+##  4 "An 18-year-old boy has been arrested by men of the Ada… "Ada… 2020-07-29    
+##  5 "The police in Ogun State have arrested three suspected… "Ogu… 2020-07-29    
+##  6 "A former X-Factor contestant has been jailed for life …  <NA> 2020-07-27    
+##  7 "A Court of Appeal sitting in Lagos on Monday, July 27,… "Lag… 2020-07-27    
+##  8 "26-year-old Pwadimadi Zeham, pictured above, has been … "Ada… 2020-07-27    
+##  9 "Men of the Katsina state police command have arrested … "Kat… 2020-07-24    
+## 10 "Men of the Niger state police command have arrested a … "Nig… 2020-07-24    
+## 11 "A 70-year-old man, Mohammed Sani Umar, has been senten… "Nig… 2020-07-23    
+## 12 "Adamawa police arrest 44-year-old man for allegedly ra… "Ada… 2020-07-23    
+## 13 "Men of the Rivers state police command have arrested 3… "Riv… 2020-07-23    
+## 14 "The Yobe state police command has arrested an Assistan… "Yob… 2020-07-22    
+## 15 "Justice Abiodun Akinyemi of an Ogun State High Court s… "Ogu… 2020-07-22    
+## 16 "A man has been sentenced to 9 years in prison for defi… "Edo" 2020-07-21    
+## 17 "39-year-old man arrested for defiling 9-year-old daugh… "Ada… 2020-07-21    
+## 18 "A popular singer based in Imo state, Uba Obinna Agbaso… "Imo" 2020-07-20    
+## 19 "Rivers police arrest man for impregnating his 16-year-… "Riv… 2020-07-17    
+## 20 "The police in Anambra state have arrested a 31-year-ol… "Ana… 2020-07-15
 ```
 
 
@@ -244,19 +247,19 @@ rape_related %>% filter(is.na(state) == TRUE) %>% head(10)
 ```
 
 ```
-## # A tibble: 10 x 3
+## # A tibble: 10 × 3
 ##    title                                                    state date_published
 ##    <chr>                                                    <chr> <date>        
-##  1 "British-Ghanaian rapper, Solo 45 is jailed for 24 year~ <NA>  2020-07-31    
-##  2 "A former X-Factor contestant has been jailed for life ~ <NA>  2020-07-27    
-##  3 "The senate on Tuesday July 14, passed a bill prescribi~ <NA>  2020-07-14    
-##  4 "Mary Kay Letourneau, the former Washington middle scho~ <NA>  2020-07-08    
-##  5 "Cricketer Alex Hepburn jailed for raping a sleeping wo~ <NA>  2020-06-30    
-##  6 "The Inspector-General of Police, Mohammed Adamu, has o~ <NA>  2020-06-30    
-##  7 "Rapist, 18, begins two-year jail sentence after his pa~ <NA>  2020-06-29    
-##  8 "An aggrieved Kenyan mother has called for the arrest o~ <NA>  2020-06-25    
-##  9 "A 43-year-old father has been arrested for allegedly r~ <NA>  2020-06-25    
-## 10 "American adult film star and stand-up comedian, Ron Je~ <NA>  2020-06-24
+##  1 "British-Ghanaian rapper, Solo 45 is jailed for 24 year… <NA>  2020-07-31    
+##  2 "A former X-Factor contestant has been jailed for life … <NA>  2020-07-27    
+##  3 "The senate on Tuesday July 14, passed a bill prescribi… <NA>  2020-07-14    
+##  4 "Mary Kay Letourneau, the former Washington middle scho… <NA>  2020-07-08    
+##  5 "Cricketer Alex Hepburn jailed for raping a sleeping wo… <NA>  2020-06-30    
+##  6 "The Inspector-General of Police, Mohammed Adamu, has o… <NA>  2020-06-30    
+##  7 "Rapist, 18, begins two-year jail sentence after his pa… <NA>  2020-06-29    
+##  8 "An aggrieved Kenyan mother has called for the arrest o… <NA>  2020-06-25    
+##  9 "A 43-year-old father has been arrested for allegedly r… <NA>  2020-06-25    
+## 10 "American adult film star and stand-up comedian, Ron Je… <NA>  2020-06-24
 ```
 
 
@@ -288,19 +291,19 @@ rape_related %>% filter(is.na(state) == FALSE) %>% head(10)
 ```
 
 ```
-## # A tibble: 10 x 3
-##    title                                                  state   date_published
-##    <chr>                                                  <chr>   <date>        
-##  1 "A human rights activist, Prince Wiro, has charged th~ "River~ 2020-07-30    
-##  2 "A 24-year-old man identified as Godwin Akpan has bee~ "Ogun"  2020-07-30    
-##  3 "An 18-year-old boy has been arrested by men of the A~ "Adama~ 2020-07-29    
-##  4 "The police in Ogun State have arrested three suspect~ "Ogun"  2020-07-29    
-##  5 "A Court of Appeal sitting in Lagos on Monday, July 2~ "Lagos" 2020-07-27    
-##  6 "26-year-old Pwadimadi Zeham, pictured above, has bee~ "Adama~ 2020-07-27    
-##  7 "Men of the Katsina state police command have arreste~ "Katsi~ 2020-07-24    
-##  8 "Men of the Niger state police command have arrested ~ "Niger~ 2020-07-24    
-##  9 "A 70-year-old man, Mohammed Sani Umar, has been sent~ "Niger~ 2020-07-23    
-## 10 "Adamawa police arrest 44-year-old man for allegedly ~ "Adama~ 2020-07-23
+## # A tibble: 10 × 3
+##    title                                                    state date_published
+##    <chr>                                                    <chr> <date>        
+##  1 "A human rights activist, Prince Wiro, has charged the … "Riv… 2020-07-30    
+##  2 "A 24-year-old man identified as Godwin Akpan has been … "Ogu… 2020-07-30    
+##  3 "An 18-year-old boy has been arrested by men of the Ada… "Ada… 2020-07-29    
+##  4 "The police in Ogun State have arrested three suspected… "Ogu… 2020-07-29    
+##  5 "A Court of Appeal sitting in Lagos on Monday, July 27,… "Lag… 2020-07-27    
+##  6 "26-year-old Pwadimadi Zeham, pictured above, has been … "Ada… 2020-07-27    
+##  7 "Men of the Katsina state police command have arrested … "Kat… 2020-07-24    
+##  8 "Men of the Niger state police command have arrested a … "Nig… 2020-07-24    
+##  9 "A 70-year-old man, Mohammed Sani Umar, has been senten… "Nig… 2020-07-23    
+## 10 "Adamawa police arrest 44-year-old man for allegedly ra… "Ada… 2020-07-23
 ```
 
 
@@ -319,19 +322,19 @@ rape_related %>% filter(is.na(state) == FALSE) %>% head(10)
 ```
 
 ```
-## # A tibble: 10 x 3
-##    title                                                  state   date_published
-##    <chr>                                                  <chr>   <date>        
-##  1 "A 24-year-old man identified as Godwin Akpan has bee~ "Ogun"  2020-07-30    
-##  2 "An 18-year-old boy has been arrested by men of the A~ "Adama~ 2020-07-29    
-##  3 "The police in Ogun State have arrested three suspect~ "Ogun"  2020-07-29    
-##  4 "A Court of Appeal sitting in Lagos on Monday, July 2~ "Lagos" 2020-07-27    
-##  5 "26-year-old Pwadimadi Zeham, pictured above, has bee~ "Adama~ 2020-07-27    
-##  6 "Men of the Katsina state police command have arreste~ "Katsi~ 2020-07-24    
-##  7 "Men of the Niger state police command have arrested ~ "Niger~ 2020-07-24    
-##  8 "A 70-year-old man, Mohammed Sani Umar, has been sent~ "Niger~ 2020-07-23    
-##  9 "Adamawa police arrest 44-year-old man for allegedly ~ "Adama~ 2020-07-23    
-## 10 "Men of the Rivers state police command have arrested~ "River~ 2020-07-23
+## # A tibble: 10 × 3
+##    title                                                    state date_published
+##    <chr>                                                    <chr> <date>        
+##  1 "A 24-year-old man identified as Godwin Akpan has been … "Ogu… 2020-07-30    
+##  2 "An 18-year-old boy has been arrested by men of the Ada… "Ada… 2020-07-29    
+##  3 "The police in Ogun State have arrested three suspected… "Ogu… 2020-07-29    
+##  4 "A Court of Appeal sitting in Lagos on Monday, July 27,… "Lag… 2020-07-27    
+##  5 "26-year-old Pwadimadi Zeham, pictured above, has been … "Ada… 2020-07-27    
+##  6 "Men of the Katsina state police command have arrested … "Kat… 2020-07-24    
+##  7 "Men of the Niger state police command have arrested a … "Nig… 2020-07-24    
+##  8 "A 70-year-old man, Mohammed Sani Umar, has been senten… "Nig… 2020-07-23    
+##  9 "Adamawa police arrest 44-year-old man for allegedly ra… "Ada… 2020-07-23    
+## 10 "Men of the Rivers state police command have arrested 3… "Riv… 2020-07-23
 ```
 
 
@@ -392,7 +395,7 @@ rape_final %>% count(state) %>% ggplot(aes(fct_reorder(state, n), n , fill = sta
 )
 ```
 
-{{<figure src="/post/Data-cleaning-tidyverse-r-package/index_files/figure-html/unnamed-chunk-24-1.png" alt="barplot showing states of confirmed rape cases created with ggplot in tidyverse">}}
+{{<figure src="index_files/figure-html/unnamed-chunk-24-1.png" alt="barplot showing states of confirmed rape cases created with ggplot in tidyverse">}}
 
 Lagos state, Ogun state and Niger state happen to have recorded more confirmed rape cases than the other states, with Anambara and Abuja following..
 
@@ -413,7 +416,7 @@ rape_final %>% mutate(date_published = floor_date(date_published, "month")) %>% 
 ) + labs(x = "Date", y = "", title = "Distribution of confirmed Rape cases from Jan-2019 to July-2020 as posted on Lindaikejisblog")
 ```
 
-{{<figure src="/post/Data-cleaning-tidyverse-r-package/index_files/figure-html/unnamed-chunk-25-1.png" alt="scatterplot of rape cases created with ggplot in tidyverse">}}
+{{<figure src="index_files/figure-html/unnamed-chunk-25-1.png" alt="scatterplot of rape cases created with ggplot in tidyverse">}}
 
 There have been quite a number of incident of Rape between 2019 and half-way 2020, despite not being a complete year yet there have been more rape cases in 2020 than in 2019, obviously because of the Lockdown that started in April.  
 

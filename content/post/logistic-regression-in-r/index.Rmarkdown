@@ -1,7 +1,7 @@
 ---
 title: Logistic regression in r
 author: ''
-date: '2020-08-22'
+date: '2023-06-02'
 slug: logistic-regression-in-r
 categories:
   - r programming
@@ -9,7 +9,7 @@ tags: []
 subtitle: ''
 summary: 'In this lesson we will try to understand Logistic Regression in r and how to build a predictive model with it.'
 authors: []
-lastmod: '2020-08-23T17:09:56+01:00'
+lastmod: '2023-06-02T17:06:56+01:00'
 featured: no
 image:
   caption: ''
@@ -68,7 +68,7 @@ Let's start by loading required packages
 ```{r, message=FALSE}
 require(tidyverse)
 require(sjPlot)
-require(InformationValue)
+#require(InformationValue)
 ```  
 
 **Read in the train and test dataset**  
@@ -207,7 +207,7 @@ cbind(OddsRatio = exp(coef(glm_model)), exp(confint(glm_model)))
 ```
 
 We can also visualize the odds ratio using a forest plot of estimates
-```{r, fig.height=3 ,hugoopts=list(alt="forest plot showing the odds ratio for the different variables")}
+```{r, fig.height=3 ,hugoopts=list(alt="forest plot showing the odds ratio for the different variables.")}
 plot_model(glm_model)
 ```  
 Most of the variables falls at the left side of the plot, this means that they have a relationship with the response variable.
@@ -216,11 +216,11 @@ Most of the variables falls at the left side of the plot, this means that they h
 
 
 ```{r, fig.height=3 ,hugoopts=list(alt="ROC auc curve showing model performance")}
-plotROC(titanic_train$Survived, predict(glm_model, titanic_train, type = "response"))
+library(PRROC)
+plot(roc.curve(predict(glm_model, titanic_train, type = "response"),titanic_train$Survived, curve = TRUE))
 ```
 
 
-An AUC of 85 is fairly okay but since we fitted this model on the same train set we predicted on without cross-validation, there is a high possibility that the model overfitted. For the sake of trying to keep things simple we won't apply cross-validation in this example.  
 
 **Predict on test set**  
 

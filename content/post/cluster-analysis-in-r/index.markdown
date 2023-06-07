@@ -1,14 +1,14 @@
 ---
 title: Cluster analysis in r (Clustering)
 author: ''
-date: '2020-09-19'
+date: '2023-06-05'
 slug: cluster-analysis-in-r
 categories: [clustering]
 tags: []
 subtitle: ''
 summary: ''
 authors: []
-lastmod: '2020-09-19T16:56:28+01:00'
+lastmod: '2023-06-05T16:56:28+01:00'
 featured: no
 image:
   caption: ''
@@ -102,7 +102,7 @@ require(ggplot2)
 ggplot(iris_data, aes(Sepal.Width, Sepal.Length)) + geom_point()
 ```
 
-{{<figure src="/post/cluster-analysis-in-r/index_files/figure-html/unnamed-chunk-4-1.png" alt="scatter plot showing sepal.width vs sepal.length">}}
+{{<figure src="index_files/figure-html/unnamed-chunk-4-1.png" alt="scatter plot showing sepal.width vs sepal.length">}}
 
 `Petal.Width` VS `Petal.Length`  
 
@@ -111,7 +111,7 @@ ggplot(iris_data, aes(Sepal.Width, Sepal.Length)) + geom_point()
 ggplot(iris_data, aes(Petal.Width, Petal.Length)) + geom_point()
 ```
 
-{{<figure src="/post/cluster-analysis-in-r/index_files/figure-html/unnamed-chunk-5-1.png" alt="scatter plot showing petal.width vs petal.length">}}
+{{<figure src="index_files/figure-html/unnamed-chunk-5-1.png" alt="scatter plot showing petal.width vs petal.length">}}
 
 **STEP 3**  
 
@@ -166,7 +166,7 @@ h_clust$labels <-  " "
 plot(color_branches(as.dendrogram(h_clust), k = 3))
 ```
 
-{{<figure src="/post/cluster-analysis-in-r/index_files/figure-html/unnamed-chunk-9-1.png" alt="dendogram showing clustered data">}}
+{{<figure src="index_files/figure-html/unnamed-chunk-9-1.png" alt="dendogram showing clustered data">}}
 
 **View how many observations were assigned to each cluster**  
 
@@ -227,6 +227,6 @@ summary(kmeans_model)
 plot(iris$Sepal.Length, iris$Sepal.Width, col = kmeans_model$cluster)
 ```
 
-{{<figure src="/post/cluster-analysis-in-r/index_files/figure-html/unnamed-chunk-12-1.png" alt="scatter plot showing three clusters of sepal.width vs sepal.lenth ">}}
+{{<figure src="index_files/figure-html/unnamed-chunk-12-1.png" alt="scatter plot showing three clusters of sepal.width vs sepal.lenth ">}}
 
 The above plot shows that the data points were decently clustered.

@@ -1,14 +1,14 @@
 ---
 title: Anova in r
 author: ''
-date: '2020-08-26'
+date: '2023-06-06'
 slug: anova-in-r
 categories: [r programming, statistics]
 tags: []
 subtitle: ''
 summary: 'Conducting one-way and two-way analysis of variance (ANOVA) test in R'
 authors: []
-lastmod: '2020-08-26T13:59:55+01:00'
+lastmod: '2023-06-06T13:59:55+01:00'
 featured: no
 image:
   caption: ''

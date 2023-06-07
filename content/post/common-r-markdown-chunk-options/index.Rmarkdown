@@ -1,14 +1,14 @@
 ---
 title: Commonly used R markdown chunk options
 author: ''
-date: '2020-09-15'
+date: '2023-06-04'
 slug: commonly-used-r-markdown-chunk-options
 categories: [rmarkdown]
 tags: []
 subtitle: ''
 summary: 'There are more than 50 chunk options that can be used to fine tune the behavior of `knitr` when processing code chunks, in this lesson we are going to list all the chunk options and discuss some of the most commonly used.'
 authors: []
-lastmod: '2020-09-15T18:55:16+01:00'
+lastmod: '2023-06-04T18:55:16+01:00'
 featured: no
 image:
   caption: ''

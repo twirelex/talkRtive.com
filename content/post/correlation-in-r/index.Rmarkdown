@@ -1,14 +1,14 @@
 ---
 title: Visualizing and interpreting correlation in R
 author: ''
-date: '2020-09-03'
+date: '2023-06-04'
 slug: visualizing-and-interpreting-correlation-in-r
 categories: [r programming, statistics]
 tags: []
 subtitle: ''
 summary: 'R is a good statistical tool for performing so many statistical tests. In this lesson i will walk you through how to test/interpret correlation between varibles in r.'
 authors: []
-lastmod: '2020-09-03T13:54:22+01:00'
+lastmod: '2023-06-04T13:53:22+01:00'
 featured: no
 image:
   caption: ''

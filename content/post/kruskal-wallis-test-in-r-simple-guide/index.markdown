@@ -1,14 +1,14 @@
 ---
 title: Kruskal-wallis test in r (Simple guide)
 author: ''
-date: '2020-09-17'
+date: '2023-06-03'
 slug: kruskal-wallis-test-in-r-simple-guide
 categories: [r programming, statistics]
 tags: []
 subtitle: ''
 summary: 'A simple guide to performing kruskal wallis test in R'
 authors: []
-lastmod: '2020-09-17T21:31:34+01:00'
+lastmod: '2023-06-03T21:31:34+01:00'
 featured: no
 image:
   caption: ''
@@ -67,11 +67,14 @@ dietdata <- read_csv("https://raw.githubusercontent.com/twirelex/dataset/master/
 ```
 
 ```
-## Parsed with column specification:
-## cols(
-##   diet = col_character(),
-##   weightloss = col_double()
-## )
+## Rows: 78 Columns: 2
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: ","
+## chr (1): diet
+## dbl (1): weightloss
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 ```
 **View first 6 observations of the data**
 
@@ -80,7 +83,7 @@ head(dietdata)
 ```
 
 ```
-## # A tibble: 6 x 2
+## # A tibble: 6 × 2
 ##   diet  weightloss
 ##   <chr>      <dbl>
 ## 1 B           60  
@@ -100,8 +103,8 @@ glimpse(dietdata)
 ```
 ## Rows: 78
 ## Columns: 2
-## $ diet       <chr> "B", "B", "A", "A", "A", "A", "A", "A", "A", "A", "A", "...
-## $ weightloss <dbl> 60.0, 103.0, 54.2, 54.0, 63.3, 61.1, 62.2, 64.0, 65.0, 6...
+## $ diet       <chr> "B", "B", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A",…
+## $ weightloss <dbl> 60.0, 103.0, 54.2, 54.0, 63.3, 61.1, 62.2, 64.0, 65.0, 60.5…
 ```
 The `diet` variable appears to be a character variable, we need to make it a categorical variable to be able to use it in the analysis.  
 
@@ -120,8 +123,8 @@ glimpse(dietdata)
 ```
 ## Rows: 78
 ## Columns: 2
-## $ diet       <fct> B, B, A, A, A, A, A, A, A, A, A, A, A, A, A, A, B, B, B,...
-## $ weightloss <dbl> 60.0, 103.0, 54.2, 54.0, 63.3, 61.1, 62.2, 64.0, 65.0, 6...
+## $ diet       <fct> B, B, A, A, A, A, A, A, A, A, A, A, A, A, A, A, B, B, B, B,…
+## $ weightloss <dbl> 60.0, 103.0, 54.2, 54.0, 63.3, 61.1, 62.2, 64.0, 65.0, 60.5…
 ```
 
 **See the count for each diet category**  
@@ -132,7 +135,7 @@ dietdata %>% count(diet)
 ```
 
 ```
-## # A tibble: 3 x 2
+## # A tibble: 3 × 2
 ##   diet      n
 ##   <fct> <int>
 ## 1 A        24
@@ -147,7 +150,7 @@ dietdata %>% count(diet)
 dietdata %>% ggplot(aes(diet, fill = diet)) + geom_bar(show.legend = FALSE)
 ```
 
-{{<figure src="/post/kruskal-wallis-test-in-r-simple-guide/index_files/figure-html/unnamed-chunk-9-1.png" alt="barplot for diet variable">}}
+{{<figure src="index_files/figure-html/unnamed-chunk-9-1.png" alt="barplot for diet variable">}}
 
 **Visualize the weightloss variable**  
 
@@ -156,7 +159,7 @@ dietdata %>% ggplot(aes(diet, fill = diet)) + geom_bar(show.legend = FALSE)
 dietdata %>% ggplot(aes(weightloss)) + geom_density() 
 ```
 
-{{<figure src="/post/kruskal-wallis-test-in-r-simple-guide/index_files/figure-html/unnamed-chunk-10-1.png" alt="density plot for weightloss variable">}}
+{{<figure src="index_files/figure-html/unnamed-chunk-10-1.png" alt="density plot for weightloss variable">}}
 
 
 **Visualize the weightloss variable for each diet category**  
@@ -166,7 +169,7 @@ dietdata %>% ggplot(aes(weightloss)) + geom_density()
 dietdata %>% ggplot(aes(weightloss, diet, fill = diet)) + geom_boxplot(show.legend = FALSE) + coord_flip()
 ```
 
-{{<figure src="/post/kruskal-wallis-test-in-r-simple-guide/index_files/figure-html/unnamed-chunk-11-1.png" alt="boxplot of weightloss and diet variable">}}
+{{<figure src="index_files/figure-html/unnamed-chunk-11-1.png" alt="boxplot of weightloss and diet variable">}}
 
 Notice that the median weightloss for group **B** is slightly different from that of group **A** and group **C**.  
 
