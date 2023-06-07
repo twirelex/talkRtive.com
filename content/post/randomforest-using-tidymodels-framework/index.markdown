@@ -1,7 +1,7 @@
 ---
 title: Random forest in R using the tidymodels framework
 author: ''
-date: '2020-10-14'
+date: '2023-06-04'
 slug: RandomForest-using-tidymodels-FrameWork
 categories:
   - r programming
@@ -10,7 +10,7 @@ tags: []
 subtitle: ''
 summary: 'The Random forest algorithm is one of the most used algorithm for building machine learning models. The random forest algorithm is a tree based algorithm that combines several decision trees of varying depth, and it is mostly used for classification problems.'
 authors: []
-lastmod: '2020-10-09T12:52:55+01:00'
+lastmod: '2023-06-04T12:52:55+01:00'
 featured: no
 image:
   caption: ''
@@ -48,13 +48,13 @@ data <- read_csv("https://raw.githubusercontent.com/twirelex/dataset/master/bina
 ```
 
 ```
-## Parsed with column specification:
-## cols(
-##   admit = col_double(),
-##   gre = col_double(),
-##   gpa = col_double(),
-##   rank = col_double()
-## )
+## Rows: 400 Columns: 4
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: ","
+## dbl (4): admit, gre, gpa, rank
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 ```
 
 
@@ -150,19 +150,19 @@ tune_result
 ```
 ## # Tuning results
 ## # 10-fold cross-validation 
-## # A tibble: 10 x 4
+## # A tibble: 10 × 4
 ##    splits           id     .metrics          .notes          
 ##    <list>           <chr>  <list>            <list>          
-##  1 <split [270/31]> Fold01 <tibble [40 x 6]> <tibble [0 x 1]>
-##  2 <split [271/30]> Fold02 <tibble [40 x 6]> <tibble [0 x 1]>
-##  3 <split [271/30]> Fold03 <tibble [40 x 6]> <tibble [0 x 1]>
-##  4 <split [271/30]> Fold04 <tibble [40 x 6]> <tibble [0 x 1]>
-##  5 <split [271/30]> Fold05 <tibble [40 x 6]> <tibble [0 x 1]>
-##  6 <split [271/30]> Fold06 <tibble [40 x 6]> <tibble [0 x 1]>
-##  7 <split [271/30]> Fold07 <tibble [40 x 6]> <tibble [0 x 1]>
-##  8 <split [271/30]> Fold08 <tibble [40 x 6]> <tibble [0 x 1]>
-##  9 <split [271/30]> Fold09 <tibble [40 x 6]> <tibble [0 x 1]>
-## 10 <split [271/30]> Fold10 <tibble [40 x 6]> <tibble [0 x 1]>
+##  1 <split [269/30]> Fold01 <tibble [40 × 6]> <tibble [0 × 3]>
+##  2 <split [269/30]> Fold02 <tibble [40 × 6]> <tibble [0 × 3]>
+##  3 <split [269/30]> Fold03 <tibble [40 × 6]> <tibble [0 × 3]>
+##  4 <split [269/30]> Fold04 <tibble [40 × 6]> <tibble [0 × 3]>
+##  5 <split [269/30]> Fold05 <tibble [40 × 6]> <tibble [0 × 3]>
+##  6 <split [269/30]> Fold06 <tibble [40 × 6]> <tibble [0 × 3]>
+##  7 <split [269/30]> Fold07 <tibble [40 × 6]> <tibble [0 × 3]>
+##  8 <split [269/30]> Fold08 <tibble [40 × 6]> <tibble [0 × 3]>
+##  9 <split [269/30]> Fold09 <tibble [40 × 6]> <tibble [0 × 3]>
+## 10 <split [270/29]> Fold10 <tibble [40 × 6]> <tibble [0 × 3]>
 ```
 
 We can take a look at AUC to see the various mtry and min_n values  
@@ -183,7 +183,7 @@ tune_result %>%
   labs(x = NULL, y = "AUC")
 ```
 
-{{<figure src="/post/randomforest-using-tidymodels-framework/index_files/figure-html/unnamed-chunk-10-1.png" alt="r random forest hyperparameters scatter plot">}}
+{{<figure src="index_files/figure-html/unnamed-chunk-10-1.png" alt="r random forest hyperparameters scatter plot">}}
 
 clearly, lower values of `mtry` are good (below 2) and higher values of `min_n` are good (above 30). We can get a better handle on the hyperparameters by tuning one more time, this time using regular_grid(). Let’s set ranges of hyperparameters we want to try, based on the results from our initial tune.  
 
@@ -199,7 +199,7 @@ data_grid
 ```
 
 ```
-## # A tibble: 10 x 2
+## # A tibble: 10 × 2
 ##     mtry min_n
 ##    <int> <int>
 ##  1     1    30
@@ -234,19 +234,19 @@ regular_res
 ```
 ## # Tuning results
 ## # 10-fold cross-validation 
-## # A tibble: 10 x 4
+## # A tibble: 10 × 4
 ##    splits           id     .metrics          .notes          
 ##    <list>           <chr>  <list>            <list>          
-##  1 <split [270/31]> Fold01 <tibble [20 x 6]> <tibble [0 x 1]>
-##  2 <split [271/30]> Fold02 <tibble [20 x 6]> <tibble [0 x 1]>
-##  3 <split [271/30]> Fold03 <tibble [20 x 6]> <tibble [0 x 1]>
-##  4 <split [271/30]> Fold04 <tibble [20 x 6]> <tibble [0 x 1]>
-##  5 <split [271/30]> Fold05 <tibble [20 x 6]> <tibble [0 x 1]>
-##  6 <split [271/30]> Fold06 <tibble [20 x 6]> <tibble [0 x 1]>
-##  7 <split [271/30]> Fold07 <tibble [20 x 6]> <tibble [0 x 1]>
-##  8 <split [271/30]> Fold08 <tibble [20 x 6]> <tibble [0 x 1]>
-##  9 <split [271/30]> Fold09 <tibble [20 x 6]> <tibble [0 x 1]>
-## 10 <split [271/30]> Fold10 <tibble [20 x 6]> <tibble [0 x 1]>
+##  1 <split [269/30]> Fold01 <tibble [20 × 6]> <tibble [0 × 3]>
+##  2 <split [269/30]> Fold02 <tibble [20 × 6]> <tibble [0 × 3]>
+##  3 <split [269/30]> Fold03 <tibble [20 × 6]> <tibble [0 × 3]>
+##  4 <split [269/30]> Fold04 <tibble [20 × 6]> <tibble [0 × 3]>
+##  5 <split [269/30]> Fold05 <tibble [20 × 6]> <tibble [0 × 3]>
+##  6 <split [269/30]> Fold06 <tibble [20 × 6]> <tibble [0 × 3]>
+##  7 <split [269/30]> Fold07 <tibble [20 × 6]> <tibble [0 × 3]>
+##  8 <split [269/30]> Fold08 <tibble [20 × 6]> <tibble [0 × 3]>
+##  9 <split [269/30]> Fold09 <tibble [20 × 6]> <tibble [0 × 3]>
+## 10 <split [270/29]> Fold10 <tibble [20 × 6]> <tibble [0 × 3]>
 ```
 
 What the results look like now?  
@@ -263,7 +263,15 @@ regular_res %>%
   labs(y = "AUC")
 ```
 
-{{<figure src="/post/randomforest-using-tidymodels-framework/index_files/figure-html/unnamed-chunk-13-1.png" alt="scatter plot for random forest r hyperparameters">}}
+```
+## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+## ℹ Please use `linewidth` instead.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.
+```
+
+{{<figure src="index_files/figure-html/unnamed-chunk-13-1.png" alt="scatter plot for random forest r hyperparameters">}}
 
 **CHOSE THE BEST MODEL**  
 
@@ -287,7 +295,7 @@ final_rf
 ## Main Arguments:
 ##   mtry = 1
 ##   trees = 1000
-##   min_n = 35
+##   min_n = 30
 ## 
 ## Computational engine: ranger
 ```
@@ -302,11 +310,11 @@ last_fit(final_rf, admit~., data_split) %>%
 ```
 
 ```
-## # A tibble: 2 x 3
-##   .metric  .estimator .estimate
-##   <chr>    <chr>          <dbl>
-## 1 accuracy binary         0.768
-## 2 roc_auc  binary         0.742
+## # A tibble: 2 × 4
+##   .metric  .estimator .estimate .config             
+##   <chr>    <chr>          <dbl> <chr>               
+## 1 accuracy binary         0.723 Preprocessor1_Model1
+## 2 roc_auc  binary         0.700 Preprocessor1_Model1
 ```
 
 The result above is a clear indication that we did not overfit during tuning. 

@@ -1,7 +1,7 @@
 ---
 title: Random forest in R using the tidymodels framework
 author: ''
-date: '2020-10-14'
+date: '2023-06-04'
 slug: RandomForest-using-tidymodels-FrameWork
 categories:
   - r programming
@@ -10,7 +10,7 @@ tags: []
 subtitle: ''
 summary: 'The Random forest algorithm is one of the most used algorithm for building machine learning models. The random forest algorithm is a tree based algorithm that combines several decision trees of varying depth, and it is mostly used for classification problems.'
 authors: []
-lastmod: '2020-10-09T12:52:55+01:00'
+lastmod: '2023-06-04T12:52:55+01:00'
 featured: no
 image:
   caption: ''
