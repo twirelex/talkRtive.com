@@ -91,7 +91,7 @@ ggplot(df_variance, aes(x = Principal_Component, y = Cumulative_Variance_Explain
   geom_text(aes(label = paste0(round(cumulative_variance * 100, 1), "%")), vjust = -0.5, hjust = 1) +
   theme_minimal()
 ```
-{{< figure library="true" src="web-scraping-selenium/Bet9jaLoginPage.png" alt="the website's login page">}}
+{{< figure library="true" src="web-scraping-selenium/unnamed-chunk-7.png" alt="the website's login page">}}
 
 From the plot, we can see that the first two principal components (PC1 and PC2) explain more than 95% of the variance in the data.
 
