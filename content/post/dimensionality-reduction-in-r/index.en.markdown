@@ -87,8 +87,7 @@ The first principal component (PC1) explains the highest amount of variance, fol
 
 **Cumulative variance explained**
 
-
-```r
+```
 cumulative_variance <- cumsum(variance_explained)
 df_variance <- data.frame(Principal_Component = 1:length(variance_explained), Cumulative_Variance_Explained = cumulative_variance)
 
@@ -99,9 +98,7 @@ ggplot(df_variance, aes(x = Principal_Component, y = Cumulative_Variance_Explain
   geom_text(aes(label = paste0(round(cumulative_variance * 100, 1), "%")), vjust = -0.5, hjust = 1) +
   theme_minimal()
 ```
-
-<img src="{{< blogdown/postref >}}index.en_files/figure-html/unnamed-chunk-7-1.png" width="672" />
-![cumulative variance explained](index.en_files/figure-html/unnamed-chunk-7-1.png)
+{{< figure library="true" src="web-scraping-selenium/Bet9jaLoginPage.png" alt="the website's login page">}}
 
 From the plot, we can see that the first two principal components (PC1 and PC2) explain more than 95% of the variance in the data.
 
@@ -125,7 +122,7 @@ ggplot(pca_data, aes(PC1, PC2, color = Species)) +
   theme_minimal()
 ```
 
-<img src="{{< blogdown/postref >}}index.en_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<img src="{{< blogdown/postref >}}index.en_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 The scatter plot shows how the different species of Iris are distributed in the PCA space. We can observe that the setosa species is clearly separated from the versicolor species and virginica species.
 
 #t-SNE (t-Distributed Stochastic Neighbor Embedding)
@@ -160,7 +157,7 @@ ggplot(tsne_data, aes(V1, V2, color = Species)) +
   theme_minimal()
 ```
 
-<img src="{{< blogdown/postref >}}index.en_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+<img src="{{< blogdown/postref >}}index.en_files/figure-html/unnamed-chunk-11-1.png" width="672" />
 The scatter plot shows the Iris species in the t-SNE embedding space. We can see that the three species are clearly separated, indicating distinct clusters.
 
 # Conclusion

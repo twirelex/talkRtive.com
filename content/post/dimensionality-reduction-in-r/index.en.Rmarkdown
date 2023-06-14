@@ -80,7 +80,7 @@ The first principal component (PC1) explains the highest amount of variance, fol
 
 **Cumulative variance explained**
 
-```{r, message=FALSE}
+```
 cumulative_variance <- cumsum(variance_explained)
 df_variance <- data.frame(Principal_Component = 1:length(variance_explained), Cumulative_Variance_Explained = cumulative_variance)
 
@@ -91,7 +91,7 @@ ggplot(df_variance, aes(x = Principal_Component, y = Cumulative_Variance_Explain
   geom_text(aes(label = paste0(round(cumulative_variance * 100, 1), "%")), vjust = -0.5, hjust = 1) +
   theme_minimal()
 ```
-![cumulative variance explained](index.en_files/figure-html/unnamed-chunk-7-1.png)
+{{< figure library="true" src="web-scraping-selenium/Bet9jaLoginPage.png" alt="the website's login page">}}
 
 From the plot, we can see that the first two principal components (PC1 and PC2) explain more than 95% of the variance in the data.
 
