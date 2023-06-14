@@ -101,6 +101,8 @@ ggplot(df_variance, aes(x = Principal_Component, y = Cumulative_Variance_Explain
 ```
 
 <img src="{{< blogdown/postref >}}index.en_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+![cumulative variance explained](index.en_files/figure-html/unnamed-chunk-7-1.png)
+
 From the plot, we can see that the first two principal components (PC1 and PC2) explain more than 95% of the variance in the data.
 
 We can also visualize the transformed data in the PCA space:
