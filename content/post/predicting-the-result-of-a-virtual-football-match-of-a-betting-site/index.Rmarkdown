@@ -129,7 +129,7 @@ bet9ja %>%
 ```  
 **The plot above is trying to convince us that when a team is home and its winning odds is big i.e above 2 then the match will likely end up in favor of its opponent(away team), but when its winning odds is small or medium i.e between 1 and 2 then the match will most likely end in favor of the team..**
 
-```{r, fig.width=18, fig.height=10, hugoopts = list(alt="barplot showing the away team odds.")}
+```{r, fig.width=8, fig.height=3, hugoopts = list(alt="barplot showing the away team odds.")}
 bet9ja %>%
   transmute(result, awaysOdd = factor(
     case_when(

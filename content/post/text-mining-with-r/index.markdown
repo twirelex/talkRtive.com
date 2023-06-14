@@ -55,16 +55,15 @@ nairaland_data <- read_csv("https://raw.githubusercontent.com/twirelex/dataset/m
 ```
 
 ```
-## Parsed with column specification:
-## cols(
-##   X1 = col_double(),
-##   link = col_character(),
-##   title = col_character(),
-##   section = col_character(),
-##   author = col_character(),
-##   frontPageDate = col_datetime(format = ""),
-##   postedDate = col_datetime(format = "")
-## )
+## Rows: 28800 Columns: 7
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: ","
+## chr  (4): link, title, section, author
+## dbl  (1): X1
+## dttm (2): frontPageDate, postedDate
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 ```
 
 
@@ -87,7 +86,7 @@ nairaland_data %>% count(section) %>% arrange(desc(n))
 ```
 
 ```
-## # A tibble: 37 x 2
+## # A tibble: 37 × 2
 ##    section         n
 ##    <chr>       <int>
 ##  1 Politics     9892
@@ -100,7 +99,7 @@ nairaland_data %>% count(section) %>% arrange(desc(n))
 ##  8 Education     892
 ##  9 Romance       858
 ## 10 Business      615
-## # ... with 27 more rows
+## # ℹ 27 more rows
 ```
 
 There are 37 different categories in the `section` variable. Working with such number of categories for a response variable in a classification model is out of the scope of this lesson so we may have to use the categories that appears in the top 10 i.e categories with the highest count/frequency.
@@ -113,7 +112,7 @@ nairaland_data %>% count(section) %>%
   theme_bw() + labs(x = "SECTION", y = "")
 ```
 
-{{<figure src="/post/text-mining-with-r/index_files/figure-html/unnamed-chunk-5-1.png" alt="text mining in r bar chart of counts">}}
+{{<figure src="index_files/figure-html/unnamed-chunk-5-1.png" alt="text mining in r bar chart of counts">}}
 We can see from the plot above that categories like computers, gaming, autos had very few posts in them, and categories like Politics, Celebrities, Crime are where most of the posts that were featured on the forum fall under.  
 
 ### Let's also explore the `title` variable
@@ -180,7 +179,7 @@ nairaland_filtered %>% count(section) %>% ggplot(aes(fct_reorder(section, n), n,
   geom_col(show.legend = FALSE) + labs(x = "Section", y = "")
 ```
 
-{{<figure src="/post/text-mining-with-r/index_files/figure-html/unnamed-chunk-9-1.png" alt="text mining with r top 10 variables barplot">}}
+{{<figure src="index_files/figure-html/unnamed-chunk-9-1.png" alt="text mining with r top 10 variables barplot">}}
 
 **Sample out 2,000 observations**  
 
@@ -278,7 +277,7 @@ predicted <- predict(randomForest_model, pre_pro_test) %>%
 predicted %>% conf_mat(truth = truth, estimate = .pred_class) %>% autoplot(type = "heatmap")
 ```
 
-{{<figure src="/post/text-mining-with-r/index_files/figure-html/unnamed-chunk-18-1.png" alt="text mining in r heatmap showing confusion matrix">}}
+{{<figure src="index_files/figure-html/unnamed-chunk-18-1.png" alt="text mining in r heatmap showing confusion matrix">}}
 From the heatmap above it is obvious that the randomforest model got more correct predictions for  *Politics*, *Celebrities*, *Health* and *Crime* category than it did for the other categories. This is definitely because of the inbalanced nature of the **Section** variable.
 
 **view accuracy metric**
@@ -288,11 +287,11 @@ predicted %>% metrics(truth, .pred_class)
 ```
 
 ```
-## # A tibble: 2 x 3
+## # A tibble: 2 × 3
 ##   .metric  .estimator .estimate
 ##   <chr>    <chr>          <dbl>
-## 1 accuracy multiclass     0.647
-## 2 kap      multiclass     0.526
+## 1 accuracy multiclass     0.627
+## 2 kap      multiclass     0.502
 ```
 given that we sampled the observations down to 2,000 and used only about 75% of the 2,000 observations to train the model an accuracy of %60+ isn't too bad.  
 
@@ -376,7 +375,7 @@ cbind(get_section(title = "Can Someone Explain The Feeling Of Disgust, Remorse A
 
 |.pred_class |true_class |
 |:-----------|:----------|
-|Education   |Romance    |
+|Religion    |Romance    |
 
 As expected, the model got prediction right for Crime, Politics, Health because these categories had more posts than the rest.
 
